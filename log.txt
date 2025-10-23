@@ -1,0 +1,1489 @@
+Starting open.mp server (1.4.0.2996) from commit 6a1c7fe0d9fed95a016b4eda53a4980caff9ed07
+Loading component Actors.dll
+	Successfully loaded component Actors (1.4.0.2996) with UID c81ca021eae2ad5c
+Loading component Checkpoints.dll
+	Successfully loaded component Checkpoints (1.4.0.2996) with UID 44a937350d611dde
+Loading component Classes.dll
+	Successfully loaded component Classes (1.4.0.2996) with UID 8cfb3183976da208
+Loading component Console.dll
+	Successfully loaded component Console (1.4.0.2996) with UID bfa24e49d0c95ee4
+Loading component CustomModels.dll
+	Successfully loaded component CustomModels (1.4.0.2996) with UID 15e3cb1e7c77ffff
+Loading component Databases.dll
+	Successfully loaded component Databases (1.4.0.2996) with UID 80092e7eb5821a96
+Loading component Dialogs.dll
+	Successfully loaded component Dialogs (1.4.0.2996) with UID 44a111350d611dde
+Loading component GangZones.dll
+	Successfully loaded component GangZones (1.4.0.2996) with UID b3351d11ee8d8056
+Loading component LegacyConfig.dll
+	Successfully loaded component LegacyConfig (1.4.0.2996) with UID 24ef6216838f9ffc
+Loading component LegacyNetwork.dll
+	Successfully loaded component RakNetLegacyNetwork (1.4.0.2996) with UID ea9799fd79cf8442
+Loading component Menus.dll
+	Successfully loaded component Menus (1.4.0.2996) with UID 621e219eb97ee0b2
+Loading component NPCs.dll
+	Successfully loaded component Controllable NPCs (0.0.1.0) with UID 3d0e59e87f4e90bc
+Loading component Objects.dll
+	Successfully loaded component Objects (1.4.0.2996) with UID 59f8415f72da6160
+Loading component Pawn.dll
+	Successfully loaded component Pawn (1.4.0.2996) with UID 78906cd9f19c36a6
+Loading component Pickups.dll
+	Successfully loaded component Pickups (1.4.0.2996) with UID cf304faa363dd971
+Loading component Recordings.dll
+	Successfully loaded component Recordings (1.4.0.2996) with UID 871144d399f5f613
+Loading component TextDraws.dll
+	Successfully loaded component TextDraws (1.4.0.2996) with UID 9b5dc2b1d15c992a
+Loading component TextLabels.dll
+	Successfully loaded component TextLabels (1.4.0.2996) with UID a0c57ea80a009742
+Loading component Timers.dll
+	Successfully loaded component Timers (1.4.0.2996) with UID 2ad8124c5ea257a3
+Loading component Variables.dll
+	Successfully loaded component Variables (1.4.0.2996) with UID 75e121848bc01fa2
+Loading component Vehicles.dll
+	Successfully loaded component Vehicles (1.4.0.2996) with UID 3f1f62ee9e22ab19
+Loaded 21 component(s) from I:\beta\components
+[2025-10-22T01:28:21+0100] [Info] 
+----------------------------------
+[2025-10-22T01:28:21+0100] [Info]  gungame is a gun game mode released as
+[2025-10-22T01:28:21+0100] [Info]  an example mode for open.mp
+[2025-10-22T01:28:21+0100] [Info]  
+[2025-10-22T01:28:21+0100] [Info]  Author: NotUnlikeTheWaves (github)
+[2025-10-22T01:28:21+0100] [Info] ----------------------------------
+
+[2025-10-22T01:28:21+0100] [Error] Unable to start legacy network on port 7777. Port in use?
+Starting open.mp server (1.4.0.2996) from commit 6a1c7fe0d9fed95a016b4eda53a4980caff9ed07
+Loading component Actors.dll
+	Successfully loaded component Actors (1.4.0.2996) with UID c81ca021eae2ad5c
+Loading component Checkpoints.dll
+	Successfully loaded component Checkpoints (1.4.0.2996) with UID 44a937350d611dde
+Loading component Classes.dll
+	Successfully loaded component Classes (1.4.0.2996) with UID 8cfb3183976da208
+Loading component Console.dll
+	Successfully loaded component Console (1.4.0.2996) with UID bfa24e49d0c95ee4
+Loading component CustomModels.dll
+	Successfully loaded component CustomModels (1.4.0.2996) with UID 15e3cb1e7c77ffff
+Loading component Databases.dll
+	Successfully loaded component Databases (1.4.0.2996) with UID 80092e7eb5821a96
+Loading component Dialogs.dll
+	Successfully loaded component Dialogs (1.4.0.2996) with UID 44a111350d611dde
+Loading component GangZones.dll
+	Successfully loaded component GangZones (1.4.0.2996) with UID b3351d11ee8d8056
+Loading component LegacyConfig.dll
+	Successfully loaded component LegacyConfig (1.4.0.2996) with UID 24ef6216838f9ffc
+Loading component LegacyNetwork.dll
+	Successfully loaded component RakNetLegacyNetwork (1.4.0.2996) with UID ea9799fd79cf8442
+Loading component Menus.dll
+	Successfully loaded component Menus (1.4.0.2996) with UID 621e219eb97ee0b2
+Loading component NPCs.dll
+	Successfully loaded component Controllable NPCs (0.0.1.0) with UID 3d0e59e87f4e90bc
+Loading component Objects.dll
+	Successfully loaded component Objects (1.4.0.2996) with UID 59f8415f72da6160
+Loading component Pawn.dll
+	Successfully loaded component Pawn (1.4.0.2996) with UID 78906cd9f19c36a6
+Loading component Pickups.dll
+	Successfully loaded component Pickups (1.4.0.2996) with UID cf304faa363dd971
+Loading component Recordings.dll
+	Successfully loaded component Recordings (1.4.0.2996) with UID 871144d399f5f613
+Loading component TextDraws.dll
+	Successfully loaded component TextDraws (1.4.0.2996) with UID 9b5dc2b1d15c992a
+Loading component TextLabels.dll
+	Successfully loaded component TextLabels (1.4.0.2996) with UID a0c57ea80a009742
+Loading component Timers.dll
+	Successfully loaded component Timers (1.4.0.2996) with UID 2ad8124c5ea257a3
+Loading component Variables.dll
+	Successfully loaded component Variables (1.4.0.2996) with UID 75e121848bc01fa2
+Loading component Vehicles.dll
+	Successfully loaded component Vehicles (1.4.0.2996) with UID 3f1f62ee9e22ab19
+Loaded 21 component(s) from I:\beta\components
+[2025-10-22T01:28:42+0100] [Info] 
+----------------------------------
+[2025-10-22T01:28:42+0100] [Info]  gungame is a gun game mode released as
+[2025-10-22T01:28:42+0100] [Info]  an example mode for open.mp
+[2025-10-22T01:28:42+0100] [Info]  
+[2025-10-22T01:28:42+0100] [Info]  Author: NotUnlikeTheWaves (github)
+[2025-10-22T01:28:42+0100] [Info] ----------------------------------
+
+[2025-10-22T01:28:42+0100] [Info] Legacy Network started on port 7777
+[2025-10-22T01:28:52+0100] [Warning] Couldn't announce legacy network to open.mp list.
+[2025-10-22T01:28:52+0100] [Warning] 	 Status: 406
+[2025-10-22T01:28:52+0100] [Warning] 	 Message: {"error":"failed to query server: socket read timed out"}
+[2025-10-22T01:28:52+0100] [Warning] This won't affect the server's behaviour.
+Starting open.mp server (1.4.0.3020) from commit f408b3e390cab4f583fa65593fb5dbf0a9454e8c
+Loading component $CAPI.dll
+	Successfully loaded component C-API (1.4.0.3020) with UID 10467dd8d4c56fc6
+Loading component Actors.dll
+	Successfully loaded component Actors (1.4.0.3020) with UID c81ca021eae2ad5c
+Loading component Checkpoints.dll
+	Successfully loaded component Checkpoints (1.4.0.3020) with UID 44a937350d611dde
+Loading component Classes.dll
+	Successfully loaded component Classes (1.4.0.3020) with UID 8cfb3183976da208
+Loading component Console.dll
+	Successfully loaded component Console (1.4.0.3020) with UID bfa24e49d0c95ee4
+Loading component CustomModels.dll
+	Successfully loaded component CustomModels (1.4.0.3020) with UID 15e3cb1e7c77ffff
+Loading component Databases.dll
+	Successfully loaded component Databases (1.4.0.3020) with UID 80092e7eb5821a96
+Loading component Dialogs.dll
+	Successfully loaded component Dialogs (1.4.0.3020) with UID 44a111350d611dde
+Loading component GangZones.dll
+	Successfully loaded component GangZones (1.4.0.3020) with UID b3351d11ee8d8056
+Loading component LegacyConfig.dll
+	Successfully loaded component LegacyConfig (1.4.0.3020) with UID 24ef6216838f9ffc
+Loading component LegacyNetwork.dll
+	Successfully loaded component RakNetLegacyNetwork (1.4.0.3020) with UID ea9799fd79cf8442
+Loading component Menus.dll
+	Successfully loaded component Menus (1.4.0.3020) with UID 621e219eb97ee0b2
+Loading component NPCs.dll
+	Successfully loaded component NPCs (1.4.0.3020) with UID 3d0e59e87f4e90bc
+Loading component Objects.dll
+	Successfully loaded component Objects (1.4.0.3020) with UID 59f8415f72da6160
+Loading component Pawn.dll
+	Successfully loaded component Pawn (1.4.0.3020) with UID 78906cd9f19c36a6
+Loading component Pickups.dll
+	Successfully loaded component Pickups (1.4.0.3020) with UID cf304faa363dd971
+Loading component Recordings.dll
+	Successfully loaded component Recordings (1.4.0.3020) with UID 871144d399f5f613
+Loading component TextDraws.dll
+	Successfully loaded component TextDraws (1.4.0.3020) with UID 9b5dc2b1d15c992a
+Loading component TextLabels.dll
+	Successfully loaded component TextLabels (1.4.0.3020) with UID a0c57ea80a009742
+Loading component Timers.dll
+	Successfully loaded component Timers (1.4.0.3020) with UID 2ad8124c5ea257a3
+Loading component Variables.dll
+	Successfully loaded component Variables (1.4.0.3020) with UID 75e121848bc01fa2
+Loading component Vehicles.dll
+	Successfully loaded component Vehicles (1.4.0.3020) with UID 3f1f62ee9e22ab19
+Loaded 22 component(s) from I:\beta\components
+[2025-10-23T03:03:45+0100] [Info] +---------------------------------------------+
+[2025-10-23T03:03:45+0100] [Info] |  Example Filterscript for Train NPC System  |
+[2025-10-23T03:03:46+0100] [Info] |     using open.mp NPC component loaded!     |
+[2025-10-23T03:03:46+0100] [Info] +---------------------------------------------+
+[2025-10-23T03:03:46+0100] [Info] [TRAIN NPC]: All 5 passenger train vehicles created
+[2025-10-23T03:03:46+0100] [Error] [NPC] NPC has a bad name!
+[2025-10-23T03:03:46+0100] [Error] [NPC] NPC has a bad name!
+[2025-10-23T03:03:46+0100] [Error] [NPC] NPC has a bad name!
+[2025-10-23T03:03:46+0100] [Error] [NPC] NPC has a bad name!
+[2025-10-23T03:03:46+0100] [Error] [NPC] NPC has a bad name!
+[2025-10-23T03:03:46+0100] [Info] [TRAIN NPC]: Driver of train Unity created (NPC ID: 65535, Vehicle: 1)
+[2025-10-23T03:03:46+0100] [Info] [TRAIN NPC]: Driver of train Market created (NPC ID: 65535, Vehicle: 5)
+[2025-10-23T03:03:46+0100] [Info] [TRAIN NPC]: Driver of train Cranberry created (NPC ID: 65535, Vehicle: 9)
+[2025-10-23T03:03:46+0100] [Info] [TRAIN NPC]: Driver of train YellowBell created (NPC ID: 65535, Vehicle: 13)
+[2025-10-23T03:03:46+0100] [Info] [TRAIN NPC]: Driver of trainLinden created (NPC ID: 65535, Vehicle: 17)
+[2025-10-23T03:03:46+0100] [Info] Loaded 3 vehicles from: vehicles/trains.txt
+[2025-10-23T03:03:46+0100] [Info] Loaded 3 vehicles from: vehicles/pilots.txt
+[2025-10-23T03:03:46+0100] [Info] Loaded 15 vehicles from: vehicles/lv_law.txt
+[2025-10-23T03:03:46+0100] [Info] Loaded 39 vehicles from: vehicles/lv_airport.txt
+[2025-10-23T03:03:46+0100] [Info] Loaded 255 vehicles from: vehicles/lv_gen.txt
+[2025-10-23T03:03:46+0100] [Info] Loaded 38 vehicles from: vehicles/sf_law.txt
+[2025-10-23T03:03:46+0100] [Info] Loaded 35 vehicles from: vehicles/sf_airport.txt
+[2025-10-23T03:03:46+0100] [Info] Loaded 353 vehicles from: vehicles/sf_gen.txt
+[2025-10-23T03:03:46+0100] [Info] Loaded 24 vehicles from: vehicles/ls_law.txt
+[2025-10-23T03:03:46+0100] [Info] Loaded 37 vehicles from: vehicles/ls_airport.txt
+[2025-10-23T03:03:46+0100] [Info] Loaded 98 vehicles from: vehicles/ls_gen_inner.txt
+[2025-10-23T03:03:46+0100] [Info] Loaded 389 vehicles from: vehicles/ls_gen_outer.txt
+[2025-10-23T03:03:46+0100] [Info] Loaded 71 vehicles from: vehicles/whetstone.txt
+[2025-10-23T03:03:46+0100] [Info] Loaded 168 vehicles from: vehicles/bone.txt
+[2025-10-23T03:03:46+0100] [Info] Loaded 61 vehicles from: vehicles/flint.txt
+[2025-10-23T03:03:46+0100] [Info] Loaded 96 vehicles from: vehicles/tierra.txt
+[2025-10-23T03:03:46+0100] [Info] Loaded 96 vehicles from: vehicles/red_county.txt
+[2025-10-23T03:03:46+0100] [Info] Total vehicles from files: 1781
+[2025-10-23T03:03:46+0100] [Info] 
+---------------------------------------
+[2025-10-23T03:03:46+0100] [Info] Running Grand Larceny - by the SA-MP team
+
+[2025-10-23T03:03:46+0100] [Info] ---------------------------------------
+
+[2025-10-23T03:03:46+0100] [Info] Legacy Network started on port 7777
+[2025-10-23T03:03:56+0100] [Warning] Couldn't announce legacy network to open.mp list.
+[2025-10-23T03:03:56+0100] [Warning] 	 Status: 406
+[2025-10-23T03:03:56+0100] [Warning] 	 Message: {"error":"failed to query server: socket read timed out"}
+[2025-10-23T03:03:56+0100] [Warning] This won't affect the server's behaviour.
+Starting open.mp server (1.4.0.3020) from commit f408b3e390cab4f583fa65593fb5dbf0a9454e8c
+Loading component $CAPI.dll
+	Successfully loaded component C-API (1.4.0.3020) with UID 10467dd8d4c56fc6
+Loading component Actors.dll
+	Successfully loaded component Actors (1.4.0.3020) with UID c81ca021eae2ad5c
+Loading component Checkpoints.dll
+	Successfully loaded component Checkpoints (1.4.0.3020) with UID 44a937350d611dde
+Loading component Classes.dll
+	Successfully loaded component Classes (1.4.0.3020) with UID 8cfb3183976da208
+Loading component Console.dll
+	Successfully loaded component Console (1.4.0.3020) with UID bfa24e49d0c95ee4
+Loading component CustomModels.dll
+	Successfully loaded component CustomModels (1.4.0.3020) with UID 15e3cb1e7c77ffff
+Loading component Databases.dll
+	Successfully loaded component Databases (1.4.0.3020) with UID 80092e7eb5821a96
+Loading component Dialogs.dll
+	Successfully loaded component Dialogs (1.4.0.3020) with UID 44a111350d611dde
+Loading component GangZones.dll
+	Successfully loaded component GangZones (1.4.0.3020) with UID b3351d11ee8d8056
+Loading component LegacyConfig.dll
+	Successfully loaded component LegacyConfig (1.4.0.3020) with UID 24ef6216838f9ffc
+Loading component LegacyNetwork.dll
+	Successfully loaded component RakNetLegacyNetwork (1.4.0.3020) with UID ea9799fd79cf8442
+Loading component Menus.dll
+	Successfully loaded component Menus (1.4.0.3020) with UID 621e219eb97ee0b2
+Loading component NPCs.dll
+	Successfully loaded component NPCs (1.4.0.3020) with UID 3d0e59e87f4e90bc
+Loading component Objects.dll
+	Successfully loaded component Objects (1.4.0.3020) with UID 59f8415f72da6160
+Loading component Pawn.dll
+	Successfully loaded component Pawn (1.4.0.3020) with UID 78906cd9f19c36a6
+Loading component Pickups.dll
+	Successfully loaded component Pickups (1.4.0.3020) with UID cf304faa363dd971
+Loading component Recordings.dll
+	Successfully loaded component Recordings (1.4.0.3020) with UID 871144d399f5f613
+Loading component TextDraws.dll
+	Successfully loaded component TextDraws (1.4.0.3020) with UID 9b5dc2b1d15c992a
+Loading component TextLabels.dll
+	Successfully loaded component TextLabels (1.4.0.3020) with UID a0c57ea80a009742
+Loading component Timers.dll
+	Successfully loaded component Timers (1.4.0.3020) with UID 2ad8124c5ea257a3
+Loading component Variables.dll
+	Successfully loaded component Variables (1.4.0.3020) with UID 75e121848bc01fa2
+Loading component Vehicles.dll
+	Successfully loaded component Vehicles (1.4.0.3020) with UID 3f1f62ee9e22ab19
+Loaded 22 component(s) from I:\beta\components
+[2025-10-23T03:06:55+0100] [Info] +---------------------------------------------+
+[2025-10-23T03:06:55+0100] [Info] |  Example Filterscript for Train NPC System  |
+[2025-10-23T03:06:55+0100] [Info] |     using open.mp NPC component loaded!     |
+[2025-10-23T03:06:55+0100] [Info] +---------------------------------------------+
+[2025-10-23T03:06:55+0100] [Info] [TRAIN NPC]: All 5 passenger train vehicles created
+[2025-10-23T03:06:55+0100] [Info] [connection] incoming connection: 127.0.0.1:60949 id: 49
+[2025-10-23T03:06:55+0100] [Info] [npc:join] TrainDriverUnity has joined the server (49:127.0.0.1)
+[2025-10-23T03:06:55+0100] [Info] [connection] incoming connection: 127.0.0.1:59946 id: 48
+[2025-10-23T03:06:55+0100] [Info] [npc:join] TrainDriverMarket has joined the server (48:127.0.0.1)
+[2025-10-23T03:06:55+0100] [Info] [connection] incoming connection: 127.0.0.1:64977 id: 47
+[2025-10-23T03:06:55+0100] [Info] [npc:join] TrainDriverCranberry has joined the server (47:127.0.0.1)
+[2025-10-23T03:06:55+0100] [Info] [connection] incoming connection: 127.0.0.1:52575 id: 46
+[2025-10-23T03:06:55+0100] [Info] [npc:join] TrainDriverYellowBell has joined the server (46:127.0.0.1)
+[2025-10-23T03:06:55+0100] [Info] [connection] incoming connection: 127.0.0.1:58047 id: 45
+[2025-10-23T03:06:55+0100] [Info] [npc:join] TrainDriverLinden has joined the server (45:127.0.0.1)
+[2025-10-23T03:06:55+0100] [Info] [TRAIN NPC]: Driver of train Unity created (NPC ID: 49, Vehicle: 1)
+[2025-10-23T03:06:55+0100] [Info] [TRAIN NPC]: Driver of train Market created (NPC ID: 48, Vehicle: 5)
+[2025-10-23T03:06:55+0100] [Info] [TRAIN NPC]: Driver of train Cranberry created (NPC ID: 47, Vehicle: 9)
+[2025-10-23T03:06:55+0100] [Info] [TRAIN NPC]: Driver of train YellowBell created (NPC ID: 46, Vehicle: 13)
+[2025-10-23T03:06:55+0100] [Info] [TRAIN NPC]: Driver of trainLinden created (NPC ID: 45, Vehicle: 17)
+[2025-10-23T03:06:55+0100] [Info] Loaded 3 vehicles from: vehicles/trains.txt
+[2025-10-23T03:06:55+0100] [Info] Loaded 3 vehicles from: vehicles/pilots.txt
+[2025-10-23T03:06:55+0100] [Info] Loaded 15 vehicles from: vehicles/lv_law.txt
+[2025-10-23T03:06:55+0100] [Info] Loaded 39 vehicles from: vehicles/lv_airport.txt
+[2025-10-23T03:06:55+0100] [Info] Loaded 255 vehicles from: vehicles/lv_gen.txt
+[2025-10-23T03:06:55+0100] [Info] Loaded 38 vehicles from: vehicles/sf_law.txt
+[2025-10-23T03:06:55+0100] [Info] Loaded 35 vehicles from: vehicles/sf_airport.txt
+[2025-10-23T03:06:55+0100] [Info] Loaded 353 vehicles from: vehicles/sf_gen.txt
+[2025-10-23T03:06:55+0100] [Info] Loaded 24 vehicles from: vehicles/ls_law.txt
+[2025-10-23T03:06:55+0100] [Info] Loaded 37 vehicles from: vehicles/ls_airport.txt
+[2025-10-23T03:06:55+0100] [Info] Loaded 98 vehicles from: vehicles/ls_gen_inner.txt
+[2025-10-23T03:06:55+0100] [Info] Loaded 389 vehicles from: vehicles/ls_gen_outer.txt
+[2025-10-23T03:06:55+0100] [Info] Loaded 71 vehicles from: vehicles/whetstone.txt
+[2025-10-23T03:06:55+0100] [Info] Loaded 168 vehicles from: vehicles/bone.txt
+[2025-10-23T03:06:55+0100] [Info] Loaded 61 vehicles from: vehicles/flint.txt
+[2025-10-23T03:06:55+0100] [Info] Loaded 96 vehicles from: vehicles/tierra.txt
+[2025-10-23T03:06:55+0100] [Info] Loaded 96 vehicles from: vehicles/red_county.txt
+[2025-10-23T03:06:55+0100] [Info] Total vehicles from files: 1781
+[2025-10-23T03:06:55+0100] [Info] 
+---------------------------------------
+[2025-10-23T03:06:55+0100] [Info] Running Grand Larceny - by the SA-MP team
+
+[2025-10-23T03:06:55+0100] [Info] ---------------------------------------
+
+[2025-10-23T03:06:55+0100] [Error] Unable to start legacy network on port 7777. Port in use?
+[2025-10-23T03:06:58+0100] [Info] +---------------------------------------------+
+[2025-10-23T03:06:58+0100] [Info] |  Example Filterscript for Train NPC System  |
+[2025-10-23T03:06:58+0100] [Info] |    using open.mp NPC component unloaded!    |
+[2025-10-23T03:06:58+0100] [Info] +---------------------------------------------+
+[2025-10-23T03:07:01+0100] [Info] +---------------------------------------------+
+[2025-10-23T03:07:01+0100] [Info] |  Example Filterscript for Train NPC System  |
+[2025-10-23T03:07:01+0100] [Info] |    using open.mp NPC component unloaded!    |
+[2025-10-23T03:07:01+0100] [Info] +---------------------------------------------+
+Starting open.mp server (1.4.0.3020) from commit f408b3e390cab4f583fa65593fb5dbf0a9454e8c
+Loading component $CAPI.dll
+	Successfully loaded component C-API (1.4.0.3020) with UID 10467dd8d4c56fc6
+Loading component Actors.dll
+	Successfully loaded component Actors (1.4.0.3020) with UID c81ca021eae2ad5c
+Loading component Checkpoints.dll
+	Successfully loaded component Checkpoints (1.4.0.3020) with UID 44a937350d611dde
+Loading component Classes.dll
+	Successfully loaded component Classes (1.4.0.3020) with UID 8cfb3183976da208
+Loading component Console.dll
+	Successfully loaded component Console (1.4.0.3020) with UID bfa24e49d0c95ee4
+Loading component CustomModels.dll
+	Successfully loaded component CustomModels (1.4.0.3020) with UID 15e3cb1e7c77ffff
+Loading component Databases.dll
+	Successfully loaded component Databases (1.4.0.3020) with UID 80092e7eb5821a96
+Loading component Dialogs.dll
+	Successfully loaded component Dialogs (1.4.0.3020) with UID 44a111350d611dde
+Loading component GangZones.dll
+	Successfully loaded component GangZones (1.4.0.3020) with UID b3351d11ee8d8056
+Loading component LegacyConfig.dll
+	Successfully loaded component LegacyConfig (1.4.0.3020) with UID 24ef6216838f9ffc
+Loading component LegacyNetwork.dll
+	Successfully loaded component RakNetLegacyNetwork (1.4.0.3020) with UID ea9799fd79cf8442
+Loading component Menus.dll
+	Successfully loaded component Menus (1.4.0.3020) with UID 621e219eb97ee0b2
+Loading component NPCs.dll
+	Successfully loaded component NPCs (1.4.0.3020) with UID 3d0e59e87f4e90bc
+Loading component Objects.dll
+	Successfully loaded component Objects (1.4.0.3020) with UID 59f8415f72da6160
+Loading component Pawn.dll
+	Successfully loaded component Pawn (1.4.0.3020) with UID 78906cd9f19c36a6
+Loading component Pickups.dll
+	Successfully loaded component Pickups (1.4.0.3020) with UID cf304faa363dd971
+Loading component Recordings.dll
+	Successfully loaded component Recordings (1.4.0.3020) with UID 871144d399f5f613
+Loading component TextDraws.dll
+	Successfully loaded component TextDraws (1.4.0.3020) with UID 9b5dc2b1d15c992a
+Loading component TextLabels.dll
+	Successfully loaded component TextLabels (1.4.0.3020) with UID a0c57ea80a009742
+Loading component Timers.dll
+	Successfully loaded component Timers (1.4.0.3020) with UID 2ad8124c5ea257a3
+Loading component Variables.dll
+	Successfully loaded component Variables (1.4.0.3020) with UID 75e121848bc01fa2
+Loading component Vehicles.dll
+	Successfully loaded component Vehicles (1.4.0.3020) with UID 3f1f62ee9e22ab19
+Loaded 22 component(s) from I:\beta\components
+[2025-10-23T03:07:02+0100] [Info] +---------------------------------------------+
+[2025-10-23T03:07:02+0100] [Info] |  Example Filterscript for Train NPC System  |
+[2025-10-23T03:07:02+0100] [Info] |     using open.mp NPC component loaded!     |
+[2025-10-23T03:07:02+0100] [Info] +---------------------------------------------+
+[2025-10-23T03:07:02+0100] [Info] [TRAIN NPC]: All 5 passenger train vehicles created
+[2025-10-23T03:07:02+0100] [Info] [connection] incoming connection: 127.0.0.1:51289 id: 49
+[2025-10-23T03:07:02+0100] [Info] [npc:join] TrainDriverUnity has joined the server (49:127.0.0.1)
+[2025-10-23T03:07:02+0100] [Info] [connection] incoming connection: 127.0.0.1:56633 id: 48
+[2025-10-23T03:07:02+0100] [Info] [npc:join] TrainDriverMarket has joined the server (48:127.0.0.1)
+[2025-10-23T03:07:02+0100] [Info] [connection] incoming connection: 127.0.0.1:52677 id: 47
+[2025-10-23T03:07:02+0100] [Info] [npc:join] TrainDriverCranberry has joined the server (47:127.0.0.1)
+[2025-10-23T03:07:02+0100] [Info] [connection] incoming connection: 127.0.0.1:60212 id: 46
+[2025-10-23T03:07:02+0100] [Info] [npc:join] TrainDriverYellowBell has joined the server (46:127.0.0.1)
+[2025-10-23T03:07:02+0100] [Info] [connection] incoming connection: 127.0.0.1:65149 id: 45
+[2025-10-23T03:07:02+0100] [Info] [npc:join] TrainDriverLinden has joined the server (45:127.0.0.1)
+[2025-10-23T03:07:02+0100] [Info] [TRAIN NPC]: Driver of train Unity created (NPC ID: 49, Vehicle: 1)
+[2025-10-23T03:07:02+0100] [Info] [TRAIN NPC]: Driver of train Market created (NPC ID: 48, Vehicle: 5)
+[2025-10-23T03:07:02+0100] [Info] [TRAIN NPC]: Driver of train Cranberry created (NPC ID: 47, Vehicle: 9)
+[2025-10-23T03:07:02+0100] [Info] [TRAIN NPC]: Driver of train YellowBell created (NPC ID: 46, Vehicle: 13)
+[2025-10-23T03:07:02+0100] [Info] [TRAIN NPC]: Driver of trainLinden created (NPC ID: 45, Vehicle: 17)
+[2025-10-23T03:07:02+0100] [Info] Loaded 3 vehicles from: vehicles/trains.txt
+[2025-10-23T03:07:02+0100] [Info] Loaded 3 vehicles from: vehicles/pilots.txt
+[2025-10-23T03:07:02+0100] [Info] Loaded 15 vehicles from: vehicles/lv_law.txt
+[2025-10-23T03:07:02+0100] [Info] Loaded 39 vehicles from: vehicles/lv_airport.txt
+[2025-10-23T03:07:02+0100] [Info] Loaded 255 vehicles from: vehicles/lv_gen.txt
+[2025-10-23T03:07:02+0100] [Info] Loaded 38 vehicles from: vehicles/sf_law.txt
+[2025-10-23T03:07:02+0100] [Info] Loaded 35 vehicles from: vehicles/sf_airport.txt
+[2025-10-23T03:07:02+0100] [Info] Loaded 353 vehicles from: vehicles/sf_gen.txt
+[2025-10-23T03:07:02+0100] [Info] Loaded 24 vehicles from: vehicles/ls_law.txt
+[2025-10-23T03:07:02+0100] [Info] Loaded 37 vehicles from: vehicles/ls_airport.txt
+[2025-10-23T03:07:02+0100] [Info] Loaded 98 vehicles from: vehicles/ls_gen_inner.txt
+[2025-10-23T03:07:02+0100] [Info] Loaded 389 vehicles from: vehicles/ls_gen_outer.txt
+[2025-10-23T03:07:02+0100] [Info] Loaded 71 vehicles from: vehicles/whetstone.txt
+[2025-10-23T03:07:02+0100] [Info] Loaded 168 vehicles from: vehicles/bone.txt
+[2025-10-23T03:07:02+0100] [Info] Loaded 61 vehicles from: vehicles/flint.txt
+[2025-10-23T03:07:02+0100] [Info] Loaded 96 vehicles from: vehicles/tierra.txt
+[2025-10-23T03:07:02+0100] [Info] Loaded 96 vehicles from: vehicles/red_county.txt
+[2025-10-23T03:07:02+0100] [Info] Total vehicles from files: 1781
+[2025-10-23T03:07:02+0100] [Info] 
+---------------------------------------
+[2025-10-23T03:07:02+0100] [Info] Running Grand Larceny - by the SA-MP team
+
+[2025-10-23T03:07:02+0100] [Info] ---------------------------------------
+
+[2025-10-23T03:07:02+0100] [Info] Legacy Network started on port 7777
+[2025-10-23T03:07:12+0100] [Warning] Couldn't announce legacy network to open.mp list.
+[2025-10-23T03:07:12+0100] [Warning] 	 Status: 406
+[2025-10-23T03:07:12+0100] [Warning] 	 Message: {"error":"failed to query server: socket read timed out"}
+[2025-10-23T03:07:12+0100] [Warning] This won't affect the server's behaviour.
+[2025-10-23T03:09:18+0100] [Info] +---------------------------------------------+
+[2025-10-23T03:09:18+0100] [Info] |  Example Filterscript for Train NPC System  |
+[2025-10-23T03:09:18+0100] [Info] |    using open.mp NPC component unloaded!    |
+[2025-10-23T03:09:18+0100] [Info] +---------------------------------------------+
+Starting open.mp server (1.4.0.3020) from commit f408b3e390cab4f583fa65593fb5dbf0a9454e8c
+Loading component $CAPI.dll
+	Successfully loaded component C-API (1.4.0.3020) with UID 10467dd8d4c56fc6
+Loading component Actors.dll
+	Successfully loaded component Actors (1.4.0.3020) with UID c81ca021eae2ad5c
+Loading component Checkpoints.dll
+	Successfully loaded component Checkpoints (1.4.0.3020) with UID 44a937350d611dde
+Loading component Classes.dll
+	Successfully loaded component Classes (1.4.0.3020) with UID 8cfb3183976da208
+Loading component Console.dll
+	Successfully loaded component Console (1.4.0.3020) with UID bfa24e49d0c95ee4
+Loading component CustomModels.dll
+	Successfully loaded component CustomModels (1.4.0.3020) with UID 15e3cb1e7c77ffff
+Loading component Databases.dll
+	Successfully loaded component Databases (1.4.0.3020) with UID 80092e7eb5821a96
+Loading component Dialogs.dll
+	Successfully loaded component Dialogs (1.4.0.3020) with UID 44a111350d611dde
+Loading component GangZones.dll
+	Successfully loaded component GangZones (1.4.0.3020) with UID b3351d11ee8d8056
+Loading component LegacyConfig.dll
+	Successfully loaded component LegacyConfig (1.4.0.3020) with UID 24ef6216838f9ffc
+Loading component LegacyNetwork.dll
+	Successfully loaded component RakNetLegacyNetwork (1.4.0.3020) with UID ea9799fd79cf8442
+Loading component Menus.dll
+	Successfully loaded component Menus (1.4.0.3020) with UID 621e219eb97ee0b2
+Loading component NPCs.dll
+	Successfully loaded component NPCs (1.4.0.3020) with UID 3d0e59e87f4e90bc
+Loading component Objects.dll
+	Successfully loaded component Objects (1.4.0.3020) with UID 59f8415f72da6160
+Loading component Pawn.dll
+	Successfully loaded component Pawn (1.4.0.3020) with UID 78906cd9f19c36a6
+Loading component Pickups.dll
+	Successfully loaded component Pickups (1.4.0.3020) with UID cf304faa363dd971
+Loading component Recordings.dll
+	Successfully loaded component Recordings (1.4.0.3020) with UID 871144d399f5f613
+Loading component TextDraws.dll
+	Successfully loaded component TextDraws (1.4.0.3020) with UID 9b5dc2b1d15c992a
+Loading component TextLabels.dll
+	Successfully loaded component TextLabels (1.4.0.3020) with UID a0c57ea80a009742
+Loading component Timers.dll
+	Successfully loaded component Timers (1.4.0.3020) with UID 2ad8124c5ea257a3
+Loading component Variables.dll
+	Successfully loaded component Variables (1.4.0.3020) with UID 75e121848bc01fa2
+Loading component Vehicles.dll
+	Successfully loaded component Vehicles (1.4.0.3020) with UID 3f1f62ee9e22ab19
+Loaded 22 component(s) from I:\beta\components
+[2025-10-23T03:09:24+0100] [Info] +---------------------------------------------+
+[2025-10-23T03:09:24+0100] [Info] |  Example Filterscript for Train NPC System  |
+[2025-10-23T03:09:24+0100] [Info] |     using open.mp NPC component loaded!     |
+[2025-10-23T03:09:24+0100] [Info] +---------------------------------------------+
+[2025-10-23T03:09:24+0100] [Info] [TRAIN NPC]: All 5 passenger train vehicles created
+[2025-10-23T03:09:24+0100] [Info] [connection] incoming connection: 127.0.0.1:60267 id: 49
+[2025-10-23T03:09:24+0100] [Info] [npc:join] TrainDriverUnity has joined the server (49:127.0.0.1)
+[2025-10-23T03:09:24+0100] [Info] [connection] incoming connection: 127.0.0.1:60853 id: 48
+[2025-10-23T03:09:24+0100] [Info] [npc:join] TrainDriverMarket has joined the server (48:127.0.0.1)
+[2025-10-23T03:09:24+0100] [Info] [connection] incoming connection: 127.0.0.1:60342 id: 47
+[2025-10-23T03:09:24+0100] [Info] [npc:join] TrainDriverCranberry has joined the server (47:127.0.0.1)
+[2025-10-23T03:09:24+0100] [Info] [connection] incoming connection: 127.0.0.1:62032 id: 46
+[2025-10-23T03:09:24+0100] [Info] [npc:join] TrainDriverYellowBell has joined the server (46:127.0.0.1)
+[2025-10-23T03:09:24+0100] [Info] [connection] incoming connection: 127.0.0.1:50784 id: 45
+[2025-10-23T03:09:24+0100] [Info] [npc:join] TrainDriverLinden has joined the server (45:127.0.0.1)
+[2025-10-23T03:09:24+0100] [Info] [TRAIN NPC]: Driver of train Unity created (NPC ID: 49, Vehicle: 1)
+[2025-10-23T03:09:24+0100] [Info] [TRAIN NPC]: Driver of train Market created (NPC ID: 48, Vehicle: 5)
+[2025-10-23T03:09:24+0100] [Info] [TRAIN NPC]: Driver of train Cranberry created (NPC ID: 47, Vehicle: 9)
+[2025-10-23T03:09:24+0100] [Info] [TRAIN NPC]: Driver of train YellowBell created (NPC ID: 46, Vehicle: 13)
+[2025-10-23T03:09:24+0100] [Info] [TRAIN NPC]: Driver of trainLinden created (NPC ID: 45, Vehicle: 17)
+[2025-10-23T03:09:24+0100] [Info] Loaded 3 vehicles from: vehicles/trains.txt
+[2025-10-23T03:09:24+0100] [Info] Loaded 3 vehicles from: vehicles/pilots.txt
+[2025-10-23T03:09:24+0100] [Info] Loaded 15 vehicles from: vehicles/lv_law.txt
+[2025-10-23T03:09:24+0100] [Info] Loaded 39 vehicles from: vehicles/lv_airport.txt
+[2025-10-23T03:09:24+0100] [Info] Loaded 255 vehicles from: vehicles/lv_gen.txt
+[2025-10-23T03:09:24+0100] [Info] Loaded 38 vehicles from: vehicles/sf_law.txt
+[2025-10-23T03:09:24+0100] [Info] Loaded 35 vehicles from: vehicles/sf_airport.txt
+[2025-10-23T03:09:24+0100] [Info] Loaded 353 vehicles from: vehicles/sf_gen.txt
+[2025-10-23T03:09:24+0100] [Info] Loaded 24 vehicles from: vehicles/ls_law.txt
+[2025-10-23T03:09:24+0100] [Info] Loaded 37 vehicles from: vehicles/ls_airport.txt
+[2025-10-23T03:09:24+0100] [Info] Loaded 98 vehicles from: vehicles/ls_gen_inner.txt
+[2025-10-23T03:09:24+0100] [Info] Loaded 389 vehicles from: vehicles/ls_gen_outer.txt
+[2025-10-23T03:09:24+0100] [Info] Loaded 71 vehicles from: vehicles/whetstone.txt
+[2025-10-23T03:09:24+0100] [Info] Loaded 168 vehicles from: vehicles/bone.txt
+[2025-10-23T03:09:24+0100] [Info] Loaded 61 vehicles from: vehicles/flint.txt
+[2025-10-23T03:09:24+0100] [Info] Loaded 96 vehicles from: vehicles/tierra.txt
+[2025-10-23T03:09:24+0100] [Info] Loaded 96 vehicles from: vehicles/red_county.txt
+[2025-10-23T03:09:24+0100] [Info] Total vehicles from files: 1781
+[2025-10-23T03:09:24+0100] [Info] 
+---------------------------------------
+[2025-10-23T03:09:24+0100] [Info] Running Grand Larceny - by the SA-MP team
+
+[2025-10-23T03:09:24+0100] [Info] ---------------------------------------
+
+[2025-10-23T03:09:24+0100] [Info] Legacy Network started on port 7777
+[2025-10-23T03:09:34+0100] [Warning] Couldn't announce legacy network to open.mp list.
+[2025-10-23T03:09:34+0100] [Warning] 	 Status: 406
+[2025-10-23T03:09:34+0100] [Warning] 	 Message: {"error":"failed to query server: socket read timed out"}
+[2025-10-23T03:09:34+0100] [Warning] This won't affect the server's behaviour.
+[2025-10-23T03:10:31+0100] [Info] [connection] incoming connection: 127.0.0.1:51597 id: 0
+[2025-10-23T03:10:31+0100] [Info] [join] itsneufox has joined the server (0:127.0.0.1)
+[2025-10-23T03:10:48+0100] [Info] [part] itsneufox has left the server (0:1)
+[2025-10-23T03:16:53+0100] [Info] +---------------------------------------------+
+[2025-10-23T03:16:53+0100] [Info] |  Example Filterscript for Train NPC System  |
+[2025-10-23T03:16:53+0100] [Info] |    using open.mp NPC component unloaded!    |
+[2025-10-23T03:16:53+0100] [Info] +---------------------------------------------+
+Starting open.mp server (1.4.0.3020) from commit f408b3e390cab4f583fa65593fb5dbf0a9454e8c
+Loading component $CAPI.dll
+	Successfully loaded component C-API (1.4.0.3020) with UID 10467dd8d4c56fc6
+Loading component Actors.dll
+	Successfully loaded component Actors (1.4.0.3020) with UID c81ca021eae2ad5c
+Loading component Checkpoints.dll
+	Successfully loaded component Checkpoints (1.4.0.3020) with UID 44a937350d611dde
+Loading component Classes.dll
+	Successfully loaded component Classes (1.4.0.3020) with UID 8cfb3183976da208
+Loading component Console.dll
+	Successfully loaded component Console (1.4.0.3020) with UID bfa24e49d0c95ee4
+Loading component CustomModels.dll
+	Successfully loaded component CustomModels (1.4.0.3020) with UID 15e3cb1e7c77ffff
+Loading component Databases.dll
+	Successfully loaded component Databases (1.4.0.3020) with UID 80092e7eb5821a96
+Loading component Dialogs.dll
+	Successfully loaded component Dialogs (1.4.0.3020) with UID 44a111350d611dde
+Loading component GangZones.dll
+	Successfully loaded component GangZones (1.4.0.3020) with UID b3351d11ee8d8056
+Loading component LegacyConfig.dll
+	Successfully loaded component LegacyConfig (1.4.0.3020) with UID 24ef6216838f9ffc
+Loading component LegacyNetwork.dll
+	Successfully loaded component RakNetLegacyNetwork (1.4.0.3020) with UID ea9799fd79cf8442
+Loading component Menus.dll
+	Successfully loaded component Menus (1.4.0.3020) with UID 621e219eb97ee0b2
+Loading component NPCs.dll
+	Successfully loaded component NPCs (1.4.0.3020) with UID 3d0e59e87f4e90bc
+Loading component Objects.dll
+	Successfully loaded component Objects (1.4.0.3020) with UID 59f8415f72da6160
+Loading component Pawn.dll
+	Successfully loaded component Pawn (1.4.0.3020) with UID 78906cd9f19c36a6
+Loading component Pickups.dll
+	Successfully loaded component Pickups (1.4.0.3020) with UID cf304faa363dd971
+Loading component Recordings.dll
+	Successfully loaded component Recordings (1.4.0.3020) with UID 871144d399f5f613
+Loading component TextDraws.dll
+	Successfully loaded component TextDraws (1.4.0.3020) with UID 9b5dc2b1d15c992a
+Loading component TextLabels.dll
+	Successfully loaded component TextLabels (1.4.0.3020) with UID a0c57ea80a009742
+Loading component Timers.dll
+	Successfully loaded component Timers (1.4.0.3020) with UID 2ad8124c5ea257a3
+Loading component Variables.dll
+	Successfully loaded component Variables (1.4.0.3020) with UID 75e121848bc01fa2
+Loading component Vehicles.dll
+	Successfully loaded component Vehicles (1.4.0.3020) with UID 3f1f62ee9e22ab19
+Loaded 22 component(s) from I:\beta\components
+[2025-10-23T03:16:55+0100] [Info] +---------------------------------------------+
+[2025-10-23T03:16:55+0100] [Info] |  Example Filterscript for Train NPC System  |
+[2025-10-23T03:16:55+0100] [Info] |     using open.mp NPC component loaded!     |
+[2025-10-23T03:16:55+0100] [Info] +---------------------------------------------+
+[2025-10-23T03:16:55+0100] [Info] [connection] incoming connection: 127.0.0.1:63867 id: 49
+[2025-10-23T03:16:55+0100] [Info] [npc:join] TrainDriverUnity has joined the server (49:127.0.0.1)
+[2025-10-23T03:16:55+0100] [Info] [TRAIN NPC]: Driver of train Unity created (NPC ID: 49, Vehicle: 1)
+[2025-10-23T03:16:55+0100] [Info] [connection] incoming connection: 127.0.0.1:56407 id: 48
+[2025-10-23T03:16:55+0100] [Info] [npc:join] TrainDriverMarket has joined the server (48:127.0.0.1)
+[2025-10-23T03:16:55+0100] [Info] [TRAIN NPC]: Driver of train Market created (NPC ID: 48, Vehicle: 5)
+[2025-10-23T03:16:55+0100] [Info] [connection] incoming connection: 127.0.0.1:65324 id: 47
+[2025-10-23T03:16:55+0100] [Info] [npc:join] TrainDriverCranberry has joined the server (47:127.0.0.1)
+[2025-10-23T03:16:55+0100] [Info] [TRAIN NPC]: Driver of train Cranberry created (NPC ID: 47, Vehicle: 9)
+[2025-10-23T03:16:55+0100] [Info] [connection] incoming connection: 127.0.0.1:53569 id: 46
+[2025-10-23T03:16:55+0100] [Info] [npc:join] TrainDriverYellowBell has joined the server (46:127.0.0.1)
+[2025-10-23T03:16:55+0100] [Info] [TRAIN NPC]: Driver of train YellowBell created (NPC ID: 46, Vehicle: 13)
+[2025-10-23T03:16:55+0100] [Info] [connection] incoming connection: 127.0.0.1:54244 id: 45
+[2025-10-23T03:16:55+0100] [Info] [npc:join] TrainDriverLinden has joined the server (45:127.0.0.1)
+[2025-10-23T03:16:55+0100] [Info] [TRAIN NPC]: Driver of train Linden created (NPC ID: 45, Vehicle: 17)
+[2025-10-23T03:16:55+0100] [Info] [TRAIN NPC]: All 5 passenger train vehicles and NPCs created
+[2025-10-23T03:16:55+0100] [Info] Loaded 3 vehicles from: vehicles/trains.txt
+[2025-10-23T03:16:55+0100] [Info] Loaded 3 vehicles from: vehicles/pilots.txt
+[2025-10-23T03:16:55+0100] [Info] Loaded 15 vehicles from: vehicles/lv_law.txt
+[2025-10-23T03:16:55+0100] [Info] Loaded 39 vehicles from: vehicles/lv_airport.txt
+[2025-10-23T03:16:55+0100] [Info] Loaded 255 vehicles from: vehicles/lv_gen.txt
+[2025-10-23T03:16:55+0100] [Info] Loaded 38 vehicles from: vehicles/sf_law.txt
+[2025-10-23T03:16:55+0100] [Info] Loaded 35 vehicles from: vehicles/sf_airport.txt
+[2025-10-23T03:16:55+0100] [Info] Loaded 353 vehicles from: vehicles/sf_gen.txt
+[2025-10-23T03:16:55+0100] [Info] Loaded 24 vehicles from: vehicles/ls_law.txt
+[2025-10-23T03:16:55+0100] [Info] Loaded 37 vehicles from: vehicles/ls_airport.txt
+[2025-10-23T03:16:55+0100] [Info] Loaded 98 vehicles from: vehicles/ls_gen_inner.txt
+[2025-10-23T03:16:55+0100] [Info] Loaded 389 vehicles from: vehicles/ls_gen_outer.txt
+[2025-10-23T03:16:55+0100] [Info] Loaded 71 vehicles from: vehicles/whetstone.txt
+[2025-10-23T03:16:55+0100] [Info] Loaded 168 vehicles from: vehicles/bone.txt
+[2025-10-23T03:16:55+0100] [Info] Loaded 61 vehicles from: vehicles/flint.txt
+[2025-10-23T03:16:55+0100] [Info] Loaded 96 vehicles from: vehicles/tierra.txt
+[2025-10-23T03:16:55+0100] [Info] Loaded 96 vehicles from: vehicles/red_county.txt
+[2025-10-23T03:16:55+0100] [Info] Total vehicles from files: 1781
+[2025-10-23T03:16:55+0100] [Info] 
+---------------------------------------
+[2025-10-23T03:16:55+0100] [Info] Running Grand Larceny - by the SA-MP team
+
+[2025-10-23T03:16:55+0100] [Info] ---------------------------------------
+
+[2025-10-23T03:16:55+0100] [Info] Legacy Network started on port 7777
+[2025-10-23T03:17:11+0100] [Warning] Couldn't announce legacy network to open.mp list.
+[2025-10-23T03:17:11+0100] [Warning] 	 Status: 503
+[2025-10-23T03:17:11+0100] [Warning] 	 Message: 
+[2025-10-23T03:17:11+0100] [Warning] This won't affect the server's behaviour.
+[2025-10-23T03:18:15+0100] [Info] +---------------------------------------------+
+[2025-10-23T03:18:15+0100] [Info] |  Example Filterscript for Train NPC System  |
+[2025-10-23T03:18:15+0100] [Info] |    using open.mp NPC component unloaded!    |
+[2025-10-23T03:18:15+0100] [Info] +---------------------------------------------+
+Starting open.mp server (1.4.0.3020) from commit f408b3e390cab4f583fa65593fb5dbf0a9454e8c
+Loading component $CAPI.dll
+	Successfully loaded component C-API (1.4.0.3020) with UID 10467dd8d4c56fc6
+Loading component Actors.dll
+	Successfully loaded component Actors (1.4.0.3020) with UID c81ca021eae2ad5c
+Loading component Checkpoints.dll
+	Successfully loaded component Checkpoints (1.4.0.3020) with UID 44a937350d611dde
+Loading component Classes.dll
+	Successfully loaded component Classes (1.4.0.3020) with UID 8cfb3183976da208
+Loading component Console.dll
+	Successfully loaded component Console (1.4.0.3020) with UID bfa24e49d0c95ee4
+Loading component CustomModels.dll
+	Successfully loaded component CustomModels (1.4.0.3020) with UID 15e3cb1e7c77ffff
+Loading component Databases.dll
+	Successfully loaded component Databases (1.4.0.3020) with UID 80092e7eb5821a96
+Loading component Dialogs.dll
+	Successfully loaded component Dialogs (1.4.0.3020) with UID 44a111350d611dde
+Loading component GangZones.dll
+	Successfully loaded component GangZones (1.4.0.3020) with UID b3351d11ee8d8056
+Loading component LegacyConfig.dll
+	Successfully loaded component LegacyConfig (1.4.0.3020) with UID 24ef6216838f9ffc
+Loading component LegacyNetwork.dll
+	Successfully loaded component RakNetLegacyNetwork (1.4.0.3020) with UID ea9799fd79cf8442
+Loading component Menus.dll
+	Successfully loaded component Menus (1.4.0.3020) with UID 621e219eb97ee0b2
+Loading component NPCs.dll
+	Successfully loaded component NPCs (1.4.0.3020) with UID 3d0e59e87f4e90bc
+Loading component Objects.dll
+	Successfully loaded component Objects (1.4.0.3020) with UID 59f8415f72da6160
+Loading component Pawn.dll
+	Successfully loaded component Pawn (1.4.0.3020) with UID 78906cd9f19c36a6
+Loading component Pickups.dll
+	Successfully loaded component Pickups (1.4.0.3020) with UID cf304faa363dd971
+Loading component Recordings.dll
+	Successfully loaded component Recordings (1.4.0.3020) with UID 871144d399f5f613
+Loading component TextDraws.dll
+	Successfully loaded component TextDraws (1.4.0.3020) with UID 9b5dc2b1d15c992a
+Loading component TextLabels.dll
+	Successfully loaded component TextLabels (1.4.0.3020) with UID a0c57ea80a009742
+Loading component Timers.dll
+	Successfully loaded component Timers (1.4.0.3020) with UID 2ad8124c5ea257a3
+Loading component Variables.dll
+	Successfully loaded component Variables (1.4.0.3020) with UID 75e121848bc01fa2
+Loading component Vehicles.dll
+	Successfully loaded component Vehicles (1.4.0.3020) with UID 3f1f62ee9e22ab19
+Loaded 22 component(s) from I:\beta\components
+[2025-10-23T03:18:18+0100] [Info] +---------------------------------------------+
+[2025-10-23T03:18:18+0100] [Info] |  Example Filterscript for Train NPC System  |
+[2025-10-23T03:18:18+0100] [Info] |     using open.mp NPC component loaded!     |
+[2025-10-23T03:18:18+0100] [Info] +---------------------------------------------+
+[2025-10-23T03:18:18+0100] [Info] [connection] incoming connection: 127.0.0.1:64834 id: 49
+[2025-10-23T03:18:18+0100] [Info] [npc:join] TrainDriverUnity has joined the server (49:127.0.0.1)
+[2025-10-23T03:18:18+0100] [Info] [TRAIN NPC]: Driver of train Unity created (NPC ID: 49, Vehicle: 1)
+[2025-10-23T03:18:18+0100] [Info] [connection] incoming connection: 127.0.0.1:51786 id: 48
+[2025-10-23T03:18:18+0100] [Info] [npc:join] TrainDriverMarket has joined the server (48:127.0.0.1)
+[2025-10-23T03:18:18+0100] [Info] [TRAIN NPC]: Driver of train Market created (NPC ID: 48, Vehicle: 5)
+[2025-10-23T03:18:18+0100] [Info] [connection] incoming connection: 127.0.0.1:60281 id: 47
+[2025-10-23T03:18:18+0100] [Info] [npc:join] TrainDriverCranberry has joined the server (47:127.0.0.1)
+[2025-10-23T03:18:18+0100] [Info] [TRAIN NPC]: Driver of train Cranberry created (NPC ID: 47, Vehicle: 9)
+[2025-10-23T03:18:18+0100] [Info] [connection] incoming connection: 127.0.0.1:60124 id: 46
+[2025-10-23T03:18:18+0100] [Info] [npc:join] TrainDriverYellowBell has joined the server (46:127.0.0.1)
+[2025-10-23T03:18:18+0100] [Info] [TRAIN NPC]: Driver of train YellowBell created (NPC ID: 46, Vehicle: 13)
+[2025-10-23T03:18:18+0100] [Info] [connection] incoming connection: 127.0.0.1:64497 id: 45
+[2025-10-23T03:18:18+0100] [Info] [npc:join] TrainDriverLinden has joined the server (45:127.0.0.1)
+[2025-10-23T03:18:18+0100] [Info] [TRAIN NPC]: Driver of train Linden created (NPC ID: 45, Vehicle: 17)
+[2025-10-23T03:18:18+0100] [Info] [TRAIN NPC]: All 5 passenger train vehicles and NPCs created
+[2025-10-23T03:18:18+0100] [Info] Loaded 3 vehicles from: vehicles/trains.txt
+[2025-10-23T03:18:18+0100] [Info] Loaded 3 vehicles from: vehicles/pilots.txt
+[2025-10-23T03:18:18+0100] [Info] Loaded 15 vehicles from: vehicles/lv_law.txt
+[2025-10-23T03:18:18+0100] [Info] Loaded 39 vehicles from: vehicles/lv_airport.txt
+[2025-10-23T03:18:18+0100] [Info] Loaded 255 vehicles from: vehicles/lv_gen.txt
+[2025-10-23T03:18:18+0100] [Info] Loaded 38 vehicles from: vehicles/sf_law.txt
+[2025-10-23T03:18:18+0100] [Info] Loaded 35 vehicles from: vehicles/sf_airport.txt
+[2025-10-23T03:18:18+0100] [Info] Loaded 353 vehicles from: vehicles/sf_gen.txt
+[2025-10-23T03:18:18+0100] [Info] Loaded 24 vehicles from: vehicles/ls_law.txt
+[2025-10-23T03:18:18+0100] [Info] Loaded 37 vehicles from: vehicles/ls_airport.txt
+[2025-10-23T03:18:18+0100] [Info] Loaded 98 vehicles from: vehicles/ls_gen_inner.txt
+[2025-10-23T03:18:18+0100] [Info] Loaded 389 vehicles from: vehicles/ls_gen_outer.txt
+[2025-10-23T03:18:18+0100] [Info] Loaded 71 vehicles from: vehicles/whetstone.txt
+[2025-10-23T03:18:18+0100] [Info] Loaded 168 vehicles from: vehicles/bone.txt
+[2025-10-23T03:18:18+0100] [Info] Loaded 61 vehicles from: vehicles/flint.txt
+[2025-10-23T03:18:18+0100] [Info] Loaded 96 vehicles from: vehicles/tierra.txt
+[2025-10-23T03:18:18+0100] [Info] Loaded 96 vehicles from: vehicles/red_county.txt
+[2025-10-23T03:18:18+0100] [Info] Total vehicles from files: 1781
+[2025-10-23T03:18:18+0100] [Info] 
+---------------------------------------
+[2025-10-23T03:18:18+0100] [Info] Running Grand Larceny - by the SA-MP team
+
+[2025-10-23T03:18:18+0100] [Info] ---------------------------------------
+
+[2025-10-23T03:18:18+0100] [Info] Legacy Network started on port 7777
+[2025-10-23T03:18:33+0100] [Warning] Couldn't announce legacy network to open.mp list.
+[2025-10-23T03:18:33+0100] [Warning] 	 Status: 503
+[2025-10-23T03:18:33+0100] [Warning] 	 Message: 
+[2025-10-23T03:18:33+0100] [Warning] This won't affect the server's behaviour.
+[2025-10-23T03:19:09+0100] [Info] +---------------------------------------------+
+[2025-10-23T03:19:09+0100] [Info] |  Example Filterscript for Train NPC System  |
+[2025-10-23T03:19:09+0100] [Info] |    using open.mp NPC component unloaded!    |
+[2025-10-23T03:19:09+0100] [Info] +---------------------------------------------+
+Starting open.mp server (1.4.0.3020) from commit f408b3e390cab4f583fa65593fb5dbf0a9454e8c
+Loading component $CAPI.dll
+	Successfully loaded component C-API (1.4.0.3020) with UID 10467dd8d4c56fc6
+Loading component Actors.dll
+	Successfully loaded component Actors (1.4.0.3020) with UID c81ca021eae2ad5c
+Loading component Checkpoints.dll
+	Successfully loaded component Checkpoints (1.4.0.3020) with UID 44a937350d611dde
+Loading component Classes.dll
+	Successfully loaded component Classes (1.4.0.3020) with UID 8cfb3183976da208
+Loading component Console.dll
+	Successfully loaded component Console (1.4.0.3020) with UID bfa24e49d0c95ee4
+Loading component CustomModels.dll
+	Successfully loaded component CustomModels (1.4.0.3020) with UID 15e3cb1e7c77ffff
+Loading component Databases.dll
+	Successfully loaded component Databases (1.4.0.3020) with UID 80092e7eb5821a96
+Loading component Dialogs.dll
+	Successfully loaded component Dialogs (1.4.0.3020) with UID 44a111350d611dde
+Loading component GangZones.dll
+	Successfully loaded component GangZones (1.4.0.3020) with UID b3351d11ee8d8056
+Loading component LegacyConfig.dll
+	Successfully loaded component LegacyConfig (1.4.0.3020) with UID 24ef6216838f9ffc
+Loading component LegacyNetwork.dll
+	Successfully loaded component RakNetLegacyNetwork (1.4.0.3020) with UID ea9799fd79cf8442
+Loading component Menus.dll
+	Successfully loaded component Menus (1.4.0.3020) with UID 621e219eb97ee0b2
+Loading component NPCs.dll
+	Successfully loaded component NPCs (1.4.0.3020) with UID 3d0e59e87f4e90bc
+Loading component Objects.dll
+	Successfully loaded component Objects (1.4.0.3020) with UID 59f8415f72da6160
+Loading component Pawn.dll
+	Successfully loaded component Pawn (1.4.0.3020) with UID 78906cd9f19c36a6
+Loading component Pickups.dll
+	Successfully loaded component Pickups (1.4.0.3020) with UID cf304faa363dd971
+Loading component Recordings.dll
+	Successfully loaded component Recordings (1.4.0.3020) with UID 871144d399f5f613
+Loading component TextDraws.dll
+	Successfully loaded component TextDraws (1.4.0.3020) with UID 9b5dc2b1d15c992a
+Loading component TextLabels.dll
+	Successfully loaded component TextLabels (1.4.0.3020) with UID a0c57ea80a009742
+Loading component Timers.dll
+	Successfully loaded component Timers (1.4.0.3020) with UID 2ad8124c5ea257a3
+Loading component Variables.dll
+	Successfully loaded component Variables (1.4.0.3020) with UID 75e121848bc01fa2
+Loading component Vehicles.dll
+	Successfully loaded component Vehicles (1.4.0.3020) with UID 3f1f62ee9e22ab19
+Loaded 22 component(s) from I:\beta\components
+[2025-10-23T03:19:11+0100] [Info] +---------------------------------------------+
+[2025-10-23T03:19:11+0100] [Info] |  Example Filterscript for Train NPC System  |
+[2025-10-23T03:19:11+0100] [Info] |     using open.mp NPC component loaded!     |
+[2025-10-23T03:19:11+0100] [Info] +---------------------------------------------+
+[2025-10-23T03:19:11+0100] [Info] [TRAIN NPC]: OnNPCCreate called for NPC ID 49
+[2025-10-23T03:19:11+0100] [Info] [connection] incoming connection: 127.0.0.1:55040 id: 49
+[2025-10-23T03:19:11+0100] [Info] [npc:join] TrainDriverUnity has joined the server (49:127.0.0.1)
+[2025-10-23T03:19:11+0100] [Info] [TRAIN NPC]: Driver of train Unity created (NPC ID: 49, Vehicle: 1)
+[2025-10-23T03:19:11+0100] [Info] [TRAIN NPC]: OnNPCCreate called for NPC ID 48
+[2025-10-23T03:19:11+0100] [Info] [connection] incoming connection: 127.0.0.1:49927 id: 48
+[2025-10-23T03:19:11+0100] [Info] [npc:join] TrainDriverMarket has joined the server (48:127.0.0.1)
+[2025-10-23T03:19:11+0100] [Info] [TRAIN NPC]: Driver of train Market created (NPC ID: 48, Vehicle: 5)
+[2025-10-23T03:19:11+0100] [Info] [TRAIN NPC]: OnNPCCreate called for NPC ID 47
+[2025-10-23T03:19:11+0100] [Info] [connection] incoming connection: 127.0.0.1:56848 id: 47
+[2025-10-23T03:19:11+0100] [Info] [npc:join] TrainDriverCranberry has joined the server (47:127.0.0.1)
+[2025-10-23T03:19:11+0100] [Info] [TRAIN NPC]: Driver of train Cranberry created (NPC ID: 47, Vehicle: 9)
+[2025-10-23T03:19:11+0100] [Info] [TRAIN NPC]: OnNPCCreate called for NPC ID 46
+[2025-10-23T03:19:11+0100] [Info] [connection] incoming connection: 127.0.0.1:56134 id: 46
+[2025-10-23T03:19:11+0100] [Info] [npc:join] TrainDriverYellowBell has joined the server (46:127.0.0.1)
+[2025-10-23T03:19:11+0100] [Info] [TRAIN NPC]: Driver of train YellowBell created (NPC ID: 46, Vehicle: 13)
+[2025-10-23T03:19:11+0100] [Info] [TRAIN NPC]: OnNPCCreate called for NPC ID 45
+[2025-10-23T03:19:11+0100] [Info] [connection] incoming connection: 127.0.0.1:61471 id: 45
+[2025-10-23T03:19:11+0100] [Info] [npc:join] TrainDriverLinden has joined the server (45:127.0.0.1)
+[2025-10-23T03:19:11+0100] [Info] [TRAIN NPC]: Driver of train Linden created (NPC ID: 45, Vehicle: 17)
+[2025-10-23T03:19:11+0100] [Info] [TRAIN NPC]: All 5 passenger train vehicles and NPCs created
+[2025-10-23T03:19:11+0100] [Info] Loaded 3 vehicles from: vehicles/trains.txt
+[2025-10-23T03:19:11+0100] [Info] Loaded 3 vehicles from: vehicles/pilots.txt
+[2025-10-23T03:19:11+0100] [Info] Loaded 15 vehicles from: vehicles/lv_law.txt
+[2025-10-23T03:19:11+0100] [Info] Loaded 39 vehicles from: vehicles/lv_airport.txt
+[2025-10-23T03:19:11+0100] [Info] Loaded 255 vehicles from: vehicles/lv_gen.txt
+[2025-10-23T03:19:11+0100] [Info] Loaded 38 vehicles from: vehicles/sf_law.txt
+[2025-10-23T03:19:11+0100] [Info] Loaded 35 vehicles from: vehicles/sf_airport.txt
+[2025-10-23T03:19:11+0100] [Info] Loaded 353 vehicles from: vehicles/sf_gen.txt
+[2025-10-23T03:19:11+0100] [Info] Loaded 24 vehicles from: vehicles/ls_law.txt
+[2025-10-23T03:19:11+0100] [Info] Loaded 37 vehicles from: vehicles/ls_airport.txt
+[2025-10-23T03:19:11+0100] [Info] Loaded 98 vehicles from: vehicles/ls_gen_inner.txt
+[2025-10-23T03:19:11+0100] [Info] Loaded 389 vehicles from: vehicles/ls_gen_outer.txt
+[2025-10-23T03:19:11+0100] [Info] Loaded 71 vehicles from: vehicles/whetstone.txt
+[2025-10-23T03:19:11+0100] [Info] Loaded 168 vehicles from: vehicles/bone.txt
+[2025-10-23T03:19:11+0100] [Info] Loaded 61 vehicles from: vehicles/flint.txt
+[2025-10-23T03:19:11+0100] [Info] Loaded 96 vehicles from: vehicles/tierra.txt
+[2025-10-23T03:19:11+0100] [Info] Loaded 96 vehicles from: vehicles/red_county.txt
+[2025-10-23T03:19:11+0100] [Info] Total vehicles from files: 1781
+[2025-10-23T03:19:11+0100] [Info] 
+---------------------------------------
+[2025-10-23T03:19:11+0100] [Info] Running Grand Larceny - by the SA-MP team
+
+[2025-10-23T03:19:11+0100] [Info] ---------------------------------------
+
+[2025-10-23T03:19:11+0100] [Info] Legacy Network started on port 7777
+[2025-10-23T03:19:11+0100] [Info] [TRAIN NPC]: Driver of train Unity spawned, putting in vehicle
+[2025-10-23T03:19:11+0100] [Info] [TRAIN NPC]: Spawning train Unity (ID: 49)
+[2025-10-23T03:19:11+0100] [Info] [TRAIN NPC]: Driver of train Market spawned, putting in vehicle
+[2025-10-23T03:19:11+0100] [Info] [TRAIN NPC]: Spawning train Market (ID: 48)
+[2025-10-23T03:19:11+0100] [Info] [TRAIN NPC]: Driver of train Cranberry spawned, putting in vehicle
+[2025-10-23T03:19:11+0100] [Info] [TRAIN NPC]: Spawning train Cranberry (ID: 47)
+[2025-10-23T03:19:11+0100] [Info] [TRAIN NPC]: Driver of train YellowBell spawned, putting in vehicle
+[2025-10-23T03:19:11+0100] [Info] [TRAIN NPC]: Spawning train YellowBell (ID: 46)
+[2025-10-23T03:19:11+0100] [Info] [TRAIN NPC]: Driver of train Linden spawned, putting in vehicle
+[2025-10-23T03:19:11+0100] [Info] [TRAIN NPC]: Spawning train Linden (ID: 45)
+[2025-10-23T03:19:12+0100] [Info] [TRAIN NPC]: Train Unity started initial playback
+[2025-10-23T03:19:12+0100] [Info] [TRAIN NPC]: Train Market started initial playback
+[2025-10-23T03:19:12+0100] [Info] [TRAIN NPC]: Train Cranberry started initial playback
+[2025-10-23T03:19:12+0100] [Info] [TRAIN NPC]: Train YellowBell started initial playback
+[2025-10-23T03:19:12+0100] [Info] [TRAIN NPC]: Train Linden started initial playback
+[2025-10-23T03:19:26+0100] [Warning] Couldn't announce legacy network to open.mp list.
+[2025-10-23T03:19:26+0100] [Warning] 	 Status: 503
+[2025-10-23T03:19:26+0100] [Warning] 	 Message: 
+[2025-10-23T03:19:26+0100] [Warning] This won't affect the server's behaviour.
+[2025-10-23T03:20:27+0100] [Info] [connection] incoming connection: 127.0.0.1:60220 id: 0
+[2025-10-23T03:20:27+0100] [Info] [join] itsneufox has joined the server (0:127.0.0.1)
+[2025-10-23T03:20:47+0100] [Info] [TRAIN NPC]: NPC 49 finished route, starting next...
+[2025-10-23T03:20:47+0100] [Info] [TRAIN NPC]: Train Unity -> next segment (recording: TRAIN_MARKET_TO_CRANBERRY)
+[2025-10-23T03:21:15+0100] [Info] [TRAIN NPC]: NPC 46 finished route, starting next...
+[2025-10-23T03:21:15+0100] [Info] [TRAIN NPC]: Train YellowBell -> next segment (recording: TRAIN_LINDEN_TO_UNITY)
+[2025-10-23T03:22:01+0100] [Info] [TRAIN NPC]: NPC 48 finished route, starting next...
+[2025-10-23T03:22:01+0100] [Info] [TRAIN NPC]: Train Market -> next segment (recording: TRAIN_CRANBERRY_TO_YELLOW_BELL)
+[2025-10-23T03:22:08+0100] [Info] [TRAIN NPC]: NPC 45 finished route, starting next...
+[2025-10-23T03:22:08+0100] [Info] [TRAIN NPC]: Train Linden -> next segment (recording: TRAIN_UNITY_TO_MARKET)
+[2025-10-23T03:22:13+0100] [Info] [TRAIN NPC]: NPC 47 finished route, starting next...
+[2025-10-23T03:22:13+0100] [Info] [TRAIN NPC]: Train Cranberry -> next segment (recording: TRAIN_YELLOW_BELL_TO_LINDEN)
+[2025-10-23T03:23:36+0100] [Info] [TRAIN NPC]: NPC 49 finished route, starting next...
+[2025-10-23T03:23:36+0100] [Info] [TRAIN NPC]: Train Unity -> next segment (recording: TRAIN_CRANBERRY_TO_YELLOW_BELL)
+[2025-10-23T03:23:43+0100] [Info] [TRAIN NPC]: NPC 45 finished route, starting next...
+[2025-10-23T03:23:43+0100] [Info] [TRAIN NPC]: Train Linden -> next segment (recording: TRAIN_MARKET_TO_CRANBERRY)
+[2025-10-23T03:24:11+0100] [Info] [TRAIN NPC]: NPC 46 finished route, starting next...
+[2025-10-23T03:24:11+0100] [Info] [TRAIN NPC]: Train YellowBell -> next segment (recording: TRAIN_UNITY_TO_MARKET)
+[2025-10-23T03:24:16+0100] [Info] [TRAIN NPC]: NPC 47 finished route, starting next...
+[2025-10-23T03:24:16+0100] [Info] [TRAIN NPC]: Train Cranberry -> next segment (recording: TRAIN_LINDEN_TO_UNITY)
+[2025-10-23T03:25:02+0100] [Info] [TRAIN NPC]: NPC 48 finished route, starting next...
+[2025-10-23T03:25:02+0100] [Info] [TRAIN NPC]: Train Market -> next segment (recording: TRAIN_YELLOW_BELL_TO_LINDEN)
+[2025-10-23T03:25:46+0100] [Info] [TRAIN NPC]: NPC 46 finished route, starting next...
+[2025-10-23T03:25:46+0100] [Info] [TRAIN NPC]: Train YellowBell -> next segment (recording: TRAIN_MARKET_TO_CRANBERRY)
+[2025-10-23T03:26:32+0100] [Info] [TRAIN NPC]: NPC 45 finished route, starting next...
+[2025-10-23T03:26:32+0100] [Info] [TRAIN NPC]: Train Linden -> next segment (recording: TRAIN_CRANBERRY_TO_YELLOW_BELL)
+[2025-10-23T03:26:37+0100] [Info] [TRAIN NPC]: NPC 49 finished route, starting next...
+[2025-10-23T03:26:37+0100] [Info] [TRAIN NPC]: Train Unity -> next segment (recording: TRAIN_YELLOW_BELL_TO_LINDEN)
+[2025-10-23T03:27:06+0100] [Info] [TRAIN NPC]: NPC 48 finished route, starting next...
+[2025-10-23T03:27:06+0100] [Info] [TRAIN NPC]: Train Market -> next segment (recording: TRAIN_LINDEN_TO_UNITY)
+[2025-10-23T03:27:12+0100] [Info] [TRAIN NPC]: NPC 47 finished route, starting next...
+[2025-10-23T03:27:12+0100] [Info] [TRAIN NPC]: Train Cranberry -> next segment (recording: TRAIN_UNITY_TO_MARKET)
+[2025-10-23T03:28:36+0100] [Info] [TRAIN NPC]: NPC 46 finished route, starting next...
+[2025-10-23T03:28:36+0100] [Info] [TRAIN NPC]: Train YellowBell -> next segment (recording: TRAIN_CRANBERRY_TO_YELLOW_BELL)
+[2025-10-23T03:28:40+0100] [Info] [TRAIN NPC]: NPC 49 finished route, starting next...
+[2025-10-23T03:28:40+0100] [Info] [TRAIN NPC]: Train Unity -> next segment (recording: TRAIN_LINDEN_TO_UNITY)
+[2025-10-23T03:28:47+0100] [Info] [TRAIN NPC]: NPC 47 finished route, starting next...
+[2025-10-23T03:28:47+0100] [Info] [TRAIN NPC]: Train Cranberry -> next segment (recording: TRAIN_MARKET_TO_CRANBERRY)
+[2025-10-23T03:29:33+0100] [Info] [TRAIN NPC]: NPC 45 finished route, starting next...
+[2025-10-23T03:29:33+0100] [Info] [TRAIN NPC]: Train Linden -> next segment (recording: TRAIN_YELLOW_BELL_TO_LINDEN)
+[2025-10-23T03:30:02+0100] [Info] [TRAIN NPC]: NPC 48 finished route, starting next...
+[2025-10-23T03:30:02+0100] [Info] [TRAIN NPC]: Train Market -> next segment (recording: TRAIN_UNITY_TO_MARKET)
+[2025-10-23T03:31:37+0100] [Info] [TRAIN NPC]: NPC 49 finished route, starting next...
+[2025-10-23T03:31:37+0100] [Info] [TRAIN NPC]: Train Unity -> next segment (recording: TRAIN_UNITY_TO_MARKET)
+[2025-10-23T03:31:37+0100] [Info] [TRAIN NPC]: NPC 47 finished route, starting next...
+[2025-10-23T03:31:37+0100] [Info] [TRAIN NPC]: Train Cranberry -> next segment (recording: TRAIN_CRANBERRY_TO_YELLOW_BELL)
+[2025-10-23T03:31:37+0100] [Info] [TRAIN NPC]: NPC 48 finished route, starting next...
+[2025-10-23T03:31:37+0100] [Info] [TRAIN NPC]: Train Market -> next segment (recording: TRAIN_MARKET_TO_CRANBERRY)
+[2025-10-23T03:31:37+0100] [Info] [TRAIN NPC]: NPC 46 finished route, starting next...
+[2025-10-23T03:31:37+0100] [Info] [TRAIN NPC]: Train YellowBell -> next segment (recording: TRAIN_YELLOW_BELL_TO_LINDEN)
+[2025-10-23T03:31:37+0100] [Info] [TRAIN NPC]: NPC 45 finished route, starting next...
+[2025-10-23T03:31:37+0100] [Info] [TRAIN NPC]: Train Linden -> next segment (recording: TRAIN_LINDEN_TO_UNITY)
+[2025-10-23T03:33:11+0100] [Info] [TRAIN NPC]: NPC 49 finished route, starting next...
+[2025-10-23T03:33:11+0100] [Info] [TRAIN NPC]: Train Unity -> next segment (recording: TRAIN_MARKET_TO_CRANBERRY)
+[2025-10-23T03:33:40+0100] [Info] [TRAIN NPC]: NPC 46 finished route, starting next...
+[2025-10-23T03:33:40+0100] [Info] [TRAIN NPC]: Train YellowBell -> next segment (recording: TRAIN_LINDEN_TO_UNITY)
+[2025-10-23T03:34:26+0100] [Info] [TRAIN NPC]: NPC 48 finished route, starting next...
+[2025-10-23T03:34:26+0100] [Info] [TRAIN NPC]: Train Market -> next segment (recording: TRAIN_CRANBERRY_TO_YELLOW_BELL)
+[2025-10-23T03:34:33+0100] [Info] [TRAIN NPC]: NPC 45 finished route, starting next...
+[2025-10-23T03:34:33+0100] [Info] [TRAIN NPC]: Train Linden -> next segment (recording: TRAIN_UNITY_TO_MARKET)
+[2025-10-23T03:34:38+0100] [Info] [TRAIN NPC]: NPC 47 finished route, starting next...
+[2025-10-23T03:34:38+0100] [Info] [TRAIN NPC]: Train Cranberry -> next segment (recording: TRAIN_YELLOW_BELL_TO_LINDEN)
+[2025-10-23T03:35:01+0100] [Info] [part] itsneufox has left the server (0:1)
+[2025-10-23T03:36:01+0100] [Info] [TRAIN NPC]: NPC 49 finished route, starting next...
+[2025-10-23T03:36:01+0100] [Info] [TRAIN NPC]: Train Unity -> next segment (recording: TRAIN_CRANBERRY_TO_YELLOW_BELL)
+[2025-10-23T03:36:08+0100] [Info] [TRAIN NPC]: NPC 45 finished route, starting next...
+[2025-10-23T03:36:08+0100] [Info] [TRAIN NPC]: Train Linden -> next segment (recording: TRAIN_MARKET_TO_CRANBERRY)
+[2025-10-23T03:36:36+0100] [Info] [TRAIN NPC]: NPC 46 finished route, starting next...
+[2025-10-23T03:36:36+0100] [Info] [TRAIN NPC]: Train YellowBell -> next segment (recording: TRAIN_UNITY_TO_MARKET)
+[2025-10-23T03:36:41+0100] [Info] [TRAIN NPC]: NPC 47 finished route, starting next...
+[2025-10-23T03:36:41+0100] [Info] [TRAIN NPC]: Train Cranberry -> next segment (recording: TRAIN_LINDEN_TO_UNITY)
+[2025-10-23T03:37:27+0100] [Info] [TRAIN NPC]: NPC 48 finished route, starting next...
+[2025-10-23T03:37:27+0100] [Info] [TRAIN NPC]: Train Market -> next segment (recording: TRAIN_YELLOW_BELL_TO_LINDEN)
+[2025-10-23T03:38:11+0100] [Info] [TRAIN NPC]: NPC 46 finished route, starting next...
+[2025-10-23T03:38:11+0100] [Info] [TRAIN NPC]: Train YellowBell -> next segment (recording: TRAIN_MARKET_TO_CRANBERRY)
+[2025-10-23T03:38:57+0100] [Info] [TRAIN NPC]: NPC 45 finished route, starting next...
+[2025-10-23T03:38:57+0100] [Info] [TRAIN NPC]: Train Linden -> next segment (recording: TRAIN_CRANBERRY_TO_YELLOW_BELL)
+[2025-10-23T03:39:02+0100] [Info] [TRAIN NPC]: NPC 49 finished route, starting next...
+[2025-10-23T03:39:02+0100] [Info] [TRAIN NPC]: Train Unity -> next segment (recording: TRAIN_YELLOW_BELL_TO_LINDEN)
+[2025-10-23T03:39:30+0100] [Info] [TRAIN NPC]: NPC 48 finished route, starting next...
+[2025-10-23T03:39:30+0100] [Info] [TRAIN NPC]: Train Market -> next segment (recording: TRAIN_LINDEN_TO_UNITY)
+[2025-10-23T03:39:37+0100] [Info] [TRAIN NPC]: NPC 47 finished route, starting next...
+[2025-10-23T03:39:37+0100] [Info] [TRAIN NPC]: Train Cranberry -> next segment (recording: TRAIN_UNITY_TO_MARKET)
+[2025-10-23T03:41:00+0100] [Info] [TRAIN NPC]: NPC 46 finished route, starting next...
+[2025-10-23T03:41:00+0100] [Info] [TRAIN NPC]: Train YellowBell -> next segment (recording: TRAIN_CRANBERRY_TO_YELLOW_BELL)
+[2025-10-23T03:41:05+0100] [Info] [TRAIN NPC]: NPC 49 finished route, starting next...
+[2025-10-23T03:41:05+0100] [Info] [TRAIN NPC]: Train Unity -> next segment (recording: TRAIN_LINDEN_TO_UNITY)
+[2025-10-23T03:41:12+0100] [Info] [TRAIN NPC]: NPC 47 finished route, starting next...
+[2025-10-23T03:41:12+0100] [Info] [TRAIN NPC]: Train Cranberry -> next segment (recording: TRAIN_MARKET_TO_CRANBERRY)
+[2025-10-23T03:41:58+0100] [Info] [TRAIN NPC]: NPC 45 finished route, starting next...
+[2025-10-23T03:41:58+0100] [Info] [TRAIN NPC]: Train Linden -> next segment (recording: TRAIN_YELLOW_BELL_TO_LINDEN)
+[2025-10-23T03:42:27+0100] [Info] [TRAIN NPC]: NPC 48 finished route, starting next...
+[2025-10-23T03:42:27+0100] [Info] [TRAIN NPC]: Train Market -> next segment (recording: TRAIN_UNITY_TO_MARKET)
+[2025-10-23T03:44:01+0100] [Info] [TRAIN NPC]: NPC 49 finished route, starting next...
+[2025-10-23T03:44:01+0100] [Info] [TRAIN NPC]: Train Unity -> next segment (recording: TRAIN_UNITY_TO_MARKET)
+[2025-10-23T03:44:01+0100] [Info] [TRAIN NPC]: NPC 47 finished route, starting next...
+[2025-10-23T03:44:01+0100] [Info] [TRAIN NPC]: Train Cranberry -> next segment (recording: TRAIN_CRANBERRY_TO_YELLOW_BELL)
+[2025-10-23T03:44:02+0100] [Info] [TRAIN NPC]: NPC 48 finished route, starting next...
+[2025-10-23T03:44:02+0100] [Info] [TRAIN NPC]: Train Market -> next segment (recording: TRAIN_MARKET_TO_CRANBERRY)
+[2025-10-23T03:44:02+0100] [Info] [TRAIN NPC]: NPC 46 finished route, starting next...
+[2025-10-23T03:44:02+0100] [Info] [TRAIN NPC]: Train YellowBell -> next segment (recording: TRAIN_YELLOW_BELL_TO_LINDEN)
+[2025-10-23T03:44:02+0100] [Info] [TRAIN NPC]: NPC 45 finished route, starting next...
+[2025-10-23T03:44:02+0100] [Info] [TRAIN NPC]: Train Linden -> next segment (recording: TRAIN_LINDEN_TO_UNITY)
+[2025-10-23T03:45:36+0100] [Info] [TRAIN NPC]: NPC 49 finished route, starting next...
+[2025-10-23T03:45:36+0100] [Info] [TRAIN NPC]: Train Unity -> next segment (recording: TRAIN_MARKET_TO_CRANBERRY)
+[2025-10-23T03:46:05+0100] [Info] [TRAIN NPC]: NPC 46 finished route, starting next...
+[2025-10-23T03:46:05+0100] [Info] [TRAIN NPC]: Train YellowBell -> next segment (recording: TRAIN_LINDEN_TO_UNITY)
+[2025-10-23T03:46:11+0100] [Info] +---------------------------------------------+
+[2025-10-23T03:46:11+0100] [Info] |  Example Filterscript for Train NPC System  |
+[2025-10-23T03:46:11+0100] [Info] |    using open.mp NPC component unloaded!    |
+[2025-10-23T03:46:11+0100] [Info] +---------------------------------------------+
+Starting open.mp server (1.4.0.3020) from commit f408b3e390cab4f583fa65593fb5dbf0a9454e8c
+Loading component $CAPI.dll
+	Successfully loaded component C-API (1.4.0.3020) with UID 10467dd8d4c56fc6
+Loading component Actors.dll
+	Successfully loaded component Actors (1.4.0.3020) with UID c81ca021eae2ad5c
+Loading component Checkpoints.dll
+	Successfully loaded component Checkpoints (1.4.0.3020) with UID 44a937350d611dde
+Loading component Classes.dll
+	Successfully loaded component Classes (1.4.0.3020) with UID 8cfb3183976da208
+Loading component Console.dll
+	Successfully loaded component Console (1.4.0.3020) with UID bfa24e49d0c95ee4
+Loading component CustomModels.dll
+	Successfully loaded component CustomModels (1.4.0.3020) with UID 15e3cb1e7c77ffff
+Loading component Databases.dll
+	Successfully loaded component Databases (1.4.0.3020) with UID 80092e7eb5821a96
+Loading component Dialogs.dll
+	Successfully loaded component Dialogs (1.4.0.3020) with UID 44a111350d611dde
+Loading component GangZones.dll
+	Successfully loaded component GangZones (1.4.0.3020) with UID b3351d11ee8d8056
+Loading component LegacyConfig.dll
+	Successfully loaded component LegacyConfig (1.4.0.3020) with UID 24ef6216838f9ffc
+Loading component LegacyNetwork.dll
+	Successfully loaded component RakNetLegacyNetwork (1.4.0.3020) with UID ea9799fd79cf8442
+Loading component Menus.dll
+	Successfully loaded component Menus (1.4.0.3020) with UID 621e219eb97ee0b2
+Loading component NPCs.dll
+	Successfully loaded component NPCs (1.4.0.3020) with UID 3d0e59e87f4e90bc
+Loading component Objects.dll
+	Successfully loaded component Objects (1.4.0.3020) with UID 59f8415f72da6160
+Loading component Pawn.dll
+	Successfully loaded component Pawn (1.4.0.3020) with UID 78906cd9f19c36a6
+Loading component Pickups.dll
+	Successfully loaded component Pickups (1.4.0.3020) with UID cf304faa363dd971
+Loading component Recordings.dll
+	Successfully loaded component Recordings (1.4.0.3020) with UID 871144d399f5f613
+Loading component TextDraws.dll
+	Successfully loaded component TextDraws (1.4.0.3020) with UID 9b5dc2b1d15c992a
+Loading component TextLabels.dll
+	Successfully loaded component TextLabels (1.4.0.3020) with UID a0c57ea80a009742
+Loading component Timers.dll
+	Successfully loaded component Timers (1.4.0.3020) with UID 2ad8124c5ea257a3
+Loading component Variables.dll
+	Successfully loaded component Variables (1.4.0.3020) with UID 75e121848bc01fa2
+Loading component Vehicles.dll
+	Successfully loaded component Vehicles (1.4.0.3020) with UID 3f1f62ee9e22ab19
+Loaded 22 component(s) from I:\beta\components
+[2025-10-23T03:48:53+0100] [Info] +---------------------------------------------+
+[2025-10-23T03:48:53+0100] [Info] |  Example Filterscript for Train NPC System  |
+[2025-10-23T03:48:53+0100] [Info] |     using open.mp NPC component loaded!     |
+[2025-10-23T03:48:53+0100] [Info] +---------------------------------------------+
+[2025-10-23T03:48:53+0100] [Info] [TRAIN NPC]: OnNPCCreate called for NPC ID 49
+[2025-10-23T03:48:53+0100] [Info] [connection] incoming connection: 127.0.0.1:59626 id: 49
+[2025-10-23T03:48:53+0100] [Info] [npc:join] TrainDriverUnity has joined the server (49:127.0.0.1)
+[2025-10-23T03:48:53+0100] [Info] [TRAIN NPC]: Driver of train Unity created (NPC ID: 49, Vehicle: 1)
+[2025-10-23T03:48:53+0100] [Info] [TRAIN NPC]: OnNPCCreate called for NPC ID 48
+[2025-10-23T03:48:53+0100] [Info] [connection] incoming connection: 127.0.0.1:65314 id: 48
+[2025-10-23T03:48:53+0100] [Info] [npc:join] TrainDriverMarket has joined the server (48:127.0.0.1)
+[2025-10-23T03:48:53+0100] [Info] [TRAIN NPC]: Driver of train Market created (NPC ID: 48, Vehicle: 5)
+[2025-10-23T03:48:53+0100] [Info] [TRAIN NPC]: OnNPCCreate called for NPC ID 47
+[2025-10-23T03:48:53+0100] [Info] [connection] incoming connection: 127.0.0.1:56785 id: 47
+[2025-10-23T03:48:53+0100] [Info] [npc:join] TrainDriverCranberry has joined the server (47:127.0.0.1)
+[2025-10-23T03:48:53+0100] [Info] [TRAIN NPC]: Driver of train Cranberry created (NPC ID: 47, Vehicle: 9)
+[2025-10-23T03:48:53+0100] [Info] [TRAIN NPC]: OnNPCCreate called for NPC ID 46
+[2025-10-23T03:48:53+0100] [Info] [connection] incoming connection: 127.0.0.1:56782 id: 46
+[2025-10-23T03:48:53+0100] [Info] [npc:join] TrainDriverYellowBell has joined the server (46:127.0.0.1)
+[2025-10-23T03:48:53+0100] [Info] [TRAIN NPC]: Driver of train YellowBell created (NPC ID: 46, Vehicle: 13)
+[2025-10-23T03:48:53+0100] [Info] [TRAIN NPC]: OnNPCCreate called for NPC ID 45
+[2025-10-23T03:48:53+0100] [Info] [connection] incoming connection: 127.0.0.1:64331 id: 45
+[2025-10-23T03:48:53+0100] [Info] [npc:join] TrainDriverLinden has joined the server (45:127.0.0.1)
+[2025-10-23T03:48:53+0100] [Info] [TRAIN NPC]: Driver of train Linden created (NPC ID: 45, Vehicle: 17)
+[2025-10-23T03:48:53+0100] [Info] [TRAIN NPC]: All 5 passenger train vehicles and NPCs created
+[2025-10-23T03:48:53+0100] [Info] Loaded 3 vehicles from: vehicles/trains.txt
+[2025-10-23T03:48:53+0100] [Info] Loaded 3 vehicles from: vehicles/pilots.txt
+[2025-10-23T03:48:53+0100] [Info] Loaded 15 vehicles from: vehicles/lv_law.txt
+[2025-10-23T03:48:53+0100] [Info] Loaded 39 vehicles from: vehicles/lv_airport.txt
+[2025-10-23T03:48:53+0100] [Info] Loaded 255 vehicles from: vehicles/lv_gen.txt
+[2025-10-23T03:48:53+0100] [Info] Loaded 38 vehicles from: vehicles/sf_law.txt
+[2025-10-23T03:48:53+0100] [Info] Loaded 35 vehicles from: vehicles/sf_airport.txt
+[2025-10-23T03:48:53+0100] [Info] Loaded 353 vehicles from: vehicles/sf_gen.txt
+[2025-10-23T03:48:53+0100] [Info] Loaded 24 vehicles from: vehicles/ls_law.txt
+[2025-10-23T03:48:53+0100] [Info] Loaded 37 vehicles from: vehicles/ls_airport.txt
+[2025-10-23T03:48:53+0100] [Info] Loaded 98 vehicles from: vehicles/ls_gen_inner.txt
+[2025-10-23T03:48:53+0100] [Info] Loaded 389 vehicles from: vehicles/ls_gen_outer.txt
+[2025-10-23T03:48:53+0100] [Info] Loaded 71 vehicles from: vehicles/whetstone.txt
+[2025-10-23T03:48:53+0100] [Info] Loaded 168 vehicles from: vehicles/bone.txt
+[2025-10-23T03:48:53+0100] [Info] Loaded 61 vehicles from: vehicles/flint.txt
+[2025-10-23T03:48:53+0100] [Info] Loaded 96 vehicles from: vehicles/tierra.txt
+[2025-10-23T03:48:53+0100] [Info] Loaded 96 vehicles from: vehicles/red_county.txt
+[2025-10-23T03:48:53+0100] [Info] Total vehicles from files: 1781
+[2025-10-23T03:48:53+0100] [Info] 
+---------------------------------------
+[2025-10-23T03:48:53+0100] [Info] Running Grand Larceny - by the SA-MP team
+
+[2025-10-23T03:48:53+0100] [Info] ---------------------------------------
+
+[2025-10-23T03:48:53+0100] [Info] Legacy Network started on port 7777
+[2025-10-23T03:48:53+0100] [Info] [TRAIN NPC]: Driver of train Unity spawned, putting in vehicle
+[2025-10-23T03:48:53+0100] [Info] [TRAIN NPC]: Spawning train Unity (ID: 49)
+[2025-10-23T03:48:53+0100] [Info] [TRAIN NPC]: Driver of train Market spawned, putting in vehicle
+[2025-10-23T03:48:53+0100] [Info] [TRAIN NPC]: Spawning train Market (ID: 48)
+[2025-10-23T03:48:53+0100] [Info] [TRAIN NPC]: Driver of train Cranberry spawned, putting in vehicle
+[2025-10-23T03:48:53+0100] [Info] [TRAIN NPC]: Spawning train Cranberry (ID: 47)
+[2025-10-23T03:48:53+0100] [Info] [TRAIN NPC]: Driver of train YellowBell spawned, putting in vehicle
+[2025-10-23T03:48:53+0100] [Info] [TRAIN NPC]: Spawning train YellowBell (ID: 46)
+[2025-10-23T03:48:53+0100] [Info] [TRAIN NPC]: Driver of train Linden spawned, putting in vehicle
+[2025-10-23T03:48:53+0100] [Info] [TRAIN NPC]: Spawning train Linden (ID: 45)
+[2025-10-23T03:48:54+0100] [Info] [TRAIN NPC]: Train Unity started initial playback
+[2025-10-23T03:48:54+0100] [Info] [TRAIN NPC]: Train Market started initial playback
+[2025-10-23T03:48:54+0100] [Info] [TRAIN NPC]: Train Cranberry started initial playback
+[2025-10-23T03:48:54+0100] [Info] [TRAIN NPC]: Train YellowBell started initial playback
+[2025-10-23T03:48:54+0100] [Info] [TRAIN NPC]: Train Linden started initial playback
+[2025-10-23T03:49:00+0100] [Info] [connection] incoming connection: 127.0.0.1:62445 id: 0
+[2025-10-23T03:49:00+0100] [Info] [join] itsneufox has joined the server (0:127.0.0.1)
+[2025-10-23T03:49:20+0100] [Warning] Couldn't announce legacy network to open.mp list.
+[2025-10-23T03:49:20+0100] [Warning] 	 Status: 502
+[2025-10-23T03:49:20+0100] [Warning] 	 Message: error code: 502
+[2025-10-23T03:49:20+0100] [Warning] This won't affect the server's behaviour.
+[2025-10-23T03:50:29+0100] [Info] [TRAIN NPC]: NPC 49 finished route, starting next...
+[2025-10-23T03:50:29+0100] [Info] [TRAIN NPC]: Train Unity -> next segment (recording: TRAIN_MARKET_TO_CRANBERRY)
+[2025-10-23T03:50:58+0100] [Info] [TRAIN NPC]: NPC 46 finished route, starting next...
+[2025-10-23T03:50:58+0100] [Info] [TRAIN NPC]: Train YellowBell -> next segment (recording: TRAIN_LINDEN_TO_UNITY)
+[2025-10-23T03:51:44+0100] [Info] [TRAIN NPC]: NPC 48 finished route, starting next...
+[2025-10-23T03:51:44+0100] [Info] [TRAIN NPC]: Train Market -> next segment (recording: TRAIN_CRANBERRY_TO_YELLOW_BELL)
+[2025-10-23T03:51:51+0100] [Info] [TRAIN NPC]: NPC 45 finished route, starting next...
+[2025-10-23T03:51:51+0100] [Info] [TRAIN NPC]: Train Linden -> next segment (recording: TRAIN_UNITY_TO_MARKET)
+[2025-10-23T03:51:55+0100] [Info] [TRAIN NPC]: NPC 47 finished route, starting next...
+[2025-10-23T03:51:55+0100] [Info] [TRAIN NPC]: Train Cranberry -> next segment (recording: TRAIN_YELLOW_BELL_TO_LINDEN)
+[2025-10-23T03:53:19+0100] [Info] [TRAIN NPC]: NPC 49 finished route, starting next...
+[2025-10-23T03:53:19+0100] [Info] [TRAIN NPC]: Train Unity -> next segment (recording: TRAIN_CRANBERRY_TO_YELLOW_BELL)
+[2025-10-23T03:53:25+0100] [Info] [TRAIN NPC]: NPC 45 finished route, starting next...
+[2025-10-23T03:53:25+0100] [Info] [TRAIN NPC]: Train Linden -> next segment (recording: TRAIN_MARKET_TO_CRANBERRY)
+[2025-10-23T03:53:54+0100] [Info] [TRAIN NPC]: NPC 46 finished route, starting next...
+[2025-10-23T03:53:54+0100] [Info] [TRAIN NPC]: Train YellowBell -> next segment (recording: TRAIN_UNITY_TO_MARKET)
+[2025-10-23T03:53:59+0100] [Info] [TRAIN NPC]: NPC 47 finished route, starting next...
+[2025-10-23T03:53:59+0100] [Info] [TRAIN NPC]: Train Cranberry -> next segment (recording: TRAIN_LINDEN_TO_UNITY)
+[2025-10-23T03:54:45+0100] [Info] [TRAIN NPC]: NPC 48 finished route, starting next...
+[2025-10-23T03:54:45+0100] [Info] [TRAIN NPC]: Train Market -> next segment (recording: TRAIN_YELLOW_BELL_TO_LINDEN)
+[2025-10-23T03:55:29+0100] [Info] [TRAIN NPC]: NPC 46 finished route, starting next...
+[2025-10-23T03:55:29+0100] [Info] [TRAIN NPC]: Train YellowBell -> next segment (recording: TRAIN_MARKET_TO_CRANBERRY)
+[2025-10-23T03:56:15+0100] [Info] [TRAIN NPC]: NPC 45 finished route, starting next...
+[2025-10-23T03:56:15+0100] [Info] [TRAIN NPC]: Train Linden -> next segment (recording: TRAIN_CRANBERRY_TO_YELLOW_BELL)
+[2025-10-23T03:56:20+0100] [Info] [TRAIN NPC]: NPC 49 finished route, starting next...
+[2025-10-23T03:56:20+0100] [Info] [TRAIN NPC]: Train Unity -> next segment (recording: TRAIN_YELLOW_BELL_TO_LINDEN)
+[2025-10-23T03:56:48+0100] [Info] [TRAIN NPC]: NPC 48 finished route, starting next...
+[2025-10-23T03:56:48+0100] [Info] [TRAIN NPC]: Train Market -> next segment (recording: TRAIN_LINDEN_TO_UNITY)
+[2025-10-23T03:56:55+0100] [Info] [TRAIN NPC]: NPC 47 finished route, starting next...
+[2025-10-23T03:56:55+0100] [Info] [TRAIN NPC]: Train Cranberry -> next segment (recording: TRAIN_UNITY_TO_MARKET)
+[2025-10-23T03:58:18+0100] [Info] [TRAIN NPC]: NPC 46 finished route, starting next...
+[2025-10-23T03:58:18+0100] [Info] [TRAIN NPC]: Train YellowBell -> next segment (recording: TRAIN_CRANBERRY_TO_YELLOW_BELL)
+[2025-10-23T03:58:23+0100] [Info] [TRAIN NPC]: NPC 49 finished route, starting next...
+[2025-10-23T03:58:23+0100] [Info] [TRAIN NPC]: Train Unity -> next segment (recording: TRAIN_LINDEN_TO_UNITY)
+[2025-10-23T03:58:30+0100] [Info] [TRAIN NPC]: NPC 47 finished route, starting next...
+[2025-10-23T03:58:30+0100] [Info] [TRAIN NPC]: Train Cranberry -> next segment (recording: TRAIN_MARKET_TO_CRANBERRY)
+[2025-10-23T03:59:16+0100] [Info] [TRAIN NPC]: NPC 45 finished route, starting next...
+[2025-10-23T03:59:16+0100] [Info] [TRAIN NPC]: Train Linden -> next segment (recording: TRAIN_YELLOW_BELL_TO_LINDEN)
+[2025-10-23T03:59:44+0100] [Info] [TRAIN NPC]: NPC 48 finished route, starting next...
+[2025-10-23T03:59:44+0100] [Info] [TRAIN NPC]: Train Market -> next segment (recording: TRAIN_UNITY_TO_MARKET)
+[2025-10-23T04:01:19+0100] [Info] [TRAIN NPC]: NPC 49 finished route, starting next...
+[2025-10-23T04:01:19+0100] [Info] [TRAIN NPC]: Train Unity -> next segment (recording: TRAIN_UNITY_TO_MARKET)
+[2025-10-23T04:01:19+0100] [Info] [TRAIN NPC]: NPC 48 finished route, starting next...
+[2025-10-23T04:01:19+0100] [Info] [TRAIN NPC]: Train Market -> next segment (recording: TRAIN_MARKET_TO_CRANBERRY)
+[2025-10-23T04:01:19+0100] [Info] [TRAIN NPC]: NPC 46 finished route, starting next...
+[2025-10-23T04:01:19+0100] [Info] [TRAIN NPC]: Train YellowBell -> next segment (recording: TRAIN_YELLOW_BELL_TO_LINDEN)
+[2025-10-23T04:01:19+0100] [Info] [TRAIN NPC]: NPC 47 finished route, starting next...
+[2025-10-23T04:01:19+0100] [Info] [TRAIN NPC]: Train Cranberry -> next segment (recording: TRAIN_CRANBERRY_TO_YELLOW_BELL)
+[2025-10-23T04:01:19+0100] [Info] [TRAIN NPC]: NPC 45 finished route, starting next...
+[2025-10-23T04:01:19+0100] [Info] [TRAIN NPC]: Train Linden -> next segment (recording: TRAIN_LINDEN_TO_UNITY)
+[2025-10-23T04:02:38+0100] [Info] [part] itsneufox has left the server (0:1)
+[2025-10-23T04:02:54+0100] [Info] [TRAIN NPC]: NPC 49 finished route, starting next...
+[2025-10-23T04:02:54+0100] [Info] [TRAIN NPC]: Train Unity -> next segment (recording: TRAIN_MARKET_TO_CRANBERRY)
+[2025-10-23T04:03:22+0100] [Info] [TRAIN NPC]: NPC 46 finished route, starting next...
+[2025-10-23T04:03:22+0100] [Info] [TRAIN NPC]: Train YellowBell -> next segment (recording: TRAIN_LINDEN_TO_UNITY)
+[2025-10-23T04:04:09+0100] [Info] [TRAIN NPC]: NPC 48 finished route, starting next...
+[2025-10-23T04:04:09+0100] [Info] [TRAIN NPC]: Train Market -> next segment (recording: TRAIN_CRANBERRY_TO_YELLOW_BELL)
+[2025-10-23T04:04:15+0100] [Info] [TRAIN NPC]: NPC 45 finished route, starting next...
+[2025-10-23T04:04:15+0100] [Info] [TRAIN NPC]: Train Linden -> next segment (recording: TRAIN_UNITY_TO_MARKET)
+[2025-10-23T04:04:20+0100] [Info] [TRAIN NPC]: NPC 47 finished route, starting next...
+[2025-10-23T04:04:20+0100] [Info] [TRAIN NPC]: Train Cranberry -> next segment (recording: TRAIN_YELLOW_BELL_TO_LINDEN)
+[2025-10-23T04:05:44+0100] [Info] [TRAIN NPC]: NPC 49 finished route, starting next...
+[2025-10-23T04:05:44+0100] [Info] [TRAIN NPC]: Train Unity -> next segment (recording: TRAIN_CRANBERRY_TO_YELLOW_BELL)
+[2025-10-23T04:05:50+0100] [Info] [TRAIN NPC]: NPC 45 finished route, starting next...
+[2025-10-23T04:05:50+0100] [Info] [TRAIN NPC]: Train Linden -> next segment (recording: TRAIN_MARKET_TO_CRANBERRY)
+[2025-10-23T04:06:19+0100] [Info] [TRAIN NPC]: NPC 46 finished route, starting next...
+[2025-10-23T04:06:19+0100] [Info] [TRAIN NPC]: Train YellowBell -> next segment (recording: TRAIN_UNITY_TO_MARKET)
+[2025-10-23T04:06:23+0100] [Info] [TRAIN NPC]: NPC 47 finished route, starting next...
+[2025-10-23T04:06:23+0100] [Info] [TRAIN NPC]: Train Cranberry -> next segment (recording: TRAIN_LINDEN_TO_UNITY)
+[2025-10-23T04:07:10+0100] [Info] [TRAIN NPC]: NPC 48 finished route, starting next...
+[2025-10-23T04:07:10+0100] [Info] [TRAIN NPC]: Train Market -> next segment (recording: TRAIN_YELLOW_BELL_TO_LINDEN)
+[2025-10-23T04:07:53+0100] [Info] [TRAIN NPC]: NPC 46 finished route, starting next...
+[2025-10-23T04:07:53+0100] [Info] [TRAIN NPC]: Train YellowBell -> next segment (recording: TRAIN_MARKET_TO_CRANBERRY)
+[2025-10-23T04:08:40+0100] [Info] [TRAIN NPC]: NPC 45 finished route, starting next...
+[2025-10-23T04:08:40+0100] [Info] [TRAIN NPC]: Train Linden -> next segment (recording: TRAIN_CRANBERRY_TO_YELLOW_BELL)
+[2025-10-23T04:08:45+0100] [Info] [TRAIN NPC]: NPC 49 finished route, starting next...
+[2025-10-23T04:08:45+0100] [Info] [TRAIN NPC]: Train Unity -> next segment (recording: TRAIN_YELLOW_BELL_TO_LINDEN)
+[2025-10-23T04:09:13+0100] [Info] [TRAIN NPC]: NPC 48 finished route, starting next...
+[2025-10-23T04:09:13+0100] [Info] [TRAIN NPC]: Train Market -> next segment (recording: TRAIN_LINDEN_TO_UNITY)
+[2025-10-23T04:09:20+0100] [Info] [TRAIN NPC]: NPC 47 finished route, starting next...
+[2025-10-23T04:09:20+0100] [Info] [TRAIN NPC]: Train Cranberry -> next segment (recording: TRAIN_UNITY_TO_MARKET)
+[2025-10-23T04:10:43+0100] [Info] [TRAIN NPC]: NPC 46 finished route, starting next...
+[2025-10-23T04:10:43+0100] [Info] [TRAIN NPC]: Train YellowBell -> next segment (recording: TRAIN_CRANBERRY_TO_YELLOW_BELL)
+[2025-10-23T04:10:47+0100] [Info] +---------------------------------------------+
+[2025-10-23T04:10:47+0100] [Info] |  Example Filterscript for Train NPC System  |
+[2025-10-23T04:10:47+0100] [Info] |    using open.mp NPC component unloaded!    |
+[2025-10-23T04:10:47+0100] [Info] +---------------------------------------------+
+Starting open.mp server (1.4.0.3020) from commit f408b3e390cab4f583fa65593fb5dbf0a9454e8c
+Loading component $CAPI.dll
+	Successfully loaded component C-API (1.4.0.3020) with UID 10467dd8d4c56fc6
+Loading component Actors.dll
+	Successfully loaded component Actors (1.4.0.3020) with UID c81ca021eae2ad5c
+Loading component Checkpoints.dll
+	Successfully loaded component Checkpoints (1.4.0.3020) with UID 44a937350d611dde
+Loading component Classes.dll
+	Successfully loaded component Classes (1.4.0.3020) with UID 8cfb3183976da208
+Loading component Console.dll
+	Successfully loaded component Console (1.4.0.3020) with UID bfa24e49d0c95ee4
+Loading component CustomModels.dll
+	Successfully loaded component CustomModels (1.4.0.3020) with UID 15e3cb1e7c77ffff
+Loading component Databases.dll
+	Successfully loaded component Databases (1.4.0.3020) with UID 80092e7eb5821a96
+Loading component Dialogs.dll
+	Successfully loaded component Dialogs (1.4.0.3020) with UID 44a111350d611dde
+Loading component GangZones.dll
+	Successfully loaded component GangZones (1.4.0.3020) with UID b3351d11ee8d8056
+Loading component LegacyConfig.dll
+	Successfully loaded component LegacyConfig (1.4.0.3020) with UID 24ef6216838f9ffc
+Loading component LegacyNetwork.dll
+	Successfully loaded component RakNetLegacyNetwork (1.4.0.3020) with UID ea9799fd79cf8442
+Loading component Menus.dll
+	Successfully loaded component Menus (1.4.0.3020) with UID 621e219eb97ee0b2
+Loading component NPCs.dll
+	Successfully loaded component NPCs (1.4.0.3020) with UID 3d0e59e87f4e90bc
+Loading component Objects.dll
+	Successfully loaded component Objects (1.4.0.3020) with UID 59f8415f72da6160
+Loading component Pawn.dll
+	Successfully loaded component Pawn (1.4.0.3020) with UID 78906cd9f19c36a6
+Loading component Pickups.dll
+	Successfully loaded component Pickups (1.4.0.3020) with UID cf304faa363dd971
+Loading component Recordings.dll
+	Successfully loaded component Recordings (1.4.0.3020) with UID 871144d399f5f613
+Loading component TextDraws.dll
+	Successfully loaded component TextDraws (1.4.0.3020) with UID 9b5dc2b1d15c992a
+Loading component TextLabels.dll
+	Successfully loaded component TextLabels (1.4.0.3020) with UID a0c57ea80a009742
+Loading component Timers.dll
+	Successfully loaded component Timers (1.4.0.3020) with UID 2ad8124c5ea257a3
+Loading component Variables.dll
+	Successfully loaded component Variables (1.4.0.3020) with UID 75e121848bc01fa2
+Loading component Vehicles.dll
+	Successfully loaded component Vehicles (1.4.0.3020) with UID 3f1f62ee9e22ab19
+Loaded 22 component(s) from G:\bare-test-omp-gamemode\components
+[2025-10-23T23:45:02+0100] [Info] [connection] incoming connection: 127.0.0.1:57202 id: 99
+[2025-10-23T23:45:02+0100] [Info] [npc:join] MyBot has joined the server (99:127.0.0.1)
+[2025-10-23T23:45:02+0100] [Info] NPC created with ID: 99
+[2025-10-23T23:45:02+0100] [Info]   +----------------------------------+
+[2025-10-23T23:45:02+0100] [Info]   |    Test gamemode initialised!    |
+[2025-10-23T23:45:02+0100] [Info]   +----------------------------------+
+[2025-10-23T23:45:02+0100] [Info] Legacy Network started on port 7777
+Starting open.mp server (1.4.0.3020) from commit f408b3e390cab4f583fa65593fb5dbf0a9454e8c
+Loading component $CAPI.dll
+	Successfully loaded component C-API (1.4.0.3020) with UID 10467dd8d4c56fc6
+Loading component Actors.dll
+	Successfully loaded component Actors (1.4.0.3020) with UID c81ca021eae2ad5c
+Loading component Checkpoints.dll
+	Successfully loaded component Checkpoints (1.4.0.3020) with UID 44a937350d611dde
+Loading component Classes.dll
+	Successfully loaded component Classes (1.4.0.3020) with UID 8cfb3183976da208
+Loading component Console.dll
+	Successfully loaded component Console (1.4.0.3020) with UID bfa24e49d0c95ee4
+Loading component CustomModels.dll
+	Successfully loaded component CustomModels (1.4.0.3020) with UID 15e3cb1e7c77ffff
+Loading component Databases.dll
+	Successfully loaded component Databases (1.4.0.3020) with UID 80092e7eb5821a96
+Loading component Dialogs.dll
+	Successfully loaded component Dialogs (1.4.0.3020) with UID 44a111350d611dde
+Loading component GangZones.dll
+	Successfully loaded component GangZones (1.4.0.3020) with UID b3351d11ee8d8056
+Loading component LegacyConfig.dll
+	Successfully loaded component LegacyConfig (1.4.0.3020) with UID 24ef6216838f9ffc
+Loading component LegacyNetwork.dll
+	Successfully loaded component RakNetLegacyNetwork (1.4.0.3020) with UID ea9799fd79cf8442
+Loading component Menus.dll
+	Successfully loaded component Menus (1.4.0.3020) with UID 621e219eb97ee0b2
+Loading component NPCs.dll
+	Successfully loaded component NPCs (1.4.0.3020) with UID 3d0e59e87f4e90bc
+Loading component Objects.dll
+	Successfully loaded component Objects (1.4.0.3020) with UID 59f8415f72da6160
+Loading component Pawn.dll
+	Successfully loaded component Pawn (1.4.0.3020) with UID 78906cd9f19c36a6
+Loading component Pickups.dll
+	Successfully loaded component Pickups (1.4.0.3020) with UID cf304faa363dd971
+Loading component Recordings.dll
+	Successfully loaded component Recordings (1.4.0.3020) with UID 871144d399f5f613
+Loading component TextDraws.dll
+	Successfully loaded component TextDraws (1.4.0.3020) with UID 9b5dc2b1d15c992a
+Loading component TextLabels.dll
+	Successfully loaded component TextLabels (1.4.0.3020) with UID a0c57ea80a009742
+Loading component Timers.dll
+	Successfully loaded component Timers (1.4.0.3020) with UID 2ad8124c5ea257a3
+Loading component Variables.dll
+	Successfully loaded component Variables (1.4.0.3020) with UID 75e121848bc01fa2
+Loading component Vehicles.dll
+	Successfully loaded component Vehicles (1.4.0.3020) with UID 3f1f62ee9e22ab19
+Loaded 22 component(s) from G:\bare-test-omp-gamemode\components
+[2025-10-23T23:45:18+0100] [Info] [connection] incoming connection: 127.0.0.1:51027 id: 99
+[2025-10-23T23:45:18+0100] [Info] [npc:join] MyBot has joined the server (99:127.0.0.1)
+[2025-10-23T23:45:18+0100] [Info] NPC created with ID: 99
+[2025-10-23T23:45:18+0100] [Info]   +----------------------------------+
+[2025-10-23T23:45:18+0100] [Info]   |    Test gamemode initialised!    |
+[2025-10-23T23:45:18+0100] [Info]   +----------------------------------+
+[2025-10-23T23:45:18+0100] [Info] Legacy Network started on port 7777
+[2025-10-23T23:45:28+0100] [Warning] Couldn't announce legacy network to open.mp list.
+[2025-10-23T23:45:28+0100] [Warning] 	 Status: 406
+[2025-10-23T23:45:28+0100] [Warning] 	 Message: {"error":"failed to query server: socket read timed out"}
+[2025-10-23T23:45:28+0100] [Warning] This won't affect the server's behaviour.
+[2025-10-23T23:45:41+0100] [Info] [connection] incoming connection: 127.0.0.1:65363 id: 0
+[2025-10-23T23:45:41+0100] [Info] [join] itsneufox has joined the server (0:127.0.0.1)
+[2025-10-23T23:45:48+0100] [Info] [part] itsneufox has left the server (0:1)
+[2025-10-23T23:47:43+0100] [Info] [npc:part] MyBot has left the server (99:1)
+Starting open.mp server (1.4.0.3020) from commit f408b3e390cab4f583fa65593fb5dbf0a9454e8c
+Loading component $CAPI.dll
+	Successfully loaded component C-API (1.4.0.3020) with UID 10467dd8d4c56fc6
+Loading component Actors.dll
+	Successfully loaded component Actors (1.4.0.3020) with UID c81ca021eae2ad5c
+Loading component Checkpoints.dll
+	Successfully loaded component Checkpoints (1.4.0.3020) with UID 44a937350d611dde
+Loading component Classes.dll
+	Successfully loaded component Classes (1.4.0.3020) with UID 8cfb3183976da208
+Loading component Console.dll
+	Successfully loaded component Console (1.4.0.3020) with UID bfa24e49d0c95ee4
+Loading component CustomModels.dll
+	Successfully loaded component CustomModels (1.4.0.3020) with UID 15e3cb1e7c77ffff
+Loading component Databases.dll
+	Successfully loaded component Databases (1.4.0.3020) with UID 80092e7eb5821a96
+Loading component Dialogs.dll
+	Successfully loaded component Dialogs (1.4.0.3020) with UID 44a111350d611dde
+Loading component GangZones.dll
+	Successfully loaded component GangZones (1.4.0.3020) with UID b3351d11ee8d8056
+Loading component LegacyConfig.dll
+	Successfully loaded component LegacyConfig (1.4.0.3020) with UID 24ef6216838f9ffc
+Loading component LegacyNetwork.dll
+	Successfully loaded component RakNetLegacyNetwork (1.4.0.3020) with UID ea9799fd79cf8442
+Loading component Menus.dll
+	Successfully loaded component Menus (1.4.0.3020) with UID 621e219eb97ee0b2
+Loading component NPCs.dll
+	Successfully loaded component NPCs (1.4.0.3020) with UID 3d0e59e87f4e90bc
+Loading component Objects.dll
+	Successfully loaded component Objects (1.4.0.3020) with UID 59f8415f72da6160
+Loading component Pawn.dll
+	Successfully loaded component Pawn (1.4.0.3020) with UID 78906cd9f19c36a6
+Loading component Pickups.dll
+	Successfully loaded component Pickups (1.4.0.3020) with UID cf304faa363dd971
+Loading component Recordings.dll
+	Successfully loaded component Recordings (1.4.0.3020) with UID 871144d399f5f613
+Loading component TextDraws.dll
+	Successfully loaded component TextDraws (1.4.0.3020) with UID 9b5dc2b1d15c992a
+Loading component TextLabels.dll
+	Successfully loaded component TextLabels (1.4.0.3020) with UID a0c57ea80a009742
+Loading component Timers.dll
+	Successfully loaded component Timers (1.4.0.3020) with UID 2ad8124c5ea257a3
+Loading component Variables.dll
+	Successfully loaded component Variables (1.4.0.3020) with UID 75e121848bc01fa2
+Loading component Vehicles.dll
+	Successfully loaded component Vehicles (1.4.0.3020) with UID 3f1f62ee9e22ab19
+Loaded 22 component(s) from G:\bare-test-omp-gamemode\components
+[2025-10-23T23:47:56+0100] [Info] [connection] incoming connection: 127.0.0.1:52455 id: 99
+[2025-10-23T23:47:56+0100] [Info] [npc:join] MyBot has joined the server (99:127.0.0.1)
+[2025-10-23T23:47:56+0100] [Info] NPC created with ID: 99
+[2025-10-23T23:47:56+0100] [Info]   +----------------------------------+
+[2025-10-23T23:47:56+0100] [Info]   |    Test gamemode initialised!    |
+[2025-10-23T23:47:56+0100] [Info]   +----------------------------------+
+[2025-10-23T23:47:56+0100] [Info] Legacy Network started on port 7777
+[2025-10-23T23:48:06+0100] [Warning] Couldn't announce legacy network to open.mp list.
+[2025-10-23T23:48:06+0100] [Warning] 	 Status: 406
+[2025-10-23T23:48:06+0100] [Warning] 	 Message: {"error":"failed to query server: socket read timed out"}
+[2025-10-23T23:48:06+0100] [Warning] This won't affect the server's behaviour.
+[2025-10-23T23:48:09+0100] [Info] [connection] incoming connection: 127.0.0.1:59789 id: 0
+[2025-10-23T23:48:09+0100] [Info] [join] itsneufox has joined the server (0:127.0.0.1)
+[2025-10-23T23:48:16+0100] [Info] [connection] incoming connection: 127.0.0.1:53022 id: 98
+[2025-10-23T23:48:16+0100] [Info] [npc:join] Bot has joined the server (98:127.0.0.1)
+[2025-10-23T23:48:21+0100] [Error] [NPC] NPC has a bad name!
+[2025-10-23T23:48:27+0100] [Error] [NPC] NPC has a bad name!
+[2025-10-23T23:48:29+0100] [Error] [NPC] NPC has a bad name!
+[2025-10-23T23:48:46+0100] [Info] [part] itsneufox has left the server (0:1)
+Starting open.mp server (1.4.0.3020) from commit f408b3e390cab4f583fa65593fb5dbf0a9454e8c
+Loading component $CAPI.dll
+	Successfully loaded component C-API (1.4.0.3020) with UID 10467dd8d4c56fc6
+Loading component Actors.dll
+	Successfully loaded component Actors (1.4.0.3020) with UID c81ca021eae2ad5c
+Loading component Checkpoints.dll
+	Successfully loaded component Checkpoints (1.4.0.3020) with UID 44a937350d611dde
+Loading component Classes.dll
+	Successfully loaded component Classes (1.4.0.3020) with UID 8cfb3183976da208
+Loading component Console.dll
+	Successfully loaded component Console (1.4.0.3020) with UID bfa24e49d0c95ee4
+Loading component CustomModels.dll
+	Successfully loaded component CustomModels (1.4.0.3020) with UID 15e3cb1e7c77ffff
+Loading component Databases.dll
+	Successfully loaded component Databases (1.4.0.3020) with UID 80092e7eb5821a96
+Loading component Dialogs.dll
+	Successfully loaded component Dialogs (1.4.0.3020) with UID 44a111350d611dde
+Loading component GangZones.dll
+	Successfully loaded component GangZones (1.4.0.3020) with UID b3351d11ee8d8056
+Loading component LegacyConfig.dll
+	Successfully loaded component LegacyConfig (1.4.0.3020) with UID 24ef6216838f9ffc
+Loading component LegacyNetwork.dll
+	Successfully loaded component RakNetLegacyNetwork (1.4.0.3020) with UID ea9799fd79cf8442
+Loading component Menus.dll
+	Successfully loaded component Menus (1.4.0.3020) with UID 621e219eb97ee0b2
+Loading component NPCs.dll
+	Successfully loaded component NPCs (1.4.0.3020) with UID 3d0e59e87f4e90bc
+Loading component Objects.dll
+	Successfully loaded component Objects (1.4.0.3020) with UID 59f8415f72da6160
+Loading component Pawn.dll
+	Successfully loaded component Pawn (1.4.0.3020) with UID 78906cd9f19c36a6
+Loading component Pickups.dll
+	Successfully loaded component Pickups (1.4.0.3020) with UID cf304faa363dd971
+Loading component Recordings.dll
+	Successfully loaded component Recordings (1.4.0.3020) with UID 871144d399f5f613
+Loading component TextDraws.dll
+	Successfully loaded component TextDraws (1.4.0.3020) with UID 9b5dc2b1d15c992a
+Loading component TextLabels.dll
+	Successfully loaded component TextLabels (1.4.0.3020) with UID a0c57ea80a009742
+Loading component Timers.dll
+	Successfully loaded component Timers (1.4.0.3020) with UID 2ad8124c5ea257a3
+Loading component Variables.dll
+	Successfully loaded component Variables (1.4.0.3020) with UID 75e121848bc01fa2
+Loading component Vehicles.dll
+	Successfully loaded component Vehicles (1.4.0.3020) with UID 3f1f62ee9e22ab19
+Loaded 22 component(s) from G:\bare-test-omp-gamemode\components
+[2025-10-24T00:01:10+0100] [Info] [connection] incoming connection: 127.0.0.1:63685 id: 99
+[2025-10-24T00:01:10+0100] [Info] [npc:join] MyBot has joined the server (99:127.0.0.1)
+[2025-10-24T00:01:10+0100] [Info] NPC created with ID: 99
+[2025-10-24T00:01:10+0100] [Info]   +----------------------------------+
+[2025-10-24T00:01:10+0100] [Info]   |    Test gamemode initialised!    |
+[2025-10-24T00:01:10+0100] [Info]   +----------------------------------+
+[2025-10-24T00:01:10+0100] [Info] Legacy Network started on port 7777
+[2025-10-24T00:01:12+0100] [Info] [connection] incoming connection: 127.0.0.1:59118 id: 0
+[2025-10-24T00:01:12+0100] [Info] [join] itsneufox has joined the server (0:127.0.0.1)
+[2025-10-24T00:01:19+0100] [Info] [connection] incoming connection: 127.0.0.1:59826 id: 98
+[2025-10-24T00:01:19+0100] [Info] [npc:join] Bot_0 has joined the server (98:127.0.0.1)
+[2025-10-24T00:01:20+0100] [Warning] Couldn't announce legacy network to open.mp list.
+[2025-10-24T00:01:20+0100] [Warning] 	 Status: 406
+[2025-10-24T00:01:20+0100] [Warning] 	 Message: {"error":"failed to query server: socket read timed out"}
+[2025-10-24T00:01:20+0100] [Warning] This won't affect the server's behaviour.
+[2025-10-24T00:01:23+0100] [Info] [connection] incoming connection: 127.0.0.1:50869 id: 97
+[2025-10-24T00:01:23+0100] [Info] [npc:join] Bot_1 has joined the server (97:127.0.0.1)
+[2025-10-24T00:01:26+0100] [Info] [connection] incoming connection: 127.0.0.1:50374 id: 96
+[2025-10-24T00:01:26+0100] [Info] [npc:join] Bot_2 has joined the server (96:127.0.0.1)
+[2025-10-24T00:01:28+0100] [Info] [connection] incoming connection: 127.0.0.1:58706 id: 95
+[2025-10-24T00:01:28+0100] [Info] [npc:join] Bot_3 has joined the server (95:127.0.0.1)
+[2025-10-24T00:01:30+0100] [Info] [connection] incoming connection: 127.0.0.1:53896 id: 94
+[2025-10-24T00:01:30+0100] [Info] [npc:join] Bot_4 has joined the server (94:127.0.0.1)
+[2025-10-24T00:01:40+0100] [Info] [part] itsneufox has left the server (0:1)
+Starting open.mp server (1.4.0.3020) from commit f408b3e390cab4f583fa65593fb5dbf0a9454e8c
+Loading component $CAPI.dll
+	Successfully loaded component C-API (1.4.0.3020) with UID 10467dd8d4c56fc6
+Loading component Actors.dll
+	Successfully loaded component Actors (1.4.0.3020) with UID c81ca021eae2ad5c
+Loading component Checkpoints.dll
+	Successfully loaded component Checkpoints (1.4.0.3020) with UID 44a937350d611dde
+Loading component Classes.dll
+	Successfully loaded component Classes (1.4.0.3020) with UID 8cfb3183976da208
+Loading component Console.dll
+	Successfully loaded component Console (1.4.0.3020) with UID bfa24e49d0c95ee4
+Loading component CustomModels.dll
+	Successfully loaded component CustomModels (1.4.0.3020) with UID 15e3cb1e7c77ffff
+Loading component Databases.dll
+	Successfully loaded component Databases (1.4.0.3020) with UID 80092e7eb5821a96
+Loading component Dialogs.dll
+	Successfully loaded component Dialogs (1.4.0.3020) with UID 44a111350d611dde
+Loading component GangZones.dll
+	Successfully loaded component GangZones (1.4.0.3020) with UID b3351d11ee8d8056
+Loading component LegacyConfig.dll
+	Successfully loaded component LegacyConfig (1.4.0.3020) with UID 24ef6216838f9ffc
+Loading component LegacyNetwork.dll
+	Successfully loaded component RakNetLegacyNetwork (1.4.0.3020) with UID ea9799fd79cf8442
+Loading component Menus.dll
+	Successfully loaded component Menus (1.4.0.3020) with UID 621e219eb97ee0b2
+Loading component NPCs.dll
+	Successfully loaded component NPCs (1.4.0.3020) with UID 3d0e59e87f4e90bc
+Loading component Objects.dll
+	Successfully loaded component Objects (1.4.0.3020) with UID 59f8415f72da6160
+Loading component Pawn.dll
+	Successfully loaded component Pawn (1.4.0.3020) with UID 78906cd9f19c36a6
+Loading component Pickups.dll
+	Successfully loaded component Pickups (1.4.0.3020) with UID cf304faa363dd971
+Loading component Recordings.dll
+	Successfully loaded component Recordings (1.4.0.3020) with UID 871144d399f5f613
+Loading component TextDraws.dll
+	Successfully loaded component TextDraws (1.4.0.3020) with UID 9b5dc2b1d15c992a
+Loading component TextLabels.dll
+	Successfully loaded component TextLabels (1.4.0.3020) with UID a0c57ea80a009742
+Loading component Timers.dll
+	Successfully loaded component Timers (1.4.0.3020) with UID 2ad8124c5ea257a3
+Loading component Variables.dll
+	Successfully loaded component Variables (1.4.0.3020) with UID 75e121848bc01fa2
+Loading component Vehicles.dll
+	Successfully loaded component Vehicles (1.4.0.3020) with UID 3f1f62ee9e22ab19
+Loaded 22 component(s) from G:\bare-test-omp-gamemode\components
+[2025-10-24T00:05:43+0100] [Info] [connection] incoming connection: 127.0.0.1:64185 id: 99
+[2025-10-24T00:05:43+0100] [Info] [npc:join] MyBot has joined the server (99:127.0.0.1)
+[2025-10-24T00:05:43+0100] [Info] NPC created with ID: 99
+[2025-10-24T00:05:43+0100] [Info]   +----------------------------------+
+[2025-10-24T00:05:43+0100] [Info]   |    Test gamemode initialised!    |
+[2025-10-24T00:05:43+0100] [Info]   +----------------------------------+
+[2025-10-24T00:05:43+0100] [Info] Legacy Network started on port 7777
+[2025-10-24T00:05:53+0100] [Warning] Couldn't announce legacy network to open.mp list.
+[2025-10-24T00:05:53+0100] [Warning] 	 Status: 406
+[2025-10-24T00:05:53+0100] [Warning] 	 Message: {"error":"failed to query server: socket read timed out"}
+[2025-10-24T00:05:53+0100] [Warning] This won't affect the server's behaviour.
+[2025-10-24T00:05:57+0100] [Info] [connection] incoming connection: 127.0.0.1:58002 id: 0
+[2025-10-24T00:05:57+0100] [Info] [join] itsneufox has joined the server (0:127.0.0.1)
+[2025-10-24T00:06:07+0100] [Info] [connection] incoming connection: 127.0.0.1:61637 id: 98
+[2025-10-24T00:06:07+0100] [Info] [npc:join] Bot_0 has joined the server (98:127.0.0.1)
+[2025-10-24T00:06:39+0100] [Info] [part] itsneufox has left the server (0:1)
+Starting open.mp server (1.4.0.3020) from commit f408b3e390cab4f583fa65593fb5dbf0a9454e8c
+Loading component $CAPI.dll
+	Successfully loaded component C-API (1.4.0.3020) with UID 10467dd8d4c56fc6
+Loading component Actors.dll
+	Successfully loaded component Actors (1.4.0.3020) with UID c81ca021eae2ad5c
+Loading component Checkpoints.dll
+	Successfully loaded component Checkpoints (1.4.0.3020) with UID 44a937350d611dde
+Loading component Classes.dll
+	Successfully loaded component Classes (1.4.0.3020) with UID 8cfb3183976da208
+Loading component Console.dll
+	Successfully loaded component Console (1.4.0.3020) with UID bfa24e49d0c95ee4
+Loading component CustomModels.dll
+	Successfully loaded component CustomModels (1.4.0.3020) with UID 15e3cb1e7c77ffff
+Loading component Databases.dll
+	Successfully loaded component Databases (1.4.0.3020) with UID 80092e7eb5821a96
+Loading component Dialogs.dll
+	Successfully loaded component Dialogs (1.4.0.3020) with UID 44a111350d611dde
+Loading component GangZones.dll
+	Successfully loaded component GangZones (1.4.0.3020) with UID b3351d11ee8d8056
+Loading component LegacyConfig.dll
+	Successfully loaded component LegacyConfig (1.4.0.3020) with UID 24ef6216838f9ffc
+Loading component LegacyNetwork.dll
+	Successfully loaded component RakNetLegacyNetwork (1.4.0.3020) with UID ea9799fd79cf8442
+Loading component Menus.dll
+	Successfully loaded component Menus (1.4.0.3020) with UID 621e219eb97ee0b2
+Loading component NPCs.dll
+	Successfully loaded component NPCs (1.4.0.3020) with UID 3d0e59e87f4e90bc
+Loading component Objects.dll
+	Successfully loaded component Objects (1.4.0.3020) with UID 59f8415f72da6160
+Loading component Pawn.dll
+	Successfully loaded component Pawn (1.4.0.3020) with UID 78906cd9f19c36a6
+Loading component Pickups.dll
+	Successfully loaded component Pickups (1.4.0.3020) with UID cf304faa363dd971
+Loading component Recordings.dll
+	Successfully loaded component Recordings (1.4.0.3020) with UID 871144d399f5f613
+Loading component TextDraws.dll
+	Successfully loaded component TextDraws (1.4.0.3020) with UID 9b5dc2b1d15c992a
+Loading component TextLabels.dll
+	Successfully loaded component TextLabels (1.4.0.3020) with UID a0c57ea80a009742
+Loading component Timers.dll
+	Successfully loaded component Timers (1.4.0.3020) with UID 2ad8124c5ea257a3
+Loading component Variables.dll
+	Successfully loaded component Variables (1.4.0.3020) with UID 75e121848bc01fa2
+Loading component Vehicles.dll
+	Successfully loaded component Vehicles (1.4.0.3020) with UID 3f1f62ee9e22ab19
+Loaded 22 component(s) from G:\bare-test-omp-gamemode\components
+[2025-10-24T00:10:42+0100] [Info] [connection] incoming connection: 127.0.0.1:55054 id: 99
+[2025-10-24T00:10:42+0100] [Info] [npc:join] MyBot has joined the server (99:127.0.0.1)
+[2025-10-24T00:10:42+0100] [Info] NPC created with ID: 99
+[2025-10-24T00:10:42+0100] [Error] Unable to start legacy network on port 7777. Port in use?
