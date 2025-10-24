@@ -285,7 +285,7 @@ public OnPlayerCommandText(playerid, cmdtext[])
     {
         new npcid = PlayerNPC[playerid];
         if (npcid == INVALID_NPC_ID)
-            return SendClientMessage(playerid, 0xFF0000FF, "You have no NPC.");
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
 
         new Float:x, Float:y, Float:z;
         GetPlayerPos(playerid, x, y, z);
@@ -299,7 +299,7 @@ public OnPlayerCommandText(playerid, cmdtext[])
     {
         new npcid = PlayerNPC[playerid];
         if (npcid == INVALID_NPC_ID)
-            return SendClientMessage(playerid, 0xFF0000FF, "You have no NPC.");
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
 
         new Float:x, Float:y, Float:z;
         GetPlayerPos(playerid, x, y, z);
@@ -313,7 +313,7 @@ public OnPlayerCommandText(playerid, cmdtext[])
     {
         new npcid = PlayerNPC[playerid];
         if (npcid == INVALID_NPC_ID)
-            return SendClientMessage(playerid, 0xFF0000FF, "You have no NPC.");
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
 
         NPC_AimAtPlayer(npcid, playerid, true, 800, true, 0.0, 0.0, 0.8, 0.0, 0.0, 0.6, NPC_ENTITY_CHECK_PLAYER);
         SendClientMessage(playerid, 0xFF0000FF, "NPC %d is now hostile towards you!", npcid);
@@ -324,7 +324,7 @@ public OnPlayerCommandText(playerid, cmdtext[])
     {
         new npcid = PlayerNPC[playerid];
         if (npcid == INVALID_NPC_ID)
-            return SendClientMessage(playerid, 0xFF0000FF, "You have no NPC.");
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
 
         NPC_AimAtPlayer(npcid, playerid, false, 0, true, 0.0, 0.0, 0.0, 0.0, 0.0, 0.6, NPC_ENTITY_CHECK_PLAYER);
         SendClientMessage(playerid, 0x00FF00FF, "NPC %d is now guarding you.", npcid);
@@ -335,7 +335,7 @@ public OnPlayerCommandText(playerid, cmdtext[])
     {
         new npcid = PlayerNPC[playerid];
         if (npcid == INVALID_NPC_ID)
-            return SendClientMessage(playerid, 0xFF0000FF, "You have no NPC.");
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
 
         NPC_StopAim(npcid);
         SendClientMessage(playerid, 0x00FF00FF, "NPC %d stopped aiming.", npcid);
@@ -345,16 +345,50 @@ public OnPlayerCommandText(playerid, cmdtext[])
     // ============================================================
     // NPC ANIMATION
     // ============================================================
-    if (!strcmp(cmdtext, "/dance", true))
+    if (!strcmp(cmdtext, "/applydance", true))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        NPC_ApplyAnimation(npcid, "DANCING", "dance_loop", 4.1, true, false, false, false, 0);
+        SendClientMessage(playerid, 0x00FF00FF, "NPC %d has been applied animation.", npcid);
+        
+        SetTimerEx("ClearNPCAnimations", 25000, false, "ii", playerid, npcid);
+
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/setdance", true))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        NPC_SetAnimation(npcid, 405, 4.1, true, false, false, false, 0);
+        SendClientMessage(playerid, 0x00FF00FF, "NPC %d has been set to animate.", npcid);
+        
+        SetTimerEx("ClearNPCAnimations", 25000, false, "ii", playerid, npcid);
+
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/getanim", true))
     {
         new npcid = PlayerNPC[playerid];
         if (npcid == INVALID_NPC_ID)
             return SendClientMessage(playerid, 0xFF0000FF, "You have no NPC.");
 
-        NPC_ApplyAnimation(npcid, "DANCING", "dance_loop", 4.1, true, false, false, false, 0);
-        SendClientMessage(playerid, 0x00FF00FF, "NPC %d is now animating.", npcid);
-        
-        SetTimerEx("ClearNPCAnimations", 10000, false, "ii", playerid, npcid);
+        new animid, time;
+        new Float:delta;
+        new bool:loop, bool:lockX, bool:lockY, bool:freeze;
+
+        if (!NPC_GetAnimation(npcid, animid, delta, loop, lockX, lockY, freeze, time))
+            return SendClientMessage(playerid, 0xFF0000FF, "Failed to get animation data (maybe no active animation).");
+
+
+        SendClientMessage(playerid, 0xFFFFFFFF, "NPC %d animID: %d | delta: %.2f | loop: %d | lockX: %d | lockY: %d | freeze: %d | time: %d",
+            npcid, animid, delta, _:loop, _:lockX, _:lockY, _:freeze, time);
 
         return 1;
     }
@@ -366,7 +400,7 @@ public OnPlayerCommandText(playerid, cmdtext[])
     {
         new npcid = PlayerNPC[playerid];
         if (npcid == INVALID_NPC_ID)
-            return SendClientMessage(playerid, 0xFF0000FF, "You have no NPC.");
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
 
         new bool:infinite = NPC_IsInfiniteAmmoEnabled(npcid);
         NPC_EnableInfiniteAmmo(npcid, !infinite);
@@ -379,7 +413,7 @@ public OnPlayerCommandText(playerid, cmdtext[])
     {
         new npcid = PlayerNPC[playerid];
         if (npcid == INVALID_NPC_ID)
-            return SendClientMessage(playerid, 0xFF0000FF, "You have no NPC.");
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
 
         new bool:reload = NPC_IsReloadEnabled(npcid);
         NPC_EnableReloading(npcid, !reload);
@@ -468,7 +502,7 @@ public OnPlayerCommandText(playerid, cmdtext[])
     {
         new npcid = PlayerNPC[playerid];
         if (npcid == INVALID_NPC_ID)
-            return SendClientMessage(playerid, 0xFF0000FF, "You have no NPC.");
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
 
         new count = NPC_GetPathPointCount(g_PatrolPath);
 
@@ -495,7 +529,7 @@ public OnPlayerCommandText(playerid, cmdtext[])
 
         new npcid = PlayerNPC[playerid];
         if (npcid == INVALID_NPC_ID)
-            return SendClientMessage(playerid, 0xFF0000FF, "You have no NPC.");
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
 
         if (NPC_EnterVehicle(npcid, g_motorcycle, seatid, NPC_MOVE_TYPE_JOG))
             SendClientMessage(playerid, 0x00FF00FF, "NPC %d is entering motorcycle (seat %d).", npcid, seatid);
@@ -513,7 +547,7 @@ public OnPlayerCommandText(playerid, cmdtext[])
 
         new npcid = PlayerNPC[playerid];
         if (npcid == INVALID_NPC_ID)
-            return SendClientMessage(playerid, 0xFF0000FF, "You have no NPC.");
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
 
         if (NPC_EnterVehicle(npcid, g_car, seatid, NPC_MOVE_TYPE_JOG))
             SendClientMessage(playerid, 0x00FF00FF, "NPC %d is entering car (seat %d).", npcid, seatid);
@@ -531,7 +565,7 @@ public OnPlayerCommandText(playerid, cmdtext[])
 
         new npcid = PlayerNPC[playerid];
         if (npcid == INVALID_NPC_ID)
-            return SendClientMessage(playerid, 0xFF0000FF, "You have no NPC.");
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
 
         if (NPC_EnterVehicle(npcid, g_train, seatid, NPC_MOVE_TYPE_JOG))
             SendClientMessage(playerid, 0x00FF00FF, "NPC %d is entering train (seat %d).", npcid, seatid);
@@ -545,7 +579,7 @@ public OnPlayerCommandText(playerid, cmdtext[])
     {
         new npcid = PlayerNPC[playerid];
         if (npcid == INVALID_NPC_ID)
-            return SendClientMessage(playerid, 0xFF0000FF, "You have no NPC.");
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
 
         if (NPC_ExitVehicle(npcid))
             SendClientMessage(playerid, 0x00FF00FF, "NPC %d is exiting motorcycle.", npcid);
@@ -559,7 +593,7 @@ public OnPlayerCommandText(playerid, cmdtext[])
     {
         new npcid = PlayerNPC[playerid];
         if (npcid == INVALID_NPC_ID)
-            return SendClientMessage(playerid, 0xFF0000FF, "You have no NPC.");
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
 
         if (NPC_ExitVehicle(npcid))
             SendClientMessage(playerid, 0x00FF00FF, "NPC %d is exiting car.", npcid);
@@ -573,7 +607,7 @@ public OnPlayerCommandText(playerid, cmdtext[])
     {
         new npcid = PlayerNPC[playerid];
         if (npcid == INVALID_NPC_ID)
-            return SendClientMessage(playerid, 0xFF0000FF, "You have no NPC.");
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
 
         if (NPC_ExitVehicle(npcid))
             SendClientMessage(playerid, 0x00FF00FF, "NPC %d is exiting train.", npcid);
@@ -586,18 +620,48 @@ public OnPlayerCommandText(playerid, cmdtext[])
     // ============================================================
     // NPC INFORMATION
     // ============================================================
+    if (!strcmp(cmdtext, "/checkarmour", true))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        new Float:armour = NPC_GetArmour(npcid);
+
+        SendClientMessage(playerid, 0x00FF00FF, "NPC %d has %.1f% armour", npcid, armour);
+        return 1;
+    }
+
     if (!strcmp(cmdtext, "/checkammo", true))
     {
         new npcid = PlayerNPC[playerid];
         if (npcid == INVALID_NPC_ID)
-            return SendClientMessage(playerid, 0xFF0000FF, "You have no NPC.");
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
 
         if (!NPC_IsValid(npcid))
             return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
 
         new ammo = NPC_GetAmmo(npcid);
 
-        SendClientMessage(playerid, 0xFFFFFFFF, "NPC %d ammo: %d", npcid, ammo);
+        SendClientMessage(playerid, 0x00FF00FF, "NPC %d has %d bullets remaining on total ammo", npcid, ammo);
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/checkclip", true))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        new clip = NPC_GetAmmoInClip(npcid);
+
+        SendClientMessage(playerid, 0x00FF00FF, "NPC %d has %d bullets remaining on the clip", npcid, clip);
         return 1;
     }
 
