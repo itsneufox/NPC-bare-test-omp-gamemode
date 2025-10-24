@@ -15,7 +15,7 @@ public OnGameModeInit()
     AddPlayerClass(0, 2495.3547, -1688.2319, 13.6774, 351.1646, WEAPON_M4, 500, WEAPON_KNIFE, 1, WEAPON_COLT45, 100);
     AddStaticVehicle(522, 2493.7583, -1683.6482, 12.9099, 270.8069, -1, -1);
 
-    TextDraw1 = TextDrawCreate(406.0, 94.266666, "initialising npc info...");
+    TextDraw1 = TextDrawCreate(444, 109, "initialising npc info...");
     TextDrawLetterSize(TextDraw1, 0.25, 1.0);
     TextDrawTextSize(TextDraw1, 617.0, 385.466666);
     TextDrawAlignment(TextDraw1, TEXT_DRAW_ALIGN_LEFT);
@@ -40,14 +40,8 @@ public OnPlayerConnect(playerid)
 
 public OnPlayerDisconnect(playerid, reason)
 {
-    if (PlayerNPC[playerid] != INVALID_NPC_ID)
-    {
-        NPC_Destroy(PlayerNPC[playerid]);
-        PlayerNPC[playerid] = INVALID_NPC_ID;
-    }
     return 1;
 }
-
 
 public OnPlayerRequestClass(playerid, classid)
 {
@@ -94,47 +88,59 @@ public UpdateNPCInfo(playerid)
             break;
         }
     }
-
     if (npcid == INVALID_NPC_ID)
     {
         TextDrawSetString(TextDraw1, "~r~No NPC created");
         return 1;
     }
-
+    
     new Float:x, Float:y, Float:z;
     NPC_GetPos(npcid, x, y, z);
-
+    
+    // Get facing angle if the function exists in your include
+    new Float:angle;
+    NPC_GetFacingAngle(npcid, angle); // Check if this needs an extra parameter
+    
+    // Basic NPC stats
     new Float:hp = NPC_GetHealth(npcid);
     new Float:arm = NPC_GetArmour(npcid);
+    
+    // Weapon info
     new wep = NPC_GetWeapon(npcid);
     new ammo = NPC_GetAmmo(npcid);
     new clip = NPC_GetAmmoInClip(npcid);
+    
+    // Combat flags
     new bool:reloadEnabled = NPC_IsReloadEnabled(npcid);
     new bool:infAmmo = NPC_IsInfiniteAmmoEnabled(npcid);
     new bool:reloading = NPC_IsReloading(npcid);
     new bool:shooting = NPC_IsShooting(npcid);
     new bool:aiming = NPC_IsAiming(npcid);
     new bool:invul = NPC_IsInvulnerable(npcid);
+    
+    // Movement and vehicle
     new moving = NPC_IsMoving(npcid);
     new veh = NPC_GetVehicle(npcid);
+    
+    // Other properties
     new style = NPC_GetFightingStyle(npcid);
     new action = NPC_GetSpecialAction(npcid);
     new vw = NPC_GetVirtualWorld(npcid);
     new interior = NPC_GetInterior(npcid);
-
+    
     new text[512];
     format(text, sizeof(text),
-        "~y~NPC DEBUG~n~~w~ID: %d~n~HP: %.1f~n~ARM: %.1f~n~WEP: %d~n~AMMO: %d | CLIP: %d~n~\
-        POS: %.2f %.2f %.2f~n~MOVING: %d | VEH: %d~n~\
+        "~y~NPC DEBUG FOR NPC ID: %d ~n~~w~HP: %.1f~n~ARM: %.1f~n~WEP: %d~n~AMMO: %d / CLIP: %d~n~\
+        POS: %.2f %.2f %.2f~n~ANGLE: %.1f~n~MOVING: %d / VEH: %d~n~\
         RELOAD ENABLED: %d~n~INFINITE AMMO: %d~n~RELOADING: %d~n~\
         SHOOTING: %d~n~AIMING: %d~n~INVULNERABLE: %d~n~\
-        STYLE: %d | ACTION: %d~n~VW: %d | INT: %d",
+        STYLE: %d / ACTION: %d~n~VW: %d / INT: %d",
         npcid, hp, arm, wep, ammo, clip,
-        x, y, z, moving, veh,
+        x, y, z, angle, moving, veh,
         reloadEnabled, infAmmo, reloading,
         shooting, aiming, invul,
         style, action, vw, interior);
-
+    
     TextDrawSetString(TextDraw1, text);
     return 1;
 }
