@@ -171,6 +171,9 @@ public UpdateNPCInfo(playerid)
 
 public OnPlayerCommandText(playerid, cmdtext[])
 {
+    // ============================================================
+    // NPC MANAGEMENT
+    // ============================================================
     if (!strcmp(cmdtext, "/createnpc", true))
     {
         new name[24];
@@ -251,6 +254,9 @@ public OnPlayerCommandText(playerid, cmdtext[])
         return 1;
     }
 
+    // ============================================================
+    // NPC COMBAT
+    // ============================================================
     if (!strcmp(cmdtext, "/aim", true))
     {
         new npcid = PlayerNPC[playerid];
@@ -312,6 +318,9 @@ public OnPlayerCommandText(playerid, cmdtext[])
         return 1;
     }
 
+    // ============================================================
+    // NPC ANIMATION
+    // ============================================================
     if (!strcmp(cmdtext, "/dance", true))
     {
         new npcid = PlayerNPC[playerid];
@@ -322,10 +331,13 @@ public OnPlayerCommandText(playerid, cmdtext[])
         SendClientMessage(playerid, 0x00FF00FF, "NPC %d is now animating.", npcid);
         
         SetTimerEx("ClearNPCAnimations", 10000, false, "ii", playerid, npcid);
-        
+
         return 1;
     }
 
+    // ============================================================
+    // NPC SETTINGS
+    // ============================================================
     if (!strcmp(cmdtext, "/toggleinfiniteammo", true))
     {
         new npcid = PlayerNPC[playerid];
@@ -352,6 +364,9 @@ public OnPlayerCommandText(playerid, cmdtext[])
         return 1;
     }
 
+    // ============================================================
+    // PATH MANAGEMENT
+    // ============================================================
     if (!strcmp(cmdtext, "/createpatrol", true))
     {
         new pathid = NPC_CreatePath();
@@ -445,6 +460,9 @@ public OnPlayerCommandText(playerid, cmdtext[])
         return 1;
     }
 
+    // ============================================================
+    // VEHICLE COMMANDS
+    // ============================================================
     if (!strcmp(cmdtext, "/npcenterbike", true, 13))
     {
         new seatid = strval(cmdtext[14]);
@@ -541,6 +559,18 @@ public OnPlayerCommandText(playerid, cmdtext[])
         return 1;
     }
 
+    // ============================================================
+    // NPC INFORMATION
+    // ============================================================
+    if (!strcmp(cmdtext, "/countnpcs", true))
+    {
+        new npcs[MAX_NPCS];
+        new count = NPC_GetAll(npcs);
+
+        SendClientMessage(playerid, 0x00FF00FF, "There are %d NPCs on the server.", count);
+
+        return 1;
+    }
 
     return 0;
 }
