@@ -188,10 +188,34 @@ public OnPlayerCommandText(playerid, cmdtext[])
             NPC_Spawn(npcid);
             NPC_SetPos(npcid, x + 3.0, y, z);
             NPC_SetWeapon(npcid, WEAPON_M4);
-            NPC_SetAmmo(npcid, 50);
+            NPC_SetAmmo(npcid, 500);
 
             PlayerNPC[playerid] = npcid;
             SendClientMessage(playerid, 0x00FF00FF, "NPC %s (ID %d) spawned near you!", name, npcid);
+        }
+        else
+        {
+            SendClientMessage(playerid, 0xFF0000FF, "Failed to create NPC!");
+        }
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/createunarmednpc", true))
+    {
+        new name[24];
+        format(name, sizeof name, "Bot_%d", g_NPCCount++);
+
+        new npcid = NPC_Create(name);
+        if (NPC_IsValid(npcid))
+        {
+            new Float:x, Float:y, Float:z;
+            GetPlayerPos(playerid, x, y, z);
+
+            NPC_Spawn(npcid);
+            NPC_SetPos(npcid, x + 3.0, y, z);
+
+            PlayerNPC[playerid] = npcid;
+            SendClientMessage(playerid, 0x00FF00FF, "Unarmed NPC %s (ID %d) spawned near you!", name, npcid);
         }
         else
         {
@@ -225,9 +249,9 @@ public OnPlayerCommandText(playerid, cmdtext[])
 
     if (!strcmp(cmdtext, "/claimnpc", true, 7))
     {
-        new npcid = strval(cmdtext[8]);
+        new npcid = strval(cmdtext[10]);
 
-        if (cmdtext[8] == '\0')
+        if (cmdtext[10] == '\0')
             return SendClientMessage(playerid, 0xFF0000FF, "Usage: /claimnpc [npcid]");
 
         if (!NPC_IsValid(npcid))
@@ -562,6 +586,21 @@ public OnPlayerCommandText(playerid, cmdtext[])
     // ============================================================
     // NPC INFORMATION
     // ============================================================
+    if (!strcmp(cmdtext, "/checkammo", true))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You have no NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        new ammo = NPC_GetAmmo(npcid);
+
+        SendClientMessage(playerid, 0xFFFFFFFF, "NPC %d ammo: %d", npcid, ammo);
+        return 1;
+    }
+
     if (!strcmp(cmdtext, "/countnpcs", true))
     {
         new npcs[MAX_NPCS];
@@ -574,6 +613,8 @@ public OnPlayerCommandText(playerid, cmdtext[])
 
     return 0;
 }
+
+
 
 forward ClearNPCAnimations(playerid, npcid);
 public ClearNPCAnimations(playerid, npcid)
