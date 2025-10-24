@@ -5,6 +5,7 @@ main(){}
 
 new g_NPCCount = 0,
     g_PatrolPath = -1,
+    g_PatrolPlayer = INVALID_PLAYER_ID,
     g_motorcycle = INVALID_VEHICLE_ID,
     g_car = INVALID_VEHICLE_ID,
     g_train = INVALID_VEHICLE_ID,
@@ -510,6 +511,9 @@ public OnPlayerCommandText(playerid, cmdtext[])
         {
             NPC_MoveByPath(npcid, g_PatrolPath, NPC_MOVE_TYPE_WALK);
             SendClientMessage(playerid, 0x00FF00FF, "NPC %d started patrol route with %d points", npcid, count);
+
+            g_PatrolPlayer = playerid;
+            SetTimer("CheckPathProgress", 2000, true);
         }
         else
         {
@@ -683,7 +687,27 @@ public OnPlayerCommandText(playerid, cmdtext[])
 forward ClearNPCAnimations(playerid, npcid);
 public ClearNPCAnimations(playerid, npcid)
 {
-    
+
     NPC_ClearAnimations(npcid);
     SendClientMessage(playerid, 0x00FF00FF, "NPC %d animations were cleared.", npcid);
+}
+
+forward CheckPathProgress();
+public CheckPathProgress()
+{
+    if (g_PatrolPlayer == INVALID_PLAYER_ID || !IsPlayerConnected(g_PatrolPlayer))
+        return 0;
+
+    new npcid = PlayerNPC[g_PatrolPlayer];
+    if (npcid == INVALID_NPC_ID)
+        return 0;
+
+    new currentPoint = NPC_GetCurrentPathPointIndex(npcid);
+    new totalPoints = NPC_GetPathPointCount(g_PatrolPath);
+
+    if (currentPoint != -1)
+    {
+        SendClientMessage(g_PatrolPlayer, 0xFFFF00FF, "NPC %d progress: Point %d of %d", npcid, currentPoint + 1, totalPoints);
+    }
+    return 1;
 }
