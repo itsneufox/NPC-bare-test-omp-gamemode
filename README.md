@@ -2,6 +2,7 @@
 
 ## NPC Management
 - `/createnpc` - Creates and spawns a new NPC near you (tests NPC_Create, NPC_Spawn, NPC_SetPos, NPC_SetWeapon, NPC_SetAmmo)
+- `/createunarmednpc` - Creates and spawns a new unarmed NPC near you (tests NPC_Create, NPC_Spawn, NPC_SetPos)
 - `/destroynpc` - Destroys your current NPC (tests NPC_Destroy)
 - `/claimnpc [npcid]` - Claim an NPC by ID for debugging (tests NPC_IsValid)
 - `/countnpcs` - Count all NPCs on the server (tests NPC_GetAll)
@@ -18,7 +19,9 @@
 - `/togglereload` - Toggle reloading for your NPC (tests NPC_IsReloadEnabled and NPC_EnableReloading)
 
 ## NPC Animation
-- `/dance` - Make NPC perform dance animation for 10 seconds (tests NPC_ApplyAnimation and NPC_ClearAnimations)
+- `/applydance` - Make NPC perform dance animation for 25 seconds (tests NPC_ApplyAnimation and NPC_ClearAnimations)
+- `/setdance` - Make NPC perform dance animation for 25 seconds using animation ID (tests NPC_SetAnimation and NPC_ClearAnimations)
+- `/getanim` - Get current animation info from NPC (tests NPC_GetAnimation)
 
 ## Path Management
 - `/createpatrol` - Create a new patrol path (tests NPC_CreatePath)
@@ -34,3 +37,8 @@
 - `/npcexitbike` - Make NPC exit the motorcycle (tests NPC_ExitVehicle)
 - `/npcexitcar` - Make NPC exit the car (tests NPC_ExitVehicle)
 - `/npcexittrain` - Make NPC exit the train (tests NPC_ExitVehicle)
+
+## NPC Status
+- `/checkarmour` - Check NPC's current armour value (tests NPC_GetArmour)
+- `/checkammo` - Check NPC's current ammo amount (tests NPC_GetAmmo)
+- `/checkclip` - Check NPC's current clip ammo (tests NPC_GetClipAmmo)
