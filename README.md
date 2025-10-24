@@ -42,3 +42,19 @@
 - `/checkarmour` - Check NPC's current armour value (tests NPC_GetArmour)
 - `/checkammo` - Check NPC's current ammo amount (tests NPC_GetAmmo)
 - `/checkclip` - Check NPC's current clip ammo (tests NPC_GetClipAmmo)
+
+---
+
+## Screenshots
+
+<p align="center">
+  <img src="assets/print1.png" alt="Screenshot 1"><br>
+  <em>Motorcycle and car location</em>
+</p>
+
+<p align="center">
+  <img src="assets/print2.png" alt="Screenshot 2"><br>
+  <em>Train location</em>
+</p>
+
+
