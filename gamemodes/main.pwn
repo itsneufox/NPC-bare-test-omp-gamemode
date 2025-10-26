@@ -3,36 +3,64 @@
 
 main(){}
 
-new g_NPCCount = 0,
-    g_PatrolPath = -1,
-    g_PatrolPlayer = INVALID_PLAYER_ID,
-    g_motorcycle = INVALID_VEHICLE_ID,
-    g_car = INVALID_VEHICLE_ID,
-    g_train = INVALID_VEHICLE_ID,
-    PlayerNPC[MAX_PLAYERS] = {INVALID_NPC_ID, ...};
+const INVALID_TIMER_ID = 0;
+const DIALOG_HELP = 1000;
 
-new Text:TXD_DEBUG_NPC;
+new g_NPCCount = 0,
+    PlayerNPC[MAX_PLAYERS] = {INVALID_NPC_ID, ...},
+    PlayerPatrolPath[MAX_PLAYERS] = {-1, ...};
+
+new PlayerVehicles[MAX_PLAYERS][3]; // [0] = motorcycle, [1] = car, [2] = train
+new PlayerText:TXD_DEBUG_NPC[MAX_PLAYERS] = {PlayerText:INVALID_TEXT_DRAW, ...};
+new PlayerNPCInfoTimer[MAX_PLAYERS] = {INVALID_TIMER_ID, ...};
+new PlayerPatrolTimer[MAX_PLAYERS] = {INVALID_TIMER_ID, ...};
+
+static const HELP_DIALOG_TEXT[] =
+    "Command\tDescription\n\
+/createnpc\tSpawn armed NPC and start tracking it.\n\
+/createunarmednpc\tSpawn an unarmed NPC.\n\
+/destroynpc\tDestroy your current NPC.\n\
+/claimnpc [id]\tAttach debugger to an existing NPC.\n\
+/aim, /aimfire\tAim (or fire) at you.\n\
+/hostile, /guard\tToggle hostile/guard behaviour.\n\
+/friendly\tStop aiming at you.\n\
+/applydance, /setdance\tApply preset animations.\n\
+/getanim\tInspect current animation state.\n\
+/toggleinfiniteammo\tToggle infinite ammo.\n\
+/togglereload\tToggle reloading behaviour.\n\
+/createpatrol\tCreate a new patrol path.\n\
+/addpatrolpos\tAdd a patrol point at your position.\n\
+/startpatrol\tSend NPC along the patrol path.\n\
+/npcenterbike [seat]\tPlace NPC into your motorcycle.\n\
+/npcentercar [seat]\tPlace NPC into your car.\n\
+/npcentertrain [seat]\tPlace NPC into your train.\n\
+/npcexitbike|car|train\tForce the NPC to exit vehicles.\n\
+/checkarmour\tCheck NPC armour.\n\
+/checkammo\tCheck NPC total ammo.\n\
+/checkclip\tCheck ammo in clip.\n\
+/countnpcs\tShow total NPC count.";
+
+stock StopPlayerNPCInfoTimer(playerid)
+{
+    if (PlayerNPCInfoTimer[playerid] != INVALID_TIMER_ID && IsValidTimer(PlayerNPCInfoTimer[playerid]))
+    {
+        KillTimer(PlayerNPCInfoTimer[playerid]);
+    }
+    PlayerNPCInfoTimer[playerid] = INVALID_TIMER_ID;
+}
+
+stock StopPlayerPatrolTimer(playerid)
+{
+    if (PlayerPatrolTimer[playerid] != INVALID_TIMER_ID && IsValidTimer(PlayerPatrolTimer[playerid]))
+    {
+        KillTimer(PlayerPatrolTimer[playerid]);
+    }
+    PlayerPatrolTimer[playerid] = INVALID_TIMER_ID;
+}
 
 public OnGameModeInit()
 {
     AddPlayerClass(0, 2495.3547, -1688.2319, 13.6774, 351.1646, WEAPON_M4, 500, WEAPON_KNIFE, 1, WEAPON_COLT45, 100);
-    g_motorcycle = CreateVehicle(522, 2493.7583, -1683.6482, 12.9099, 270.8069, 225, 155, -1, false);
-    g_car = CreateVehicle(411, 2473.9121, -1683.4276, 13.3589, -34.5, 136, 142, -1, false);
-    g_train = AddStaticVehicle(538, 2216.4900, -1645.4043, 17.0335, 180, 175, 225);
-
-    TXD_DEBUG_NPC = TextDrawCreate(444, 109, " ");
-    TextDrawLetterSize(TXD_DEBUG_NPC, 0.25, 1.0);
-    TextDrawTextSize(TXD_DEBUG_NPC, 617.0, 385.466666);
-    TextDrawAlignment(TXD_DEBUG_NPC, TEXT_DRAW_ALIGN_LEFT);
-    TextDrawColour(TXD_DEBUG_NPC, 0xFFFFFFFF);
-    TextDrawUseBox(TXD_DEBUG_NPC, true);
-    TextDrawBoxColour(TXD_DEBUG_NPC, 0x00000088);
-    TextDrawSetShadow(TXD_DEBUG_NPC, false);
-    TextDrawSetOutline(TXD_DEBUG_NPC, true);
-    TextDrawBackgroundColour(TXD_DEBUG_NPC, 0x000000FF);
-    TextDrawFont(TXD_DEBUG_NPC, TEXT_DRAW_FONT_1);
-    TextDrawSetProportional(TXD_DEBUG_NPC, true);
-
     return 1;
 }
 
@@ -57,14 +85,91 @@ public OnGameModeExit()
 
 public OnPlayerConnect(playerid)
 {
+    if (IsPlayerNPC(playerid))
+    {
+        return 1;
+    }
+
+    StopPlayerNPCInfoTimer(playerid);
+    StopPlayerPatrolTimer(playerid);
+
     PlayerNPC[playerid] = INVALID_NPC_ID;
-    TextDrawShowForPlayer(playerid, TXD_DEBUG_NPC);
-    SetTimerEx("UpdateNPCInfo", 250, true, "i", playerid);
+    PlayerPatrolPath[playerid] = -1;
+    PlayerVehicles[playerid][0] = INVALID_VEHICLE_ID;
+    PlayerVehicles[playerid][1] = INVALID_VEHICLE_ID;
+    PlayerVehicles[playerid][2] = INVALID_VEHICLE_ID;
+
+    if (TXD_DEBUG_NPC[playerid] != PlayerText:INVALID_TEXT_DRAW)
+    {
+        PlayerTextDrawDestroy(playerid, TXD_DEBUG_NPC[playerid]);
+        TXD_DEBUG_NPC[playerid] = PlayerText:INVALID_TEXT_DRAW;
+    }
+
+    // Create per-player vehicles
+    PlayerVehicles[playerid][0] = CreateVehicle(522, 2493.7583, -1683.6482, 12.9099, 270.8069, 225, 155, -1, false);
+    PlayerVehicles[playerid][1] = CreateVehicle(411, 2473.9121, -1683.4276, 13.3589, -34.5, 136, 142, -1, false);
+    PlayerVehicles[playerid][2] = AddStaticVehicle(538, 2216.4900, -1645.4043, 17.0335, 180, 175, 225);
+
+    TXD_DEBUG_NPC[playerid] = CreatePlayerTextDraw(playerid, 444.0, 109.0, " ");
+    PlayerTextDrawLetterSize(playerid, TXD_DEBUG_NPC[playerid], 0.25, 1.0);
+    PlayerTextDrawTextSize(playerid, TXD_DEBUG_NPC[playerid], 617.0, 385.466666);
+    PlayerTextDrawAlignment(playerid, TXD_DEBUG_NPC[playerid], TEXT_DRAW_ALIGN_LEFT);
+    PlayerTextDrawColour(playerid, TXD_DEBUG_NPC[playerid], 0xFFFFFFFF);
+    PlayerTextDrawUseBox(playerid, TXD_DEBUG_NPC[playerid], true);
+    PlayerTextDrawBoxColour(playerid, TXD_DEBUG_NPC[playerid], 0x00000088);
+    PlayerTextDrawSetShadow(playerid, TXD_DEBUG_NPC[playerid], false);
+    PlayerTextDrawSetOutline(playerid, TXD_DEBUG_NPC[playerid], true);
+    PlayerTextDrawBackgroundColour(playerid, TXD_DEBUG_NPC[playerid], 0x000000FF);
+    PlayerTextDrawFont(playerid, TXD_DEBUG_NPC[playerid], TEXT_DRAW_FONT_1);
+    PlayerTextDrawSetProportional(playerid, TXD_DEBUG_NPC[playerid], true);
+    PlayerTextDrawShow(playerid, TXD_DEBUG_NPC[playerid]);
+
+    PlayerNPCInfoTimer[playerid] = SetTimerEx("UpdateNPCInfo", 250, true, "i", playerid);
     return 1;
 }
 
 public OnPlayerDisconnect(playerid, reason)
 {
+    StopPlayerNPCInfoTimer(playerid);
+    StopPlayerPatrolTimer(playerid);
+
+    // Destroy player's NPC if they have one
+    if (NPC_IsValid(PlayerNPC[playerid]))
+    {
+        NPC_Destroy(PlayerNPC[playerid]);
+        PlayerNPC[playerid] = INVALID_NPC_ID;
+    }
+
+    // Destroy player's patrol path if they have one
+    if (NPC_IsValidPath(PlayerPatrolPath[playerid]))
+    {
+        NPC_DestroyPath(PlayerPatrolPath[playerid]);
+        PlayerPatrolPath[playerid] = -1;
+    }
+
+    // Destroy player's vehicles
+    if (PlayerVehicles[playerid][0] != INVALID_VEHICLE_ID)
+    {
+        DestroyVehicle(PlayerVehicles[playerid][0]);
+        PlayerVehicles[playerid][0] = INVALID_VEHICLE_ID;
+    }
+    if (PlayerVehicles[playerid][1] != INVALID_VEHICLE_ID)
+    {
+        DestroyVehicle(PlayerVehicles[playerid][1]);
+        PlayerVehicles[playerid][1] = INVALID_VEHICLE_ID;
+    }
+    if (PlayerVehicles[playerid][2] != INVALID_VEHICLE_ID)
+    {
+        DestroyVehicle(PlayerVehicles[playerid][2]);
+        PlayerVehicles[playerid][2] = INVALID_VEHICLE_ID;
+    }
+
+    if (TXD_DEBUG_NPC[playerid] != PlayerText:INVALID_TEXT_DRAW)
+    {
+        PlayerTextDrawDestroy(playerid, TXD_DEBUG_NPC[playerid]);
+        TXD_DEBUG_NPC[playerid] = PlayerText:INVALID_TEXT_DRAW;
+    }
+
     return 1;
 }
 
@@ -103,19 +208,24 @@ public OnPlayerUpdate(playerid)
 forward UpdateNPCInfo(playerid);
 public UpdateNPCInfo(playerid)
 {
-    // Find the latest valid NPC from any player
-    new npcid = INVALID_NPC_ID;
-    for (new i = MAX_PLAYERS - 1; i >= 0; i--)
+    if (!IsPlayerConnected(playerid))
     {
-        if (PlayerNPC[i] != INVALID_NPC_ID && NPC_IsValid(PlayerNPC[i]))
-        {
-            npcid = PlayerNPC[i];
-            break;
-        }
+        StopPlayerNPCInfoTimer(playerid);
+        return 0;
     }
-    if (npcid == INVALID_NPC_ID)
+
+    if (TXD_DEBUG_NPC[playerid] == PlayerText:INVALID_TEXT_DRAW)
     {
-        TextDrawSetString(TXD_DEBUG_NPC, "~r~No NPC created");
+        StopPlayerNPCInfoTimer(playerid);
+        return 0;
+    }
+
+    // Use only this player's NPC
+    new npcid = PlayerNPC[playerid];
+
+    if (npcid == INVALID_NPC_ID || !NPC_IsValid(npcid))
+    {
+        PlayerTextDrawSetString(playerid, TXD_DEBUG_NPC[playerid], "~r~No NPC created");
         return 1;
     }
     
@@ -166,12 +276,18 @@ public UpdateNPCInfo(playerid)
         shooting, aiming, invul,
         style, action, vw, interior);
     
-    TextDrawSetString(TXD_DEBUG_NPC, text);
+    PlayerTextDrawSetString(playerid, TXD_DEBUG_NPC[playerid], text);
     return 1;
 }
 
 public OnPlayerCommandText(playerid, cmdtext[])
 {
+    if (!strcmp(cmdtext, "/help", true))
+    {
+        ShowPlayerDialog(playerid, DIALOG_HELP, DIALOG_STYLE_TABLIST, "NPC Helper Commands", HELP_DIALOG_TEXT, "", "Close");
+        return 1;
+    }
+
     // ============================================================
     // NPC MANAGEMENT
     // ============================================================
@@ -429,9 +545,9 @@ public OnPlayerCommandText(playerid, cmdtext[])
     if (!strcmp(cmdtext, "/createpatrol", true))
     {
         new pathid = NPC_CreatePath();
-        g_PatrolPath = pathid;
+        PlayerPatrolPath[playerid] = pathid;
 
-        SendClientMessage(playerid, 0x00FF00FF, "Created a patrol path %d", g_PatrolPath);
+        SendClientMessage(playerid, 0x00FF00FF, "Created a patrol path %d", PlayerPatrolPath[playerid]);
 
         return 1;
     }
@@ -439,12 +555,12 @@ public OnPlayerCommandText(playerid, cmdtext[])
     if (!strcmp(cmdtext, "/clearpatrol", true))
     {
         // Get the number of points before clearing
-        new count = NPC_GetPathPointCount(g_PatrolPath);
+        new count = NPC_GetPathPointCount(PlayerPatrolPath[playerid]);
 
         // Try to clear the path
-        if (NPC_ClearPath(g_PatrolPath))
+        if (NPC_ClearPath(PlayerPatrolPath[playerid]))
         {
-            SendClientMessage(playerid, 0x00FF00FF, "Cleared path %d (%d points removed)", g_PatrolPath, count);
+            SendClientMessage(playerid, 0x00FF00FF, "Cleared path %d (%d points removed)", PlayerPatrolPath[playerid], count);
         }
         else
         {
@@ -457,22 +573,23 @@ public OnPlayerCommandText(playerid, cmdtext[])
     if (!strcmp(cmdtext, "/deletepatrol", true))
     {
         // Check if path is valid first
-        if (!NPC_IsValidPath(g_PatrolPath))
+        if (!NPC_IsValidPath(PlayerPatrolPath[playerid]))
         {
             SendClientMessage(playerid, 0xFF0000FF, "No valid patrol path to delete.");
             return 1;
         }
 
         // Get how many points were in it
-        new count = NPC_GetPathPointCount(g_PatrolPath);
+        new count = NPC_GetPathPointCount(PlayerPatrolPath[playerid]);
 
         // Try to destroy it
-        if (NPC_DestroyPath(g_PatrolPath))
+        if (NPC_DestroyPath(PlayerPatrolPath[playerid]))
         {
-            SendClientMessage(playerid, 0x00FF00FF, "Destroyed path %d (%d points removed).", g_PatrolPath, count);
-            
-            // Reset global variable since it's now invalid
-            g_PatrolPath = -1;
+            SendClientMessage(playerid, 0x00FF00FF, "Destroyed path %d (%d points removed).", PlayerPatrolPath[playerid], count);
+
+            // Reset player's path variable since it's now invalid
+            PlayerPatrolPath[playerid] = -1;
+            StopPlayerPatrolTimer(playerid);
         }
         else
         {
@@ -488,9 +605,9 @@ public OnPlayerCommandText(playerid, cmdtext[])
         GetPlayerPos(playerid, x, y, z);
 
         // Try to add patrol point
-        if (NPC_AddPointToPath(g_PatrolPath, x, y, z, 1.5))
+        if (NPC_AddPointToPath(PlayerPatrolPath[playerid], x, y, z, 1.5))
         {
-            SendClientMessage(playerid, 0x00FF00FF, "Added point to path %d at your current location", g_PatrolPath);
+            SendClientMessage(playerid, 0x00FF00FF, "Added point to path %d at your current location", PlayerPatrolPath[playerid]);
         }
         else
         {
@@ -505,15 +622,15 @@ public OnPlayerCommandText(playerid, cmdtext[])
         if (npcid == INVALID_NPC_ID)
             return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
 
-        new count = NPC_GetPathPointCount(g_PatrolPath);
+        new count = NPC_GetPathPointCount(PlayerPatrolPath[playerid]);
 
-        if (NPC_IsValidPath(g_PatrolPath))
+        if (NPC_IsValidPath(PlayerPatrolPath[playerid]))
         {
-            NPC_MoveByPath(npcid, g_PatrolPath, NPC_MOVE_TYPE_WALK);
+            NPC_MoveByPath(npcid, PlayerPatrolPath[playerid], NPC_MOVE_TYPE_WALK);
             SendClientMessage(playerid, 0x00FF00FF, "NPC %d started patrol route with %d points", npcid, count);
 
-            g_PatrolPlayer = playerid;
-            SetTimer("CheckPathProgress", 2000, true);
+            StopPlayerPatrolTimer(playerid);
+            PlayerPatrolTimer[playerid] = SetTimerEx("CheckPathProgress", 2000, true, "i", playerid);
         }
         else
         {
@@ -535,7 +652,11 @@ public OnPlayerCommandText(playerid, cmdtext[])
         if (npcid == INVALID_NPC_ID)
             return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
 
-        if (NPC_EnterVehicle(npcid, g_motorcycle, seatid, NPC_MOVE_TYPE_JOG))
+        new vehicleid = PlayerVehicles[playerid][0];
+        if (vehicleid == INVALID_VEHICLE_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "Your motorcycle is not available.");
+
+        if (NPC_EnterVehicle(npcid, vehicleid, seatid, NPC_MOVE_TYPE_JOG))
             SendClientMessage(playerid, 0x00FF00FF, "NPC %d is entering motorcycle (seat %d).", npcid, seatid);
         else
             SendClientMessage(playerid, 0xFF0000FF, "NPC %d failed to enter motorcycle (seat %d).", npcid, seatid);
@@ -553,7 +674,11 @@ public OnPlayerCommandText(playerid, cmdtext[])
         if (npcid == INVALID_NPC_ID)
             return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
 
-        if (NPC_EnterVehicle(npcid, g_car, seatid, NPC_MOVE_TYPE_JOG))
+        new vehicleid = PlayerVehicles[playerid][1];
+        if (vehicleid == INVALID_VEHICLE_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "Your car is not available.");
+
+        if (NPC_EnterVehicle(npcid, vehicleid, seatid, NPC_MOVE_TYPE_JOG))
             SendClientMessage(playerid, 0x00FF00FF, "NPC %d is entering car (seat %d).", npcid, seatid);
         else
             SendClientMessage(playerid, 0xFF0000FF, "NPC %d failed to enter car (seat %d).", npcid, seatid);
@@ -571,7 +696,11 @@ public OnPlayerCommandText(playerid, cmdtext[])
         if (npcid == INVALID_NPC_ID)
             return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
 
-        if (NPC_EnterVehicle(npcid, g_train, seatid, NPC_MOVE_TYPE_JOG))
+        new vehicleid = PlayerVehicles[playerid][2];
+        if (vehicleid == INVALID_VEHICLE_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "Your train is not available.");
+
+        if (NPC_EnterVehicle(npcid, vehicleid, seatid, NPC_MOVE_TYPE_JOG))
             SendClientMessage(playerid, 0x00FF00FF, "NPC %d is entering train (seat %d).", npcid, seatid);
         else
             SendClientMessage(playerid, 0xFF0000FF, "NPC %d failed to enter train (seat %d).", npcid, seatid);
@@ -692,22 +821,34 @@ public ClearNPCAnimations(playerid, npcid)
     SendClientMessage(playerid, 0x00FF00FF, "NPC %d animations were cleared.", npcid);
 }
 
-forward CheckPathProgress();
-public CheckPathProgress()
+forward CheckPathProgress(playerid);
+public CheckPathProgress(playerid)
 {
-    if (g_PatrolPlayer == INVALID_PLAYER_ID || !IsPlayerConnected(g_PatrolPlayer))
+    if (!IsPlayerConnected(playerid))
+    {
+        StopPlayerPatrolTimer(playerid);
         return 0;
+    }
 
-    new npcid = PlayerNPC[g_PatrolPlayer];
-    if (npcid == INVALID_NPC_ID)
+    new npcid = PlayerNPC[playerid];
+    if (npcid == INVALID_NPC_ID || !NPC_IsValid(npcid))
+    {
+        StopPlayerPatrolTimer(playerid);
         return 0;
+    }
+
+    if (!NPC_IsValidPath(PlayerPatrolPath[playerid]))
+    {
+        StopPlayerPatrolTimer(playerid);
+        return 0;
+    }
 
     new currentPoint = NPC_GetCurrentPathPointIndex(npcid);
-    new totalPoints = NPC_GetPathPointCount(g_PatrolPath);
+    new totalPoints = NPC_GetPathPointCount(PlayerPatrolPath[playerid]);
 
     if (currentPoint != -1)
     {
-        SendClientMessage(g_PatrolPlayer, 0xFFFF00FF, "NPC %d progress: Point %d of %d", npcid, currentPoint + 1, totalPoints);
+        SendClientMessage(playerid, 0xFFFF00FF, "NPC %d progress: Point %d of %d", npcid, currentPoint + 1, totalPoints);
     }
     return 1;
 }
