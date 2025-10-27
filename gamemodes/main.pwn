@@ -1,5 +1,5 @@
 #include <open.mp>
-#include <omp_npcs>
+#include <omp_npc>
 
 main(){}
 
@@ -38,6 +38,7 @@ static const HELP_DIALOG_TEXT[] =
 /checkarmour\tCheck NPC armour.\n\
 /checkammo\tCheck NPC total ammo.\n\
 /checkclip\tCheck ammo in clip.\n\
+/checkentervehicle\tShow the vehicle the NPC is entering.\n\
 /countnpcs\tShow total NPC count.";
 
 stock StopPlayerNPCInfoTimer(playerid)
@@ -85,11 +86,6 @@ public OnGameModeExit()
 
 public OnPlayerConnect(playerid)
 {
-    if (IsPlayerNPC(playerid))
-    {
-        return 1;
-    }
-
     StopPlayerNPCInfoTimer(playerid);
     StopPlayerPatrolTimer(playerid);
 
@@ -98,6 +94,11 @@ public OnPlayerConnect(playerid)
     PlayerVehicles[playerid][0] = INVALID_VEHICLE_ID;
     PlayerVehicles[playerid][1] = INVALID_VEHICLE_ID;
     PlayerVehicles[playerid][2] = INVALID_VEHICLE_ID;
+
+    if (IsPlayerNPC(playerid))
+    {
+        return 1;
+    }
 
     if (TXD_DEBUG_NPC[playerid] != PlayerText:INVALID_TEXT_DRAW)
     {
@@ -805,6 +806,28 @@ public OnPlayerCommandText(playerid, cmdtext[])
 
         SendClientMessage(playerid, 0x00FF00FF, "There are %d NPCs on the server.", count);
 
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/checkentervehicle", true))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        if (!NPC_IsEnteringVehicle(npcid))
+            return SendClientMessage(playerid, 0xFFFF00FF, "NPC %d is not entering a vehicle.", npcid);
+
+        new vehicleid = NPC_GetEnteringVehicle(npcid);
+        new seatid = NPC_GetEnteringVehicleSeat(npcid);
+
+        if (vehicleid == INVALID_VEHICLE_ID || vehicleid == 0)
+            return SendClientMessage(playerid, 0xFFFF00FF, "NPC %d has no pending target vehicle.", npcid);
+
+        SendClientMessage(playerid, 0x00FF00FF, "NPC %d is entering vehicle %d (seat %d).", npcid, vehicleid, seatid);
         return 1;
     }
 
