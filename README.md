@@ -42,6 +42,18 @@
 - `/checkarmour` - Check NPC's current armour value (tests NPC_GetArmour)
 - `/checkammo` - Check NPC's current ammo amount (tests NPC_GetAmmo)
 - `/checkclip` - Check NPC's current clip ammo (tests NPC_GetClipAmmo)
+- `/checkentervehicle` - Show the vehicle the NPC is entering (tests NPC_IsEnteringVehicle, NPC_GetEnteringVehicle, NPC_GetEnteringVehicleSeat)
+- `/checkenteringvehicleid` - Get the vehicle ID the NPC is entering (tests NPC_GetEnteringVehicleID)
+- `/checkentervehseat` - Get the vehicle seat the NPC is entering (tests NPC_IsEnteringVehicle, NPC_GetEnteringVehicleSeat)
+- `/checkfacingangle` - Get NPC's facing angle (tests NPC_GetFacingAngle)
+- `/checkfightingstyle` - Get NPC's fighting style (tests NPC_GetFightingStyle)
+- `/checkhealth` - Get NPC's health (tests NPC_GetHealth)
+- `/checkinterior` - Get NPC's interior ID (tests NPC_GetInterior)
+- `/checkkeys` - Get NPC's current key states (tests NPC_GetKeys)
+- `/checkpathcount` - Show total number of paths on server (tests NPC_GetPathCount)
+- `/checkpathpoint` - Get current path point coordinates (tests NPC_GetCurrentPathPointIndex, NPC_GetPathPoint)
+- `/checkpathpointcount` - Get number of points in path (tests NPC_GetPathPointCount)
+- `/checkpos` - Get NPC's position (tests NPC_GetPos)
 
 ---
 

@@ -8,7 +8,7 @@ const DIALOG_HELP = 1000;
 
 new g_NPCCount = 0,
     PlayerNPC[MAX_PLAYERS] = {INVALID_NPC_ID, ...},
-    PlayerPatrolPath[MAX_PLAYERS] = {-1, ...};
+    PlayerPatrolPath[MAX_PLAYERS] = {INVALID_PATH_ID, ...};
 
 new PlayerVehicles[MAX_PLAYERS][3]; // [0] = motorcycle, [1] = car, [2] = train
 new PlayerText:TXD_DEBUG_NPC[MAX_PLAYERS] = {PlayerText:INVALID_TEXT_DRAW, ...};
@@ -39,6 +39,17 @@ static const HELP_DIALOG_TEXT[] =
 /checkammo\tCheck NPC total ammo.\n\
 /checkclip\tCheck ammo in clip.\n\
 /checkentervehicle\tShow the vehicle the NPC is entering.\n\
+/checkenteringvehicleid\tGet entering vehicle ID.\n\
+/checkentervehseat\tGet entering vehicle seat.\n\
+/checkfacingangle\tGet NPC facing angle.\n\
+/checkfightingstyle\tGet NPC fighting style.\n\
+/checkhealth\tGet NPC health.\n\
+/checkinterior\tGet NPC interior.\n\
+/checkkeys\tGet NPC key states.\n\
+/checkpathcount\tShow total path count.\n\
+/checkpathpoint\tGet current path point coords.\n\
+/checkpathpointcount\tGet path point count.\n\
+/checkpos\tGet NPC position.\n\
 /countnpcs\tShow total NPC count.";
 
 stock StopPlayerNPCInfoTimer(playerid)
@@ -90,7 +101,7 @@ public OnPlayerConnect(playerid)
     StopPlayerPatrolTimer(playerid);
 
     PlayerNPC[playerid] = INVALID_NPC_ID;
-    PlayerPatrolPath[playerid] = -1;
+    PlayerPatrolPath[playerid] = INVALID_PATH_ID;
     PlayerVehicles[playerid][0] = INVALID_VEHICLE_ID;
     PlayerVehicles[playerid][1] = INVALID_VEHICLE_ID;
     PlayerVehicles[playerid][2] = INVALID_VEHICLE_ID;
@@ -145,7 +156,7 @@ public OnPlayerDisconnect(playerid, reason)
     if (NPC_IsValidPath(PlayerPatrolPath[playerid]))
     {
         NPC_DestroyPath(PlayerPatrolPath[playerid]);
-        PlayerPatrolPath[playerid] = -1;
+        PlayerPatrolPath[playerid] = INVALID_PATH_ID;
     }
 
     // Destroy player's vehicles
@@ -504,7 +515,6 @@ public OnPlayerCommandText(playerid, cmdtext[])
         if (!NPC_GetAnimation(npcid, animid, delta, loop, lockX, lockY, freeze, time))
             return SendClientMessage(playerid, 0xFF0000FF, "Failed to get animation data (maybe no active animation).");
 
-
         SendClientMessage(playerid, 0xFFFFFFFF, "NPC %d animID: %d | delta: %.2f | loop: %d | lockX: %d | lockY: %d | freeze: %d | time: %d",
             npcid, animid, delta, _:loop, _:lockX, _:lockY, _:freeze, time);
 
@@ -589,7 +599,7 @@ public OnPlayerCommandText(playerid, cmdtext[])
             SendClientMessage(playerid, 0x00FF00FF, "Destroyed path %d (%d points removed).", PlayerPatrolPath[playerid], count);
 
             // Reset player's path variable since it's now invalid
-            PlayerPatrolPath[playerid] = -1;
+            PlayerPatrolPath[playerid] = INVALID_PATH_ID;
             StopPlayerPatrolTimer(playerid);
         }
         else
@@ -809,7 +819,7 @@ public OnPlayerCommandText(playerid, cmdtext[])
         return 1;
     }
 
-    if (!strcmp(cmdtext, "/checkentervehicle", true))
+    if (!strcmp(cmdtext, "/checkenterveh", true))
     {
         new npcid = PlayerNPC[playerid];
         if (npcid == INVALID_NPC_ID)
@@ -831,10 +841,181 @@ public OnPlayerCommandText(playerid, cmdtext[])
         return 1;
     }
 
+    if (!strcmp(cmdtext, "/checkentervehid", true))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        new vehicleid = NPC_GetEnteringVehicleID(npcid);
+
+        if (vehicleid == INVALID_VEHICLE_ID)
+            return SendClientMessage(playerid, 0xFFFF00FF, "NPC %d is not entering any vehicle.", npcid);
+
+        SendClientMessage(playerid, 0x00FF00FF, "NPC %d is entering vehicle ID: %d", npcid, vehicleid);
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/checkentervehseat", true))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        if (!NPC_IsEnteringVehicle(npcid))
+            return SendClientMessage(playerid, 0xFFFF00FF, "NPC %d is not entering any vehicle.", npcid);
+
+        new seatid = NPC_GetEnteringVehicleSeat(npcid);
+
+        SendClientMessage(playerid, 0x00FF00FF, "NPC %d is entering vehicle seat: %d", npcid, seatid);
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/checkfacingangle", true))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        new Float:angle;
+        NPC_GetFacingAngle(npcid, angle);
+
+        SendClientMessage(playerid, 0x00FF00FF, "NPC %d facing angle: %.2f", npcid, angle);
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/checkfightingstyle", true))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        new style = NPC_GetFightingStyle(npcid);
+
+        SendClientMessage(playerid, 0x00FF00FF, "NPC %d fighting style: %d", npcid, style);
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/checkhealth", true))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        new Float:health;
+        NPC_GetHealth(npcid, health);
+
+        SendClientMessage(playerid, 0x00FF00FF, "NPC %d health: %.2f", npcid, health);
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/checkinterior", true))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        new interior = NPC_GetInterior(npcid);
+
+        SendClientMessage(playerid, 0x00FF00FF, "NPC %d interior: %d", npcid, interior);
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/checkkeys", true))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        new keys, updown, leftright;
+        NPC_GetKeys(npcid, keys, updown, leftright);
+
+        SendClientMessage(playerid, 0x00FF00FF, "NPC %d keys: %d, updown: %d, leftright: %d", npcid, keys, updown, leftright);
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/checkpathcount", true))
+    {
+        new count = NPC_GetPathCount();
+
+        SendClientMessage(playerid, 0x00FF00FF, "Total NPC paths: %d", count);
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/checkpathpoint", true))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        new pathid = PlayerPatrolPath[playerid];
+        if (pathid == INVALID_PATH_ID)
+            return SendClientMessage(playerid, 0xFFFF00FF, "No patrol path assigned.");
+
+        new pointindex = NPC_GetCurrentPathPointIndex(npcid);
+        new Float:x, Float:y, Float:z;
+
+        if (!NPC_GetPathPoint(pathid, pointindex, x, y, z))
+            return SendClientMessage(playerid, 0xFFFF00FF, "Failed to get path point.");
+
+        SendClientMessage(playerid, 0x00FF00FF, "NPC %d path point %d: %.2f, %.2f, %.2f", npcid, pointindex, x, y, z);
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/checkpathpointcount", true))
+    {
+        new pathid = PlayerPatrolPath[playerid];
+        if (pathid == INVALID_PATH_ID)
+            return SendClientMessage(playerid, 0xFFFF00FF, "No patrol path assigned.");
+
+        new count = NPC_GetPathPointCount(pathid);
+
+        SendClientMessage(playerid, 0x00FF00FF, "Path %d has %d points", pathid, count);
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/checkpos", true))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        new Float:x, Float:y, Float:z;
+        NPC_GetPos(npcid, x, y, z);
+
+        SendClientMessage(playerid, 0x00FF00FF, "NPC %d position: %.2f, %.2f, %.2f", npcid, x, y, z);
+        return 1;
+    }
+
     return 0;
 }
-
-
 
 forward ClearNPCAnimations(playerid, npcid);
 public ClearNPCAnimations(playerid, npcid)
@@ -869,7 +1050,7 @@ public CheckPathProgress(playerid)
     new currentPoint = NPC_GetCurrentPathPointIndex(npcid);
     new totalPoints = NPC_GetPathPointCount(PlayerPatrolPath[playerid]);
 
-    if (currentPoint != -1)
+    if (currentPoint != INVALID_NODE_ID)
     {
         SendClientMessage(playerid, 0xFFFF00FF, "NPC %d progress: Point %d of %d", npcid, currentPoint + 1, totalPoints);
     }
