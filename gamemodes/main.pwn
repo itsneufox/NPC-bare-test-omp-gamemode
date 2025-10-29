@@ -42,6 +42,14 @@ static const HELP_DIALOG_TEXT[] =
 /checkenteringvehicleid\tGet entering vehicle ID.\n\
 /checkentervehseat\tGet entering vehicle seat.\n\
 /checkfacingangle\tGet NPC facing angle.\n\
+/checkrot\tGet NPC rotation.\n\
+/checkspecialaction\tGet NPC special action.\n\
+/checksurfingobject\tGet NPC surfing object.\n\
+/checksurfingplayerobject\tGet NPC surfing player object.\n\
+/checksurfingvehicle\tGet NPC surfing vehicle.\n\
+/checksurfingoffset\tGet NPC surfing offset.\n\
+/checkvehicle\tGet NPC vehicle.\n\
+/checkvehiclegearstate\tGet NPC vehicle gear state.\n\
 /checkfightingstyle\tGet NPC fighting style.\n\
 /checkhealth\tGet NPC health.\n\
 /checkinterior\tGet NPC interior.\n\
@@ -893,6 +901,147 @@ public OnPlayerCommandText(playerid, cmdtext[])
         return 1;
     }
 
+    if (!strcmp(cmdtext, "/checkrot", true))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        new Float:rotX, Float:rotY, Float:rotZ;
+        NPC_GetRot(npcid, rotX, rotY, rotZ);
+
+        SendClientMessage(playerid, 0x00FF00FF, "NPC %d rotation: X=%.2f, Y=%.2f, Z=%.2f", npcid, rotX, rotY, rotZ);
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/checkspecialaction", true))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        new action = NPC_GetSpecialAction(npcid);
+
+        SendClientMessage(playerid, 0x00FF00FF, "NPC %d special action: %d", npcid, action);
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/checksurfingobject", true))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        new objectid = NPC_GetSurfingObject(npcid);
+
+        if (objectid == INVALID_OBJECT_ID)
+            SendClientMessage(playerid, 0xFFFF00FF, "NPC %d is not surfing on any object.", npcid);
+        else
+            SendClientMessage(playerid, 0x00FF00FF, "NPC %d is surfing on object: %d", npcid, objectid);
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/checksurfingplayerobject", true))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        new objectid = NPC_GetSurfingPlayerObject(npcid);
+
+        if (objectid == INVALID_OBJECT_ID)
+            SendClientMessage(playerid, 0xFFFF00FF, "NPC %d is not surfing on any player object.", npcid);
+        else
+            SendClientMessage(playerid, 0x00FF00FF, "NPC %d is surfing on player object: %d", npcid, objectid);
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/checksurfingvehicle", true))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        new vehicleid = NPC_GetSurfingVehicle(npcid);
+
+        if (vehicleid == INVALID_VEHICLE_ID)
+            SendClientMessage(playerid, 0xFFFF00FF, "NPC %d is not surfing on any vehicle.", npcid);
+        else
+            SendClientMessage(playerid, 0x00FF00FF, "NPC %d is surfing on vehicle: %d", npcid, vehicleid);
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/checksurfingoffset", true))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        new Float:offsetX, Float:offsetY, Float:offsetZ;
+        NPC_GetSurfingOffsets(npcid, offsetX, offsetY, offsetZ);
+
+        SendClientMessage(playerid, 0x00FF00FF, "NPC %d surfing offset: X=%.2f, Y=%.2f, Z=%.2f", npcid, offsetX, offsetY, offsetZ);
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/checkvehicle", true))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        new vehicleid = NPC_GetVehicle(npcid);
+
+        if (vehicleid == INVALID_VEHICLE_ID)
+            SendClientMessage(playerid, 0xFFFF00FF, "NPC %d is not in any vehicle.", npcid);
+        else
+            SendClientMessage(playerid, 0x00FF00FF, "NPC %d is in vehicle: %d", npcid, vehicleid);
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/checkvehiclegearstate", true))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        if (NPC_GetVehicle(npcid) == INVALID_VEHICLE_ID)
+            return SendClientMessage(playerid, 0xFFFF00FF, "NPC %d is not in any vehicle.", npcid);
+
+        new LANDING_GEAR_STATE:gearState = NPC_GetVehicleGearState(npcid);
+
+        if (gearState == LANDING_GEAR_STATE_UP)
+            SendClientMessage(playerid, 0x00FF00FF, "NPC %d: Landing gear UP", npcid);
+        else
+            SendClientMessage(playerid, 0x00FF00FF, "NPC %d: Landing gear DOWN", npcid);
+
+        return 1;
+    }
+
     if (!strcmp(cmdtext, "/checkfightingstyle", true))
     {
         new npcid = PlayerNPC[playerid];
@@ -917,8 +1066,7 @@ public OnPlayerCommandText(playerid, cmdtext[])
         if (!NPC_IsValid(npcid))
             return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
 
-        new Float:health;
-        NPC_GetHealth(npcid, health);
+        new Float:health = NPC_GetHealth(npcid);
 
         SendClientMessage(playerid, 0x00FF00FF, "NPC %d health: %.2f", npcid, health);
         return 1;
@@ -977,9 +1125,9 @@ public OnPlayerCommandText(playerid, cmdtext[])
             return SendClientMessage(playerid, 0xFFFF00FF, "No patrol path assigned.");
 
         new pointindex = NPC_GetCurrentPathPointIndex(npcid);
-        new Float:x, Float:y, Float:z;
+        new Float:x, Float:y, Float:z, Float:stopRange;
 
-        if (!NPC_GetPathPoint(pathid, pointindex, x, y, z))
+        if (!NPC_GetPathPoint(pathid, pointindex, x, y, z, stopRange))
             return SendClientMessage(playerid, 0xFFFF00FF, "Failed to get path point.");
 
         SendClientMessage(playerid, 0x00FF00FF, "NPC %d path point %d: %.2f, %.2f, %.2f", npcid, pointindex, x, y, z);
