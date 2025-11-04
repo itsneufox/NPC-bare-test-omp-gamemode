@@ -158,9 +158,9 @@ public OnPlayerConnect(playerid)
     PlayerVehicles[playerid][2] = AddStaticVehicle(538, 2216.4900, -1645.4043, 17.0335, 180, 175, 225);
     PlayerVehicles[playerid][3] = CreateVehicle(520, 2502.2227, -1662.8390, 12.4110, 0.0, 1, 1, -1, false);
 
-    TXD_DEBUG_NPC[playerid] = CreatePlayerTextDraw(playerid, 444.0, 109.0, " ");
+    TXD_DEBUG_NPC[playerid] = CreatePlayerTextDraw(playerid, 390.0, 109.0, " ");
     PlayerTextDrawLetterSize(playerid, TXD_DEBUG_NPC[playerid], 0.25, 1.0);
-    PlayerTextDrawTextSize(playerid, TXD_DEBUG_NPC[playerid], 617.0, 385.466666);
+    PlayerTextDrawTextSize(playerid, TXD_DEBUG_NPC[playerid], 610.0, 385.466666);
     PlayerTextDrawAlignment(playerid, TXD_DEBUG_NPC[playerid], TEXT_DRAW_ALIGN_LEFT);
     PlayerTextDrawColour(playerid, TXD_DEBUG_NPC[playerid], 0xFFFFFFFF);
     PlayerTextDrawUseBox(playerid, TXD_DEBUG_NPC[playerid], true);
@@ -345,37 +345,48 @@ public UpdateNPCInfo(playerid)
 
     new text[1024];
     format(text, sizeof(text),
-        "~y~=== NPC DEBUG [ID: %d] ===~n~\
-        ~g~BASIC:~w~ HP: %.1f | ARM: %.1f | SKIN: %d~n~\
-        ~g~POSITION:~w~ %.1f, %.1f, %.1f~n~\
-        ~g~ROTATION:~w~ Angle: %.1f | X: %.1f Y: %.1f Z: %.1f~n~\
-        ~g~VELOCITY:~w~ X: %.2f Y: %.2f Z: %.2f~n~\
-        ~g~MOVEMENT:~w~ Moving: %d | VW: %d | Int: %d~n~\
+        "~y~NPC DEBUG [ID: %d]~n~\
         ~n~\
-        ~y~WEAPON:~w~ ID: %d | Ammo: %d | Clip: %d~n~\
-        ~y~COMBAT:~w~ Reload: %d | InfAmmo: %d | Reloading: %d~n~\
-        ~y~ACTIONS:~w~ Shooting: %d | Aiming: %d | Invuln: %d~n~\
-        ~y~STYLE:~w~ Fight: %d | Special: %d~n~\
-        ~n~\
-        ~b~VEHICLE:~w~ ID: %d | Seat: %d | HP: %.1f~n~\
-        ~b~ENTERING:~w~ VehID: %d | Seat: %d~n~\
-        ~n~\
-        ~p~KEYS:~w~ UpDown: %d | LeftRight: %d | Keys: %d~n~\
-        ~p~SURFING:~w~ Veh: %d | Obj: %d | PObj: %d",
+        ~g~STATS~n~\
+        ~w~HP: %.0f / Armour: %.0f / Skin: %d~n~\
+        ~g~POS~n~\
+        ~w~X: %.1f / Y: %.1f / Z: %.1f~n~\
+        ~g~ROT~n~\
+        ~w~Angle: %.1f / X: %.1f / Y: %.1f / Z: %.1f~n~\
+        ~g~VEL~n~\
+        ~w~X: %.2f / Y: %.2f / Z: %.2f~n~\
+        ~g~STATE~n~\
+        ~w~Moving: %s / VW: %d / Int: %d~n~\
+        ~y~WEAPON~n~\
+        ~w~ID: %d / Ammo: %d / Clip: %d~n~\
+        ~y~RELOAD~n~\
+        ~w~Enabled: %s / Infinite: %s / Reloading: %s~n~\
+        ~y~COMBAT~n~\
+        ~w~Shooting: %s / Aiming: %s / Invuln: %s~n~\
+        ~b~VEHICLE~n~\
+        ~w~InVeh: %s / Seat: %d / Health: %.0f~n~\
+        ~b~ENTERING~n~\
+        ~w~VehID: %d / Seat: %d~n~\
+        ~p~KEYS~n~\
+        ~w~UpDown: %d / LeftRight: %d / Keys: %d~n~\
+        ~p~SURFING~n~\
+        ~w~Veh: %d / Obj: %d / PObj: %d~n~\
+        ~p~OTHER~n~\
+        ~w~Style: %d / Action: %d",
         npcid,
         hp, arm, skin,
         x, y, z,
         angle, rotX, rotY, rotZ,
         velX, velY, velZ,
-        moving, vw, interior,
+        moving ? "Yes" : "No", vw, interior,
         wep, ammo, clip,
-        reloadEnabled, infAmmo, reloading,
-        shooting, aiming, invul,
-        style, action,
-        veh, vehSeat, vehHealth,
+        reloadEnabled ? "ON" : "OFF", infAmmo ? "ON" : "OFF", reloading ? "Yes" : "No",
+        shooting ? "Yes" : "No", aiming ? "Yes" : "No", invul ? "Yes" : "No",
+        veh != INVALID_VEHICLE_ID ? "Yes" : "No", vehSeat, vehHealth,
         enteringVeh, enteringSeat,
         updown, leftright, keys,
-        surfVeh, surfObj, surfPObj);
+        surfVeh, surfObj, surfPObj,
+        style, action);
 
     PlayerTextDrawSetString(playerid, TXD_DEBUG_NPC[playerid], text);
     return 1;
