@@ -10,10 +10,11 @@ new g_NPCCount = 0,
     PlayerNPC[MAX_PLAYERS] = {INVALID_NPC_ID, ...},
     PlayerPatrolPath[MAX_PLAYERS] = {INVALID_PATH_ID, ...};
 
-new PlayerVehicles[MAX_PLAYERS][3]; // [0] = motorcycle, [1] = car, [2] = train
+new PlayerVehicles[MAX_PLAYERS][4]; // [0] = motorcycle, [1] = car, [2] = train, [3] = hydra
 new PlayerText:TXD_DEBUG_NPC[MAX_PLAYERS] = {PlayerText:INVALID_TEXT_DRAW, ...};
 new PlayerNPCInfoTimer[MAX_PLAYERS] = {INVALID_TIMER_ID, ...};
 new PlayerPatrolTimer[MAX_PLAYERS] = {INVALID_TIMER_ID, ...};
+new PlayerEnterVehicleMonitor[MAX_PLAYERS] = {INVALID_TIMER_ID, ...};
 
 static const HELP_DIALOG_TEXT[] =
     "Command\tDescription\n\
@@ -34,22 +35,37 @@ static const HELP_DIALOG_TEXT[] =
 /npcenterbike [seat]\tPlace NPC into your motorcycle.\n\
 /npcentercar [seat]\tPlace NPC into your car.\n\
 /npcentertrain [seat]\tPlace NPC into your train.\n\
-/npcexitbike|car|train\tForce the NPC to exit vehicles.\n\
+/npcenterhydra [seat]\tPlace NPC into your hydra.\n\
+/npcexit\tForce the NPC to exit any vehicle.\n\
 /checkarmour\tCheck NPC armour.\n\
 /checkammo\tCheck NPC total ammo.\n\
 /checkclip\tCheck ammo in clip.\n\
-/checkentervehicle\tShow the vehicle the NPC is entering.\n\
-/checkenteringvehicleid\tGet entering vehicle ID.\n\
-/checkentervehseat\tGet entering vehicle seat.\n\
+/checkenterveh\tMonitor NPC vehicle entry (chat messages).\n\
+/stopcheckenterveh\tStop monitoring NPC vehicle entry.\n\
 /checkfacingangle\tGet NPC facing angle.\n\
 /checkrot\tGet NPC rotation.\n\
+/checkvelocity\tGet NPC velocity.\n\
+/checkvirtualworld\tGet NPC virtual world.\n\
+/checkweapon\tGet NPC weapon.\n\
+/checkweaponaccuracy\tGet NPC weapon accuracy.\n\
+/checkweaponactualclipsize\tGet NPC weapon actual clip size.\n\
+/checkweaponactualreloadtime\tGet NPC weapon actual reload time.\n\
+/checkweaponclipsize\tGet NPC weapon clip size.\n\
+/checkweaponreloadtime\tGet NPC weapon reload time.\n\
+/checkweaponskill\tGet NPC weapon skill levels.\n\
+/checkskin\tGet NPC skin ID.\n\
 /checkspecialaction\tGet NPC special action.\n\
 /checksurfingobject\tGet NPC surfing object.\n\
 /checksurfingplayerobject\tGet NPC surfing player object.\n\
 /checksurfingvehicle\tGet NPC surfing vehicle.\n\
 /checksurfingoffset\tGet NPC surfing offset.\n\
 /checkvehicle\tGet NPC vehicle.\n\
+/checkvehicleid\tGet NPC vehicle ID.\n\
+/checkvehicleseat\tGet NPC vehicle seat.\n\
+/checkvehicletrainspeed\tGet NPC vehicle train speed.\n\
 /checkvehiclegearstate\tGet NPC vehicle gear state.\n\
+/checkvehiclehealth\tGet NPC vehicle health.\n\
+/checkvehiclehydra\tGet NPC vehicle hydra thrusters.\n\
 /checkfightingstyle\tGet NPC fighting style.\n\
 /checkhealth\tGet NPC health.\n\
 /checkinterior\tGet NPC interior.\n\
@@ -76,6 +92,15 @@ stock StopPlayerPatrolTimer(playerid)
         KillTimer(PlayerPatrolTimer[playerid]);
     }
     PlayerPatrolTimer[playerid] = INVALID_TIMER_ID;
+}
+
+stock StopPlayerEnterVehicleMonitor(playerid)
+{
+    if (PlayerEnterVehicleMonitor[playerid] != INVALID_TIMER_ID && IsValidTimer(PlayerEnterVehicleMonitor[playerid]))
+    {
+        KillTimer(PlayerEnterVehicleMonitor[playerid]);
+    }
+    PlayerEnterVehicleMonitor[playerid] = INVALID_TIMER_ID;
 }
 
 public OnGameModeInit()
@@ -107,12 +132,14 @@ public OnPlayerConnect(playerid)
 {
     StopPlayerNPCInfoTimer(playerid);
     StopPlayerPatrolTimer(playerid);
+    StopPlayerEnterVehicleMonitor(playerid);
 
     PlayerNPC[playerid] = INVALID_NPC_ID;
     PlayerPatrolPath[playerid] = INVALID_PATH_ID;
     PlayerVehicles[playerid][0] = INVALID_VEHICLE_ID;
     PlayerVehicles[playerid][1] = INVALID_VEHICLE_ID;
     PlayerVehicles[playerid][2] = INVALID_VEHICLE_ID;
+    PlayerVehicles[playerid][3] = INVALID_VEHICLE_ID;
 
     if (IsPlayerNPC(playerid))
     {
@@ -129,6 +156,7 @@ public OnPlayerConnect(playerid)
     PlayerVehicles[playerid][0] = CreateVehicle(522, 2493.7583, -1683.6482, 12.9099, 270.8069, 225, 155, -1, false);
     PlayerVehicles[playerid][1] = CreateVehicle(411, 2473.9121, -1683.4276, 13.3589, -34.5, 136, 142, -1, false);
     PlayerVehicles[playerid][2] = AddStaticVehicle(538, 2216.4900, -1645.4043, 17.0335, 180, 175, 225);
+    PlayerVehicles[playerid][3] = CreateVehicle(520, 2502.2227, -1662.8390, 12.4110, 0.0, 1, 1, -1, false);
 
     TXD_DEBUG_NPC[playerid] = CreatePlayerTextDraw(playerid, 444.0, 109.0, " ");
     PlayerTextDrawLetterSize(playerid, TXD_DEBUG_NPC[playerid], 0.25, 1.0);
@@ -152,6 +180,7 @@ public OnPlayerDisconnect(playerid, reason)
 {
     StopPlayerNPCInfoTimer(playerid);
     StopPlayerPatrolTimer(playerid);
+    StopPlayerEnterVehicleMonitor(playerid);
 
     // Destroy player's NPC if they have one
     if (NPC_IsValid(PlayerNPC[playerid]))
@@ -182,6 +211,11 @@ public OnPlayerDisconnect(playerid, reason)
     {
         DestroyVehicle(PlayerVehicles[playerid][2]);
         PlayerVehicles[playerid][2] = INVALID_VEHICLE_ID;
+    }
+    if (PlayerVehicles[playerid][3] != INVALID_VEHICLE_ID)
+    {
+        DestroyVehicle(PlayerVehicles[playerid][3]);
+        PlayerVehicles[playerid][3] = INVALID_VEHICLE_ID;
     }
 
     if (TXD_DEBUG_NPC[playerid] != PlayerText:INVALID_TEXT_DRAW)
@@ -276,26 +310,73 @@ public UpdateNPCInfo(playerid)
     // Movement and vehicle
     new moving = NPC_IsMoving(npcid);
     new veh = NPC_GetVehicle(npcid);
-    
+    new vehSeat = NPC_GetVehicleSeat(npcid);
+    new Float:vehHealth = 0.0;
+    if (veh != INVALID_VEHICLE_ID)
+        vehHealth = NPC_GetVehicleHealth(npcid);
+
+    // Velocity
+    new Float:velX, Float:velY, Float:velZ;
+    NPC_GetVelocity(npcid, velX, velY, velZ);
+
+    // Rotation
+    new Float:rotX, Float:rotY, Float:rotZ;
+    NPC_GetRot(npcid, rotX, rotY, rotZ);
+
     // Other properties
+    new skin = NPC_GetSkin(npcid);
     new style = NPC_GetFightingStyle(npcid);
     new action = NPC_GetSpecialAction(npcid);
     new vw = NPC_GetVirtualWorld(npcid);
     new interior = NPC_GetInterior(npcid);
-    
-    new text[512];
+
+    // Keys
+    new updown, leftright, keys;
+    NPC_GetKeys(npcid, updown, leftright, keys);
+
+    // Surfing
+    new surfVeh = NPC_GetSurfingVehicle(npcid);
+    new surfObj = NPC_GetSurfingObject(npcid);
+    new surfPObj = NPC_GetSurfingPlayerObject(npcid);
+
+    // Entering vehicle
+    new enteringVeh = NPC_GetEnteringVehicleID(npcid);
+    new enteringSeat = NPC_GetEnteringVehicleSeat(npcid);
+
+    new text[1024];
     format(text, sizeof(text),
-        "~y~NPC DEBUG FOR NPC ID: %d ~n~~w~HP: %.1f~n~ARM: %.1f~n~WEP: %d~n~AMMO: %d / CLIP: %d~n~\
-        POS: %.2f %.2f %.2f~n~ANGLE: %.1f~n~MOVING: %d / VEH: %d~n~\
-        RELOAD ENABLED: %d~n~INFINITE AMMO: %d~n~RELOADING: %d~n~\
-        SHOOTING: %d~n~AIMING: %d~n~INVULNERABLE: %d~n~\
-        STYLE: %d / ACTION: %d~n~VW: %d / INT: %d",
-        npcid, hp, arm, wep, ammo, clip,
-        x, y, z, angle, moving, veh,
+        "~y~=== NPC DEBUG [ID: %d] ===~n~\
+        ~g~BASIC:~w~ HP: %.1f | ARM: %.1f | SKIN: %d~n~\
+        ~g~POSITION:~w~ %.1f, %.1f, %.1f~n~\
+        ~g~ROTATION:~w~ Angle: %.1f | X: %.1f Y: %.1f Z: %.1f~n~\
+        ~g~VELOCITY:~w~ X: %.2f Y: %.2f Z: %.2f~n~\
+        ~g~MOVEMENT:~w~ Moving: %d | VW: %d | Int: %d~n~\
+        ~n~\
+        ~y~WEAPON:~w~ ID: %d | Ammo: %d | Clip: %d~n~\
+        ~y~COMBAT:~w~ Reload: %d | InfAmmo: %d | Reloading: %d~n~\
+        ~y~ACTIONS:~w~ Shooting: %d | Aiming: %d | Invuln: %d~n~\
+        ~y~STYLE:~w~ Fight: %d | Special: %d~n~\
+        ~n~\
+        ~b~VEHICLE:~w~ ID: %d | Seat: %d | HP: %.1f~n~\
+        ~b~ENTERING:~w~ VehID: %d | Seat: %d~n~\
+        ~n~\
+        ~p~KEYS:~w~ UpDown: %d | LeftRight: %d | Keys: %d~n~\
+        ~p~SURFING:~w~ Veh: %d | Obj: %d | PObj: %d",
+        npcid,
+        hp, arm, skin,
+        x, y, z,
+        angle, rotX, rotY, rotZ,
+        velX, velY, velZ,
+        moving, vw, interior,
+        wep, ammo, clip,
         reloadEnabled, infAmmo, reloading,
         shooting, aiming, invul,
-        style, action, vw, interior);
-    
+        style, action,
+        veh, vehSeat, vehHealth,
+        enteringVeh, enteringSeat,
+        updown, leftright, keys,
+        surfVeh, surfObj, surfPObj);
+
     PlayerTextDrawSetString(playerid, TXD_DEBUG_NPC[playerid], text);
     return 1;
 }
@@ -727,44 +808,38 @@ public OnPlayerCommandText(playerid, cmdtext[])
         return 1;
     }
 
-    if (!strcmp(cmdtext, "/npcexitbike", true))
+    if (!strcmp(cmdtext, "/npcenterhydra", true, 14))
     {
+        new seatid = strval(cmdtext[15]);
+        if (cmdtext[15] == '\0')
+            return SendClientMessage(playerid, 0xFF0000FF, "Usage: /npcenterhydra [seatid]");
+
         new npcid = PlayerNPC[playerid];
         if (npcid == INVALID_NPC_ID)
             return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
 
-        if (NPC_ExitVehicle(npcid))
-            SendClientMessage(playerid, 0x00FF00FF, "NPC %d is exiting motorcycle.", npcid);
+        new vehicleid = PlayerVehicles[playerid][3];
+        if (vehicleid == INVALID_VEHICLE_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "Your hydra is not available.");
+
+        if (NPC_EnterVehicle(npcid, vehicleid, seatid, NPC_MOVE_TYPE_JOG))
+            SendClientMessage(playerid, 0x00FF00FF, "NPC %d is entering hydra (seat %d).", npcid, seatid);
         else
-            SendClientMessage(playerid, 0xFF0000FF, "NPC %d failed to exit motorcycle.", npcid);
+            SendClientMessage(playerid, 0xFF0000FF, "NPC %d failed to enter hydra (seat %d).", npcid, seatid);
 
         return 1;
     }
 
-    if (!strcmp(cmdtext, "/npcexitcar", true))
+    if (!strcmp(cmdtext, "/npcexit", true))
     {
         new npcid = PlayerNPC[playerid];
         if (npcid == INVALID_NPC_ID)
             return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
 
         if (NPC_ExitVehicle(npcid))
-            SendClientMessage(playerid, 0x00FF00FF, "NPC %d is exiting car.", npcid);
+            SendClientMessage(playerid, 0x00FF00FF, "NPC %d is exiting vehicle.", npcid);
         else
-            SendClientMessage(playerid, 0xFF0000FF, "NPC %d failed to exit car.", npcid);
-
-        return 1;
-    }
-
-    if (!strcmp(cmdtext, "/npcexittrain", true))
-    {
-        new npcid = PlayerNPC[playerid];
-        if (npcid == INVALID_NPC_ID)
-            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
-
-        if (NPC_ExitVehicle(npcid))
-            SendClientMessage(playerid, 0x00FF00FF, "NPC %d is exiting train.", npcid);
-        else
-            SendClientMessage(playerid, 0xFF0000FF, "NPC %d failed to exit train.", npcid);
+            SendClientMessage(playerid, 0xFF0000FF, "NPC %d failed to exit vehicle.", npcid);
 
         return 1;
     }
@@ -836,20 +911,20 @@ public OnPlayerCommandText(playerid, cmdtext[])
         if (!NPC_IsValid(npcid))
             return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
 
-        if (!NPC_IsEnteringVehicle(npcid))
-            return SendClientMessage(playerid, 0xFFFF00FF, "NPC %d is not entering a vehicle.", npcid);
-
-        new vehicleid = NPC_GetEnteringVehicle(npcid);
-        new seatid = NPC_GetEnteringVehicleSeat(npcid);
-
-        if (vehicleid == INVALID_VEHICLE_ID || vehicleid == 0)
-            return SendClientMessage(playerid, 0xFFFF00FF, "NPC %d has no pending target vehicle.", npcid);
-
-        SendClientMessage(playerid, 0x00FF00FF, "NPC %d is entering vehicle %d (seat %d).", npcid, vehicleid, seatid);
+        // Start monitoring if not already running
+        if (PlayerEnterVehicleMonitor[playerid] == INVALID_TIMER_ID)
+        {
+            PlayerEnterVehicleMonitor[playerid] = SetTimerEx("CheckNPCEnteringVehicle", 200, true, "i", playerid);
+            SendClientMessage(playerid, 0x00FF00FF, "Started monitoring NPC %d vehicle entry.", npcid);
+        }
+        else
+        {
+            SendClientMessage(playerid, 0xFFFF00FF, "Already monitoring NPC %d vehicle entry.", npcid);
+        }
         return 1;
     }
 
-    if (!strcmp(cmdtext, "/checkentervehid", true))
+    if (!strcmp(cmdtext, "/stopcheckenterveh", true))
     {
         new npcid = PlayerNPC[playerid];
         if (npcid == INVALID_NPC_ID)
@@ -858,30 +933,15 @@ public OnPlayerCommandText(playerid, cmdtext[])
         if (!NPC_IsValid(npcid))
             return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
 
-        new vehicleid = NPC_GetEnteringVehicleID(npcid);
-
-        if (vehicleid == INVALID_VEHICLE_ID)
-            return SendClientMessage(playerid, 0xFFFF00FF, "NPC %d is not entering any vehicle.", npcid);
-
-        SendClientMessage(playerid, 0x00FF00FF, "NPC %d is entering vehicle ID: %d", npcid, vehicleid);
-        return 1;
-    }
-
-    if (!strcmp(cmdtext, "/checkentervehseat", true))
-    {
-        new npcid = PlayerNPC[playerid];
-        if (npcid == INVALID_NPC_ID)
-            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
-
-        if (!NPC_IsValid(npcid))
-            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
-
-        if (!NPC_IsEnteringVehicle(npcid))
-            return SendClientMessage(playerid, 0xFFFF00FF, "NPC %d is not entering any vehicle.", npcid);
-
-        new seatid = NPC_GetEnteringVehicleSeat(npcid);
-
-        SendClientMessage(playerid, 0x00FF00FF, "NPC %d is entering vehicle seat: %d", npcid, seatid);
+        if (PlayerEnterVehicleMonitor[playerid] != INVALID_TIMER_ID)
+        {
+            StopPlayerEnterVehicleMonitor(playerid);
+            SendClientMessage(playerid, 0x00FF00FF, "Stopped monitoring NPC %d vehicle entry.", npcid);
+        }
+        else
+        {
+            SendClientMessage(playerid, 0xFFFF00FF, "Not currently monitoring vehicle entry.");
+        }
         return 1;
     }
 
@@ -914,6 +974,21 @@ public OnPlayerCommandText(playerid, cmdtext[])
         NPC_GetRot(npcid, rotX, rotY, rotZ);
 
         SendClientMessage(playerid, 0x00FF00FF, "NPC %d rotation: X=%.2f, Y=%.2f, Z=%.2f", npcid, rotX, rotY, rotZ);
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/checkskin", true))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        new skinid = NPC_GetSkin(npcid);
+
+        SendClientMessage(playerid, 0x00FF00FF, "NPC %d skin: %d", npcid, skinid);
         return 1;
     }
 
@@ -1020,6 +1095,242 @@ public OnPlayerCommandText(playerid, cmdtext[])
         return 1;
     }
 
+    if (!strcmp(cmdtext, "/checkvehicleid", true))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        new vehicleid = NPC_GetVehicleID(npcid);
+
+        if (vehicleid == INVALID_VEHICLE_ID)
+            SendClientMessage(playerid, 0xFFFF00FF, "NPC %d is not in any vehicle.", npcid);
+        else
+            SendClientMessage(playerid, 0x00FF00FF, "NPC %d vehicle ID: %d", npcid, vehicleid);
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/checkvehicleseat", true))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        if (NPC_GetVehicle(npcid) == INVALID_VEHICLE_ID)
+            return SendClientMessage(playerid, 0xFFFF00FF, "NPC %d is not in any vehicle.", npcid);
+
+        new seatid = NPC_GetVehicleSeat(npcid);
+
+        SendClientMessage(playerid, 0x00FF00FF, "NPC %d vehicle seat: %d", npcid, seatid);
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/checkvehicletrainspeed", true))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        if (NPC_GetVehicle(npcid) == INVALID_VEHICLE_ID)
+            return SendClientMessage(playerid, 0xFFFF00FF, "NPC %d is not in any vehicle.", npcid);
+
+        new Float:speed = NPC_GetVehicleTrainSpeed(npcid);
+
+        SendClientMessage(playerid, 0x00FF00FF, "NPC %d vehicle train speed: %.2f", npcid, speed);
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/checkvelocity", true))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        new Float:velX, Float:velY, Float:velZ;
+        NPC_GetVelocity(npcid, velX, velY, velZ);
+
+        SendClientMessage(playerid, 0x00FF00FF, "NPC %d velocity: X=%.2f, Y=%.2f, Z=%.2f", npcid, velX, velY, velZ);
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/checkvirtualworld", true))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        new vw = NPC_GetVirtualWorld(npcid);
+
+        SendClientMessage(playerid, 0x00FF00FF, "NPC %d virtual world: %d", npcid, vw);
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/checkweapon", true))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        new weapon = NPC_GetWeapon(npcid);
+
+        SendClientMessage(playerid, 0x00FF00FF, "NPC %d weapon: %d", npcid, weapon);
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/checkweaponaccuracy", true))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        new weapon = NPC_GetWeapon(npcid);
+        new Float:accuracy = NPC_GetWeaponAccuracy(npcid, WEAPON:weapon);
+
+        SendClientMessage(playerid, 0x00FF00FF, "NPC %d weapon %d accuracy: %.2f", npcid, weapon, accuracy);
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/checkweaponactualclipsize", true))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        new weapon = NPC_GetWeapon(npcid);
+        new clipsize = NPC_GetWeaponActualClipSize(npcid, WEAPON:weapon);
+
+        SendClientMessage(playerid, 0x00FF00FF, "NPC %d weapon actual clip size: %d", npcid, clipsize);
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/checkweaponactualreloadtime", true))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        new weapon = NPC_GetWeapon(npcid);
+        new reloadtime = NPC_GetWeaponActualReloadTime(npcid, WEAPON:weapon);
+
+        SendClientMessage(playerid, 0x00FF00FF, "NPC %d weapon actual reload time: %d ms", npcid, reloadtime);
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/checkweaponclipsize", true))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        new weapon = NPC_GetWeapon(npcid);
+        new clipsize = NPC_GetWeaponClipSize(npcid, WEAPON:weapon);
+
+        SendClientMessage(playerid, 0x00FF00FF, "NPC %d weapon clip size: %d", npcid, clipsize);
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/checkweaponreloadtime", true))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        new weapon = NPC_GetWeapon(npcid);
+        new reloadtime = NPC_GetWeaponReloadTime(npcid, WEAPON:weapon);
+
+        SendClientMessage(playerid, 0x00FF00FF, "NPC %d weapon reload time: %d ms", npcid, reloadtime);
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/checkweaponskill", true))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        new pistol = NPC_GetWeaponSkillLevel(npcid, WEAPONSKILL_PISTOL);
+        new silenced = NPC_GetWeaponSkillLevel(npcid, WEAPONSKILL_PISTOL_SILENCED);
+        new deagle = NPC_GetWeaponSkillLevel(npcid, WEAPONSKILL_DESERT_EAGLE);
+        new shotgun = NPC_GetWeaponSkillLevel(npcid, WEAPONSKILL_SHOTGUN);
+        new micro = NPC_GetWeaponSkillLevel(npcid, WEAPONSKILL_MICRO_UZI);
+        new mp5 = NPC_GetWeaponSkillLevel(npcid, WEAPONSKILL_MP5);
+        new ak47 = NPC_GetWeaponSkillLevel(npcid, WEAPONSKILL_AK47);
+        new m4 = NPC_GetWeaponSkillLevel(npcid, WEAPONSKILL_M4);
+        new sniper = NPC_GetWeaponSkillLevel(npcid, WEAPONSKILL_SNIPERRIFLE);
+
+        SendClientMessage(playerid, 0x00FF00FF, "NPC %d weapon skills:", npcid);
+        SendClientMessage(playerid, 0xFFFFFFFF, "Pistol:%d Silenced:%d Deagle:%d Shotgun:%d", pistol, silenced, deagle, shotgun);
+        SendClientMessage(playerid, 0xFFFFFFFF, "Micro:%d MP5:%d AK47:%d M4:%d Sniper:%d", micro, mp5, ak47, m4, sniper);
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/checkweaponshoottime", true))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        new weapon = NPC_GetWeapon(npcid);
+        new shoottime = NPC_GetWeaponShootTime(npcid, WEAPON:weapon);
+
+        SendClientMessage(playerid, 0x00FF00FF, "NPC %d weapon %d shoot time: %d ms", npcid, weapon, shoottime);
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/checkweaponstate", true))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        new weaponstate = NPC_GetWeaponState(npcid);
+
+        SendClientMessage(playerid, 0x00FF00FF, "NPC %d weapon state: %d", npcid, weaponstate);
+        return 1;
+    }
+
     if (!strcmp(cmdtext, "/checkvehiclegearstate", true))
     {
         new npcid = PlayerNPC[playerid];
@@ -1039,7 +1350,47 @@ public OnPlayerCommandText(playerid, cmdtext[])
         else
             SendClientMessage(playerid, 0x00FF00FF, "NPC %d: Landing gear DOWN", npcid);
 
-        return 1; 
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/checkvehiclehealth", true))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        if (NPC_GetVehicle(npcid) == INVALID_VEHICLE_ID)
+            return SendClientMessage(playerid, 0xFFFF00FF, "NPC %d is not in any vehicle.", npcid);
+
+        new Float:health = NPC_GetVehicleHealth(npcid);
+
+        SendClientMessage(playerid, 0x00FF00FF, "NPC %d vehicle health: %.2f", npcid, health);
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/checkvehiclehydra", true))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        if (NPC_GetVehicle(npcid) == INVALID_VEHICLE_ID)
+            return SendClientMessage(playerid, 0xFFFF00FF, "NPC %d is not in any vehicle.", npcid);
+
+        new thrusters = NPC_GetVehicleHydraThrusters(npcid);
+
+        if (thrusters == 0)
+            SendClientMessage(playerid, 0x00FF00FF, "NPC %d: Hydra thrusters FORWARD (0)", npcid);
+        else
+            SendClientMessage(playerid, 0x00FF00FF, "NPC %d: Hydra thrusters BACKWARD (1)", npcid);
+
+        return 1;
     }
 
     if (!strcmp(cmdtext, "/checkfightingstyle", true))
@@ -1202,5 +1553,37 @@ public CheckPathProgress(playerid)
     {
         SendClientMessage(playerid, 0xFFFF00FF, "NPC %d progress: Point %d of %d", npcid, currentPoint + 1, totalPoints);
     }
+    return 1;
+}
+
+forward CheckNPCEnteringVehicle(playerid);
+public CheckNPCEnteringVehicle(playerid)
+{
+    if (!IsPlayerConnected(playerid))
+    {
+        StopPlayerEnterVehicleMonitor(playerid);
+        return 0;
+    }
+
+    new npcid = PlayerNPC[playerid];
+    if (npcid == INVALID_NPC_ID || !NPC_IsValid(npcid))
+    {
+        StopPlayerEnterVehicleMonitor(playerid);
+        return 0;
+    }
+
+    new bool:isEntering = NPC_IsEnteringVehicle(npcid);
+
+    if (isEntering)
+    {
+        new vehicleid = NPC_GetEnteringVehicle(npcid);
+        new seatid = NPC_GetEnteringVehicleSeat(npcid);
+
+        if (vehicleid != INVALID_VEHICLE_ID && vehicleid != 0)
+        {
+            SendClientMessage(playerid, 0xFFFF00FF, "NPC %d entering vehicle %d (seat %d)", npcid, vehicleid, seatid);
+        }
+    }
+
     return 1;
 }
