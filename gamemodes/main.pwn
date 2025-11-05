@@ -305,15 +305,32 @@ public UpdateNPCInfo(playerid)
     new bool:reloading = NPC_IsReloading(npcid);
     new bool:shooting = NPC_IsShooting(npcid);
     new bool:aiming = NPC_IsAiming(npcid);
+    new bool:aimingAtPlayer = NPC_IsAimingAtPlayer(npcid, playerid);
     new bool:invul = NPC_IsInvulnerable(npcid);
-    
+    new bool:meleeAttacking = NPC_IsMeleeAttacking(npcid);
+
     // Movement and vehicle
-    new moving = NPC_IsMoving(npcid);
+    new bool:moving = NPC_IsMoving(npcid);
+    new bool:movingToPlayer = NPC_IsMovingToPlayer(npcid, playerid);
+    new bool:dead = NPC_IsDead(npcid);
+    new bool:spawned = NPC_IsSpawned(npcid);
+    new bool:streamedIn = NPC_IsStreamedIn(npcid, playerid);
+    new bool:enteringVehicle = NPC_IsEnteringVehicle(npcid);
+
+    // Playback and nodes
+    new bool:playingPlayback = NPC_IsPlayingPlayback(npcid);
+    new bool:playbackPaused = NPC_IsPlaybackPaused(npcid);
+    new bool:playingNode = NPC_IsPlayingNode(npcid);
+    new bool:nodePaused = NPC_IsPlayingNodePaused(npcid);
     new veh = NPC_GetVehicle(npcid);
     new vehSeat = NPC_GetVehicleSeat(npcid);
     new Float:vehHealth = 0.0;
+    new bool:sirenUsed = false;
     if (veh != INVALID_VEHICLE_ID)
+    {
         vehHealth = NPC_GetVehicleHealth(npcid);
+        sirenUsed = NPC_IsVehicleSirenUsed(npcid);
+    }
 
     // Velocity
     new Float:velX, Float:velY, Float:velZ;
@@ -343,47 +360,52 @@ public UpdateNPCInfo(playerid)
     new enteringVeh = NPC_GetEnteringVehicleID(npcid);
     new enteringSeat = NPC_GetEnteringVehicleSeat(npcid);
 
-    new text[1024];
+    new text[2048];
     format(text, sizeof(text),
         "~y~NPC DEBUG [ID: %d]~n~\
-        ~n~\
         ~g~STATS~n~\
-        ~w~HP: %.0f / Armour: %.0f / Skin: %d~n~\
+        ~w~HP: %.0f ARM: %.0f Skin: %d Dead: %s Spawn: %s Stream: %s~n~\
         ~g~POS~n~\
-        ~w~X: %.1f / Y: %.1f / Z: %.1f~n~\
+        ~w~X: %.1f Y: %.1f Z: %.1f~n~\
         ~g~ROT~n~\
-        ~w~Angle: %.1f / X: %.1f / Y: %.1f / Z: %.1f~n~\
+        ~w~Angle: %.1f RX: %.1f RY: %.1f RZ: %.1f~n~\
         ~g~VEL~n~\
-        ~w~X: %.2f / Y: %.2f / Z: %.2f~n~\
-        ~g~STATE~n~\
-        ~w~Moving: %s / VW: %d / Int: %d~n~\
+        ~w~X: %.2f Y: %.2f Z: %.2f~n~\
+        ~g~MOVEMENT~n~\
+        ~w~Moving: %s ToPlayer: %s VW: %d Int: %d~n~\
         ~y~WEAPON~n~\
-        ~w~ID: %d / Ammo: %d / Clip: %d~n~\
+        ~w~ID: %d Ammo: %d Clip: %d~n~\
         ~y~RELOAD~n~\
-        ~w~Enabled: %s / Infinite: %s / Reloading: %s~n~\
+        ~w~Enabled: %s Infinite: %s Reloading: %s~n~\
         ~y~COMBAT~n~\
-        ~w~Shooting: %s / Aiming: %s / Invuln: %s~n~\
+        ~w~Shoot: %s Aim: %s AimAt: %s Melee: %s Invul: %s~n~\
         ~b~VEHICLE~n~\
-        ~w~InVeh: %s / Seat: %d / Health: %.0f~n~\
-        ~b~ENTERING~n~\
-        ~w~VehID: %d / Seat: %d~n~\
+        ~w~InVeh: %s Seat: %d HP: %.0f Enter: %s Siren: %s~n~\
+        ~b~ENTERING VEH~n~\
+        ~w~VehID: %d Seat: %d~n~\
+        ~p~PLAYBACK~n~\
+        ~w~Playing: %s Paused: %s~n~\
+        ~p~NODE~n~\
+        ~w~Playing: %s Paused: %s~n~\
         ~p~KEYS~n~\
-        ~w~UpDown: %d / LeftRight: %d / Keys: %d~n~\
+        ~w~UD: %d LR: %d K: %d~n~\
         ~p~SURFING~n~\
-        ~w~Veh: %d / Obj: %d / PObj: %d~n~\
+        ~w~Veh: %d Obj: %d PObj: %d~n~\
         ~p~OTHER~n~\
-        ~w~Style: %d / Action: %d",
+        ~w~Style: %d Action: %d",
         npcid,
-        hp, arm, skin,
+        hp, arm, skin, dead ? "Y" : "N", spawned ? "Y" : "N", streamedIn ? "Y" : "N",
         x, y, z,
         angle, rotX, rotY, rotZ,
         velX, velY, velZ,
-        moving ? "Yes" : "No", vw, interior,
+        moving ? "Y" : "N", movingToPlayer ? "Y" : "N", vw, interior,
         wep, ammo, clip,
-        reloadEnabled ? "ON" : "OFF", infAmmo ? "ON" : "OFF", reloading ? "Yes" : "No",
-        shooting ? "Yes" : "No", aiming ? "Yes" : "No", invul ? "Yes" : "No",
-        veh != INVALID_VEHICLE_ID ? "Yes" : "No", vehSeat, vehHealth,
+        reloadEnabled ? "ON" : "OFF", infAmmo ? "ON" : "OFF", reloading ? "Y" : "N",
+        shooting ? "Y" : "N", aiming ? "Y" : "N", aimingAtPlayer ? "Y" : "N", meleeAttacking ? "Y" : "N", invul ? "Y" : "N",
+        veh != INVALID_VEHICLE_ID ? "Y" : "N", vehSeat, vehHealth, enteringVehicle ? "Y" : "N", sirenUsed ? "Y" : "N",
         enteringVeh, enteringSeat,
+        playingPlayback ? "Y" : "N", playbackPaused ? "Y" : "N",
+        playingNode ? "Y" : "N", nodePaused ? "Y" : "N",
         updown, leftright, keys,
         surfVeh, surfObj, surfPObj,
         style, action);
@@ -1339,6 +1361,253 @@ public OnPlayerCommandText(playerid, cmdtext[])
         new weaponstate = NPC_GetWeaponState(npcid);
 
         SendClientMessage(playerid, 0x00FF00FF, "NPC %d weapon state: %d", npcid, weaponstate);
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/checkpathpointinrange", true, 22))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        new pathid = strval(cmdtext[23]);
+
+        new Float:x, Float:y, Float:z;
+        GetPlayerPos(playerid, x, y, z);
+        new bool:hasPoint = NPC_HasPathPointInRange(pathid, x, y, z, 50.0);
+
+        SendClientMessage(playerid, 0x00FF00FF, "Path %d has point near your position (%.2f, %.2f, %.2f): %s", pathid, x, y, z, hasPoint ? "Yes" : "No");
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/checkaiming", true))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        new bool:isAiming = NPC_IsAiming(npcid);
+
+        SendClientMessage(playerid, 0x00FF00FF, "NPC %d is aiming: %s", npcid, isAiming ? "Yes" : "No");
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/checkaimingat", true))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        new bool:isAimingAtPlayer = NPC_IsAimingAtPlayer(npcid, playerid);
+
+        SendClientMessage(playerid, 0x00FF00FF, "NPC %d is aiming at you: %s", npcid, isAimingAtPlayer ? "Yes" : "No");
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/checkanystreamedin", true))
+    {
+        new bool:anyStreamed = NPC_IsAnyStreamedIn(playerid);
+
+        SendClientMessage(playerid, 0x00FF00FF, "Any NPCs streamed in for you: %s", anyStreamed ? "Yes" : "No");
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/checkdead", true))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        new bool:isDead = NPC_IsDead(npcid);
+
+        SendClientMessage(playerid, 0x00FF00FF, "NPC %d is dead: %s", npcid, isDead ? "Yes" : "No");
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/checkenteringvehicle", true))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        new bool:isEntering = NPC_IsEnteringVehicle(npcid);
+
+        SendClientMessage(playerid, 0x00FF00FF, "NPC %d is entering vehicle: %s", npcid, isEntering ? "Yes" : "No");
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/checkinfiniteammo", true))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        new bool:infiniteAmmo = NPC_IsInfiniteAmmoEnabled(npcid);
+
+        SendClientMessage(playerid, 0x00FF00FF, "NPC %d infinite ammo enabled: %s", npcid, infiniteAmmo ? "Yes" : "No");
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/checkinvulnerable", true))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        new bool:isInvulnerable = NPC_IsInvulnerable(npcid);
+
+        SendClientMessage(playerid, 0x00FF00FF, "NPC %d is invulnerable: %s", npcid, isInvulnerable ? "Yes" : "No");
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/checkmeleeattacking", true))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        new bool:isMeleeAttacking = NPC_IsMeleeAttacking(npcid);
+
+        SendClientMessage(playerid, 0x00FF00FF, "NPC %d is melee attacking: %s", npcid, isMeleeAttacking ? "Yes" : "No");
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/checkmoving", true))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        new bool:isMoving = NPC_IsMoving(npcid);
+
+        SendClientMessage(playerid, 0x00FF00FF, "NPC %d is moving: %s", npcid, isMoving ? "Yes" : "No");
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/checkmovingtowardme", true))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        new bool:isMovingToPlayer = NPC_IsMovingToPlayer(npcid, playerid);
+
+        SendClientMessage(playerid, 0x00FF00FF, "NPC %d is moving toward you: %s", npcid, isMovingToPlayer ? "Yes" : "No");
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/checkplayingplayback", true))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        new bool:isPlayingPlayback = NPC_IsPlayingPlayback(npcid);
+
+        SendClientMessage(playerid, 0x00FF00FF, "NPC %d is playing playback: %s", npcid, isPlayingPlayback ? "Yes" : "No");
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/checkplaybackpaused", true))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        new bool:isPlaybackPaused = NPC_IsPlaybackPaused(npcid);
+
+        SendClientMessage(playerid, 0x00FF00FF, "NPC %d playback paused: %s", npcid, isPlaybackPaused ? "Yes" : "No");
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/checknodeopen", true, 14))
+    {
+        new nodeid = strval(cmdtext[15]);
+
+        new bool:isNodeOpen = NPC_IsNodeOpen(nodeid);
+
+        SendClientMessage(playerid, 0x00FF00FF, "Node %d is open: %s", nodeid, isNodeOpen ? "Yes" : "No");
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/checkplayingnode", true))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        new bool:isPlayingNode = NPC_IsPlayingNode(npcid);
+
+        SendClientMessage(playerid, 0x00FF00FF, "NPC %d is playing node: %s", npcid, isPlayingNode ? "Yes" : "No");
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/checknodepaused", true))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        new bool:isNodePaused = NPC_IsPlayingNodePaused(npcid);
+
+        SendClientMessage(playerid, 0x00FF00FF, "NPC %d node paused: %s", npcid, isNodePaused ? "Yes" : "No");
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/checkreloadenabled", true))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        new bool:isReloadEnabled = NPC_IsReloadEnabled(npcid);
+
+        SendClientMessage(playerid, 0x00FF00FF, "NPC %d reload enabled: %s", npcid, isReloadEnabled ? "Yes" : "No");
         return 1;
     }
 
