@@ -310,12 +310,21 @@ public UpdateNPCInfo(playerid)
     new bool:meleeAttacking = NPC_IsMeleeAttacking(npcid);
 
     // Movement and vehicle
-    new bool:moving = NPC_IsMoving(npcid);
-    new bool:movingToPlayer = NPC_IsMovingToPlayer(npcid, playerid);
-    new bool:dead = NPC_IsDead(npcid);
     new bool:spawned = NPC_IsSpawned(npcid);
-    new bool:streamedIn = NPC_IsStreamedIn(npcid, playerid);
-    new bool:enteringVehicle = NPC_IsEnteringVehicle(npcid);
+    new bool:moving = false;
+    new bool:movingToPlayer = false;
+    new bool:dead = false;
+    new bool:streamedIn = false;
+    new bool:enteringVehicle = false;
+
+    if (spawned)
+    {
+        moving = NPC_IsMoving(npcid);
+        movingToPlayer = NPC_IsMovingToPlayer(npcid, playerid);
+        dead = NPC_IsDead(npcid);
+        streamedIn = NPC_IsStreamedIn(npcid, playerid);
+        enteringVehicle = NPC_IsEnteringVehicle(npcid);
+    }
 
     // Playback and nodes
     new bool:playingPlayback = NPC_IsPlayingPlayback(npcid);
@@ -1608,6 +1617,21 @@ public OnPlayerCommandText(playerid, cmdtext[])
         new bool:isReloadEnabled = NPC_IsReloadEnabled(npcid);
 
         SendClientMessage(playerid, 0x00FF00FF, "NPC %d reload enabled: %s", npcid, isReloadEnabled ? "Yes" : "No");
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/checkreloading", true))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        new bool:isReloading = NPC_IsReloading(npcid);
+
+        SendClientMessage(playerid, 0x00FF00FF, "NPC %d is reloading: %s", npcid, isReloading ? "Yes" : "No");
         return 1;
     }
 
