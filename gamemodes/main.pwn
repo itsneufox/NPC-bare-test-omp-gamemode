@@ -1635,6 +1635,254 @@ public OnPlayerCommandText(playerid, cmdtext[])
         return 1;
     }
 
+    if (!strcmp(cmdtext, "/checkshooting", true))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        new bool:isShooting = NPC_IsShooting(npcid);
+
+        SendClientMessage(playerid, 0x00FF00FF, "NPC %d is shooting: %s", npcid, isShooting ? "Yes" : "No");
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/checkspawned", true))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        new bool:isSpawned = NPC_IsSpawned(npcid);
+
+        SendClientMessage(playerid, 0x00FF00FF, "NPC %d is spawned: %s", npcid, isSpawned ? "Yes" : "No");
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/checkstreamedin", true))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        new bool:isStreamedIn = NPC_IsStreamedIn(npcid, playerid);
+
+        SendClientMessage(playerid, 0x00FF00FF, "NPC %d is streamed in for you: %s", npcid, isStreamedIn ? "Yes" : "No");
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/checkvalid", true))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        new bool:isValid = NPC_IsValid(npcid);
+
+        SendClientMessage(playerid, 0x00FF00FF, "NPC %d is valid: %s", npcid, isValid ? "Yes" : "No");
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/checkvalidpath", true, 15))
+    {
+        new pathid = strval(cmdtext[16]);
+
+        new bool:isValidPath = NPC_IsValidPath(pathid);
+
+        SendClientMessage(playerid, 0x00FF00FF, "Path %d is valid: %s", pathid, isValidPath ? "Yes" : "No");
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/checkvalidrecord", true, 17))
+    {
+        new recordid = strval(cmdtext[18]);
+
+        new bool:isValidRecord = NPC_IsValidRecord(recordid);
+
+        SendClientMessage(playerid, 0x00FF00FF, "Record %d is valid: %s", recordid, isValidRecord ? "Yes" : "No");
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/checksirenused", true))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        new veh = NPC_GetVehicle(npcid);
+        if (veh == INVALID_VEHICLE_ID)
+            return SendClientMessage(playerid, 0xFFFF00FF, "NPC %d is not in any vehicle.", npcid);
+
+        new bool:sirenUsed = NPC_IsVehicleSirenUsed(npcid);
+
+        SendClientMessage(playerid, 0x00FF00FF, "NPC %d vehicle siren used: %s", npcid, sirenUsed ? "Yes" : "No");
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/npckill", true))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        NPC_Kill(npcid);
+
+        SendClientMessage(playerid, 0x00FF00FF, "NPC %d has been killed.", npcid);
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/npcloadrecord", true, 14))
+    {
+        new filepath[128];
+        new len = strlen(cmdtext);
+        if (len <= 15)
+            return SendClientMessage(playerid, 0xFF0000FF, "Usage: /npcloadrecord [filepath]");
+
+        strmid(filepath, cmdtext, 15, len);
+
+        new recordid = NPC_LoadRecord(filepath);
+
+        if (recordid == -1)
+            SendClientMessage(playerid, 0xFF0000FF, "Failed to load record from: %s", filepath);
+        else
+            SendClientMessage(playerid, 0x00FF00FF, "Record loaded from %s with ID: %d", filepath, recordid);
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/npcmeleeattack", true, 15))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        new time = 1000;
+        if (strlen(cmdtext) > 16)
+            time = strval(cmdtext[16]);
+
+        new bool:success = NPC_MeleeAttack(npcid, time, false);
+
+        SendClientMessage(playerid, 0x00FF00FF, "NPC %d melee attack for %dms: %s", npcid, time, success ? "Success" : "Failed");
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/npcmove", true))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        new Float:x, Float:y, Float:z;
+        GetPlayerPos(playerid, x, y, z);
+
+        NPC_Move(npcid, x, y, z, NPC_MOVE_TYPE_JOG, NPC_MOVE_SPEED_AUTO, 0.2);
+
+        SendClientMessage(playerid, 0x00FF00FF, "NPC %d moving to your position (%.2f, %.2f, %.2f)", npcid, x, y, z);
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/npcmovetoplayer", true))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        NPC_MoveToPlayer(npcid, playerid, NPC_MOVE_TYPE_JOG, NPC_MOVE_SPEED_AUTO, 0.2, 500, false);
+
+        SendClientMessage(playerid, 0x00FF00FF, "NPC %d now following you", npcid);
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/npcopennode", true, 12))
+    {
+        new nodeid = strval(cmdtext[13]);
+
+        if (nodeid < 0 || nodeid > 63)
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid node ID. Must be between 0 and 63.");
+
+        new bool:success = NPC_OpenNode(nodeid);
+
+        SendClientMessage(playerid, 0x00FF00FF, "Open node %d: %s", nodeid, success ? "Success" : "Failed");
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/npcpausenode", true))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        new bool:success = NPC_PausePlayingNode(npcid);
+
+        SendClientMessage(playerid, 0x00FF00FF, "NPC %d pause node: %s", npcid, success ? "Success" : "Failed");
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/npcplaynode", true, 12))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        new nodeid = strval(cmdtext[13]);
+
+        if (nodeid < 0 || nodeid > 63)
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid node ID. Must be between 0 and 63.");
+
+        new bool:success = NPC_PlayNode(npcid, nodeid, NPC_MOVE_TYPE_JOG, NPC_MOVE_SPEED_AUTO, 0.0, true);
+
+        SendClientMessage(playerid, 0x00FF00FF, "NPC %d play node %d: %s", npcid, nodeid, success ? "Success" : "Failed");
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/npcputinvehicle", true))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        new vehicleid = GetPlayerVehicleID(playerid);
+        if (vehicleid == 0)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not in a vehicle.");
+
+        new bool:success = NPC_PutInVehicle(npcid, vehicleid, 1);
+
+        SendClientMessage(playerid, 0x00FF00FF, "NPC %d put in vehicle %d (seat 1): %s", npcid, vehicleid, success ? "Success" : "Failed");
+        return 1;
+    }
+
     if (!strcmp(cmdtext, "/checkvehiclegearstate", true))
     {
         new npcid = PlayerNPC[playerid];
