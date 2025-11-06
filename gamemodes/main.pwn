@@ -16,28 +16,57 @@ new PlayerNPCInfoTimer[MAX_PLAYERS] = {INVALID_TIMER_ID, ...};
 new PlayerPatrolTimer[MAX_PLAYERS] = {INVALID_TIMER_ID, ...};
 new PlayerEnterVehicleMonitor[MAX_PLAYERS] = {INVALID_TIMER_ID, ...};
 
-static const HELP_DIALOG_TEXT[] =
+static const HELP_DIALOG_TEXT_1[] =
     "Command\tDescription\n\
 /createnpc\tSpawn armed NPC and start tracking it.\n\
 /createunarmednpc\tSpawn an unarmed NPC.\n\
 /destroynpc\tDestroy your current NPC.\n\
+/respawnnpc\tRespawn your current NPC.\n\
 /claimnpc [id]\tAttach debugger to an existing NPC.\n\
 /aim, /aimfire\tAim (or fire) at you.\n\
 /hostile, /guard\tToggle hostile/guard behaviour.\n\
 /friendly\tStop aiming at you.\n\
 /applydance, /setdance\tApply preset animations.\n\
 /getanim\tInspect current animation state.\n\
+/resetanim\tReset NPC animation.\n\
 /toggleinfiniteammo\tToggle infinite ammo.\n\
 /togglereload\tToggle reloading behaviour.\n\
+/toggleinvulnerable\tToggle NPC invulnerability.\n\
+/setkeys [k] [ud] [lr]\tSet NPC keys/updown/leftright.\n\
+/setweapon [id]\tSet NPC weapon.\n\
+/setammo [amount]\tSet NPC total ammo.\n\
+/setammoclip [amount]\tSet NPC clip ammo.\n\
+/sethealth [amount]\tSet NPC health (0.0-100.0).\n\
+/setarmour [amount]\tSet NPC armour (0.0-100.0).\n\
+/setfacingangle [angle]\tSet NPC facing angle (0.0-360.0).\n\
+/setposhere\tTeleport NPC to your position.\n\
+/randomrot\tRandomize NPC rotation.\n\
+/setspecialaction [id]\tSet NPC special action.\n\
+/setsurfingobject [id]\tSet NPC surfing object.\n\
+/setsurfingoffset [x] [y] [z]\tSet NPC surfing offsets.\n\
+/setsurfingplayerobject [id]\tSet NPC surfing player object.\n\
+/setsurfingvehicle [id]\tSet NPC surfing vehicle.\n\
+/setvehiclegearstate [state]\tSet NPC vehicle gear state.\n\
+/setvehiclehealth [health]\tSet NPC vehicle health.\n\
+/sethydrathrusters [dir]\tSet hydra thrusters direction.\n\
+/settrainspeed [speed]\tSet train speed.\n\
+/setvelocity [x] [y] [z]\tSet NPC velocity.\n\
+/setinterior [id]\tSet NPC interior (0-255).\n\
+/setvirtualworld [id]\tSet NPC virtual world.\n\
+/setfightingstyle [id]\tSet fighting style (4,5,6,7,15,16).\n\
+/setskin [id]\tSet NPC skin (0-311).\n\
 /createpatrol\tCreate a new patrol path.\n\
 /addpatrolpos\tAdd a patrol point at your position.\n\
+/removepatrolpoint [index]\tRemove a point from patrol path.\n\
 /startpatrol\tSend NPC along the patrol path.\n\
 /npcenterbike [seat]\tPlace NPC into your motorcycle.\n\
 /npcentercar [seat]\tPlace NPC into your car.\n\
 /npcentertrain [seat]\tPlace NPC into your train.\n\
 /npcenterhydra [seat]\tPlace NPC into your hydra.\n\
-/npcexit\tForce the NPC to exit any vehicle.\n\
-/checkarmour\tCheck NPC armour.\n\
+/npcexit\tForce the NPC to exit any vehicle.";
+
+static const HELP_DIALOG_TEXT_2[] =
+    "/checkarmour\tCheck NPC armour.\n\
 /checkammo\tCheck NPC total ammo.\n\
 /checkclip\tCheck ammo in clip.\n\
 /checkenterveh\tMonitor NPC vehicle entry (chat messages).\n\
@@ -59,6 +88,7 @@ static const HELP_DIALOG_TEXT[] =
 /checksurfingplayerobject\tGet NPC surfing player object.\n\
 /checksurfingvehicle\tGet NPC surfing vehicle.\n\
 /checksurfingoffset\tGet NPC surfing offset.\n\
+/resetsurfing\tReset NPC surfing data.\n\
 /checkvehicle\tGet NPC vehicle.\n\
 /checkvehicleid\tGet NPC vehicle ID.\n\
 /checkvehicleseat\tGet NPC vehicle seat.\n\
@@ -74,6 +104,12 @@ static const HELP_DIALOG_TEXT[] =
 /checkpathpoint\tGet current path point coords.\n\
 /checkpathpointcount\tGet path point count.\n\
 /checkpos\tGet NPC position.\n\
+/npcopennode [id]\tOpen a navigation node.\n\
+/npcplaynode [id]\tMake NPC follow a node path.\n\
+/npcpausenode\tPause NPC node playback.\n\
+/npcresumenode\tResume NPC node playback.\n\
+/npcsetnodepoint [nid] [pid]\tSet node to specific point.\n\
+/createobject\tCreate object (model 1271) for surfing tests.\n\
 /countnpcs\tShow total NPC count.";
 
 stock StopPlayerNPCInfoTimer(playerid)
@@ -427,13 +463,28 @@ public OnPlayerCommandText(playerid, cmdtext[])
 {
     if (!strcmp(cmdtext, "/help", true))
     {
-        ShowPlayerDialog(playerid, DIALOG_HELP, DIALOG_STYLE_TABLIST, "NPC Helper Commands", HELP_DIALOG_TEXT, "", "Close");
+        new helpText[4096];
+        strcat(helpText, HELP_DIALOG_TEXT_1);
+        strcat(helpText, "\n");
+        strcat(helpText, HELP_DIALOG_TEXT_2);
+        ShowPlayerDialog(playerid, DIALOG_HELP, DIALOG_STYLE_TABLIST, "NPC Helper Commands", helpText, "", "Close");
         return 1;
     }
 
     // ============================================================
     // NPC MANAGEMENT
     // ============================================================
+    if (!strcmp(cmdtext, "/createobject", true))
+    {
+        new Float:x, Float:y, Float:z;
+        GetPlayerPos(playerid, x, y, z);
+
+        new objectid = CreateObject(1271, x + 5.0, y, z, 0.0, 0.0, 0.0);
+        SendClientMessage(playerid, 0x00FF00FF, "Object %d (model 1271) created near you!", objectid);
+
+        return 1;
+    }
+
     if (!strcmp(cmdtext, "/createnpc", true))
     {
         new name[24];
@@ -502,6 +553,28 @@ public OnPlayerCommandText(playerid, cmdtext[])
         else
         {
             SendClientMessage(playerid, 0xFF0000FF, "Failed to destroy your NPC (ID %d).", npcid);
+        }
+
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/respawnnpc", true))
+    {
+        new npcid = PlayerNPC[playerid];
+
+        if (!NPC_IsValid(npcid))
+        {
+            SendClientMessage(playerid, 0xFF0000FF, "You don't have a valid NPC to respawn.");
+            return 1;
+        }
+
+        if (NPC_Respawn(npcid))
+        {
+            SendClientMessage(playerid, 0x00FF00FF, "Your NPC (ID %d) has been respawned.", npcid);
+        }
+        else
+        {
+            SendClientMessage(playerid, 0xFF0000FF, "Failed to respawn your NPC (ID %d).", npcid);
         }
 
         return 1;
@@ -652,6 +725,18 @@ public OnPlayerCommandText(playerid, cmdtext[])
         return 1;
     }
 
+    if (!strcmp(cmdtext, "/resetanim", true))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        NPC_ResetAnimation(npcid);
+        SendClientMessage(playerid, 0x00FF00FF, "NPC %d animation has been reset.", npcid);
+
+        return 1;
+    }
+
     // ============================================================
     // NPC SETTINGS
     // ============================================================
@@ -677,6 +762,504 @@ public OnPlayerCommandText(playerid, cmdtext[])
         new bool:reload = NPC_IsReloadEnabled(npcid);
         NPC_EnableReloading(npcid, !reload);
         SendClientMessage(playerid, 0x00FF00FF, "NPC %d reloading: %s", npcid, !reload ? "Enabled" : "Disabled");
+
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/setweapon ", true, 11))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        new weaponid = strval(cmdtext[11]);
+        if (weaponid < 0 || weaponid > 46)
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid weapon ID. Must be between 0 and 46.");
+
+        NPC_SetWeapon(npcid, WEAPON:weaponid);
+        SendClientMessage(playerid, 0x00FF00FF, "NPC %d weapon set to %d", npcid, weaponid);
+
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/setammo ", true, 9))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        new ammo = strval(cmdtext[9]);
+        if (ammo < 0)
+            return SendClientMessage(playerid, 0xFF0000FF, "Ammo must be positive.");
+
+        NPC_SetAmmo(npcid, ammo);
+        SendClientMessage(playerid, 0x00FF00FF, "NPC %d ammo set to %d", npcid, ammo);
+
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/setammoclip ", true, 13))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        new ammo = strval(cmdtext[13]);
+        if (ammo < 0)
+            return SendClientMessage(playerid, 0xFF0000FF, "Ammo must be positive.");
+
+        NPC_SetAmmoInClip(npcid, ammo);
+        SendClientMessage(playerid, 0x00FF00FF, "NPC %d clip ammo set to %d", npcid, ammo);
+
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/sethealth ", true, 11))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        new Float:health = floatstr(cmdtext[11]);
+        if (health < 0.0 || health > 100.0)
+            return SendClientMessage(playerid, 0xFF0000FF, "Health must be between 0.0 and 100.0.");
+
+        NPC_SetHealth(npcid, health);
+        SendClientMessage(playerid, 0x00FF00FF, "NPC %d health set to %.1f", npcid, health);
+
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/setarmour ", true, 11))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        new Float:armour = floatstr(cmdtext[11]);
+        if (armour < 0.0 || armour > 100.0)
+            return SendClientMessage(playerid, 0xFF0000FF, "Armour must be between 0.0 and 100.0.");
+
+        NPC_SetArmour(npcid, armour);
+        SendClientMessage(playerid, 0x00FF00FF, "NPC %d armour set to %.1f", npcid, armour);
+
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/setfacingangle ", true, 16))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        new Float:angle = floatstr(cmdtext[16]);
+        if (angle < 0.0 || angle > 360.0)
+            return SendClientMessage(playerid, 0xFF0000FF, "Angle must be between 0.0 and 360.0.");
+
+        NPC_SetFacingAngle(npcid, angle);
+        SendClientMessage(playerid, 0x00FF00FF, "NPC %d facing angle set to %.1f", npcid, angle);
+
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/setposhere", true))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        new Float:x, Float:y, Float:z;
+        GetPlayerPos(playerid, x, y, z);
+
+        NPC_SetPos(npcid, x + 2.0, y, z);
+        SendClientMessage(playerid, 0x00FF00FF, "NPC %d teleported to your position", npcid);
+
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/setrandomrot", true))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        new Float:x = float(random(360));
+        new Float:y = float(random(360));
+        new Float:z = float(random(360));
+
+        NPC_SetRot(npcid, x, y, z);
+        SendClientMessage(playerid, 0x00FF00FF, "NPC %d rotation randomized", npcid);
+
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/setspecialaction ", true, 18))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        new actionid = strval(cmdtext[18]);
+
+        NPC_SetSpecialAction(npcid, SPECIAL_ACTION:actionid);
+        SendClientMessage(playerid, 0x00FF00FF, "NPC %d special action set to %d", npcid, actionid);
+
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/setsurfingobject ", true, 18))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        new objectid = strval(cmdtext[18]);
+
+        NPC_SetSurfingObject(npcid, objectid);
+        SendClientMessage(playerid, 0x00FF00FF, "NPC %d surfing object set to %d", npcid, objectid);
+
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/setsurfingoffset ", true, 18))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        new Float:x, Float:y, Float:z;
+        new idx = 18;
+
+        // Parse x
+        while (cmdtext[idx] == ' ') idx++;
+        new startIdx = idx;
+        while (cmdtext[idx] != ' ' && cmdtext[idx] != '\0') idx++;
+        new xStr[32];
+        strmid(xStr, cmdtext, startIdx, idx);
+        x = floatstr(xStr);
+
+        // Parse y
+        while (cmdtext[idx] == ' ') idx++;
+        startIdx = idx;
+        while (cmdtext[idx] != ' ' && cmdtext[idx] != '\0') idx++;
+        new yStr[32];
+        strmid(yStr, cmdtext, startIdx, idx);
+        y = floatstr(yStr);
+
+        // Parse z
+        while (cmdtext[idx] == ' ') idx++;
+        z = floatstr(cmdtext[idx]);
+
+        NPC_SetSurfingOffsets(npcid, x, y, z);
+        SendClientMessage(playerid, 0x00FF00FF, "NPC %d surfing offset set to %.2f, %.2f, %.2f", npcid, x, y, z);
+
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/setsurfingplayerobject ", true, 24))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        new objectid = strval(cmdtext[24]);
+
+        NPC_SetSurfingPlayerObject(npcid, objectid);
+        SendClientMessage(playerid, 0x00FF00FF, "NPC %d surfing player object set to %d", npcid, objectid);
+
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/setsurfingvehicle ", true, 19))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        new vehicleid = strval(cmdtext[19]);
+
+        NPC_SetSurfingVehicle(npcid, vehicleid);
+        SendClientMessage(playerid, 0x00FF00FF, "NPC %d surfing vehicle set to %d", npcid, vehicleid);
+
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/setvehiclegearstate ", true, 21))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        new gearState = strval(cmdtext[21]);
+
+        NPC_SetVehicleGearState(npcid, gearState);
+        SendClientMessage(playerid, 0x00FF00FF, "NPC %d vehicle gear state set to %d", npcid, gearState);
+
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/setvehiclehealth ", true, 18))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        new Float:health = floatstr(cmdtext[18]);
+
+        NPC_SetVehicleHealth(npcid, health);
+        SendClientMessage(playerid, 0x00FF00FF, "NPC %d vehicle health set to %.2f", npcid, health);
+
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/sethydrathrusters ", true, 19))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        new direction = strval(cmdtext[19]);
+
+        NPC_SetVehicleHydraThrusters(npcid, direction);
+        SendClientMessage(playerid, 0x00FF00FF, "NPC %d hydra thrusters set to %d", npcid, direction);
+
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/settrainspeed ", true, 15))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        new Float:speed = floatstr(cmdtext[15]);
+
+        NPC_SetVehicleTrainSpeed(npcid, speed);
+        SendClientMessage(playerid, 0x00FF00FF, "NPC %d train speed set to %.2f", npcid, speed);
+
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/setvelocity ", true, 13))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        new Float:x, Float:y, Float:z;
+        new idx = 13;
+
+        // Parse x
+        while (cmdtext[idx] == ' ') idx++;
+        new startIdx = idx;
+        while (cmdtext[idx] != ' ' && cmdtext[idx] != '\0') idx++;
+        new xStr[32];
+        strmid(xStr, cmdtext, startIdx, idx);
+        x = floatstr(xStr);
+
+        // Parse y
+        while (cmdtext[idx] == ' ') idx++;
+        startIdx = idx;
+        while (cmdtext[idx] != ' ' && cmdtext[idx] != '\0') idx++;
+        new yStr[32];
+        strmid(yStr, cmdtext, startIdx, idx);
+        y = floatstr(yStr);
+
+        // Parse z
+        while (cmdtext[idx] == ' ') idx++;
+        z = floatstr(cmdtext[idx]);
+
+        NPC_SetVelocity(npcid, x, y, z);
+        SendClientMessage(playerid, 0x00FF00FF, "NPC %d velocity set to %.2f, %.2f, %.2f", npcid, x, y, z);
+
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/toggleinvulnerable", true))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        new bool:invulnerable = NPC_IsInvulnerable(npcid);
+        NPC_SetInvulnerable(npcid, !invulnerable);
+        SendClientMessage(playerid, 0x00FF00FF, "NPC %d invulnerable: %s", npcid, !invulnerable ? "Enabled" : "Disabled");
+
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/setkeys ", true, 9))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        new idx = 9;
+        new keys = 0, updown = 0, leftright = 0;
+
+        // Parse keys
+        while (cmdtext[idx] == ' ') idx++;
+        if (cmdtext[idx] == '\0')
+            return SendClientMessage(playerid, 0xFF0000FF, "Usage: /setkeys [keys] [updown] [leftright]");
+        keys = strval(cmdtext[idx]);
+
+        // Skip to next parameter
+        while (cmdtext[idx] != ' ' && cmdtext[idx] != '\0') idx++;
+        while (cmdtext[idx] == ' ') idx++;
+
+        // Parse updown if exists
+        if (cmdtext[idx] != '\0')
+        {
+            updown = strval(cmdtext[idx]);
+            while (cmdtext[idx] != ' ' && cmdtext[idx] != '\0') idx++;
+            while (cmdtext[idx] == ' ') idx++;
+
+            // Parse leftright if exists
+            if (cmdtext[idx] != '\0')
+            {
+                leftright = strval(cmdtext[idx]);
+            }
+        }
+
+        NPC_SetKeys(npcid, keys, updown, leftright);
+        SendClientMessage(playerid, 0x00FF00FF, "NPC %d keys: keys=%d, ud=%d, lr=%d", npcid, keys, updown, leftright);
+
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/setinterior ", true, 13))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        new interiorid = strval(cmdtext[13]);
+        if (interiorid < 0 || interiorid > 255)
+            return SendClientMessage(playerid, 0xFF0000FF, "Interior ID must be between 0 and 255.");
+
+        NPC_SetInterior(npcid, interiorid);
+        SendClientMessage(playerid, 0x00FF00FF, "NPC %d interior set to %d", npcid, interiorid);
+
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/setvirtualworld ", true, 16))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        new vw = strval(cmdtext[16]);
+        if (vw < 0)
+            return SendClientMessage(playerid, 0xFF0000FF, "Virtual world must be positive.");
+
+        NPC_SetVirtualWorld(npcid, vw);
+        SendClientMessage(playerid, 0x00FF00FF, "NPC %d virtual world set to %d", npcid, vw);
+
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/setfightingstyle ", true, 18))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        new styleid = strval(cmdtext[18]);
+        // Valid fighting styles: 4, 5, 6, 7, 15, 16
+        if (styleid != 4 && styleid != 5 && styleid != 6 && styleid != 7 && styleid != 15 && styleid != 16)
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid style. Valid: 4(Normal), 5(Boxing), 6(KungFu), 7(KneeHead), 15(GrabKick), 16(Elbow)");
+
+        NPC_SetFightingStyle(npcid, FIGHT_STYLE:styleid);
+        SendClientMessage(playerid, 0x00FF00FF, "NPC %d fighting style set to %d", npcid, styleid);
+
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/setskin ", true, 9))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        new skinid = strval(cmdtext[9]);
+        if (skinid < 0 || skinid > 311)
+            return SendClientMessage(playerid, 0xFF0000FF, "Skin ID must be between 0 and 311.");
+
+        NPC_SetSkin(npcid, skinid);
+        SendClientMessage(playerid, 0x00FF00FF, "NPC %d skin set to %d", npcid, skinid);
 
         return 1;
     }
@@ -754,6 +1337,34 @@ public OnPlayerCommandText(playerid, cmdtext[])
         else
         {
             SendClientMessage(playerid, 0xFF0000FF, "Failed add point to path");
+        }
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/removepatrolpoint ", true, 19))
+    {
+        if (!NPC_IsValidPath(PlayerPatrolPath[playerid]))
+        {
+            SendClientMessage(playerid, 0xFF0000FF, "No valid patrol path. Use /createpatrol first.");
+            return 1;
+        }
+
+        new pointIndex = strval(cmdtext[19]);
+        new totalPoints = NPC_GetPathPointCount(PlayerPatrolPath[playerid]);
+
+        if (pointIndex < 0 || pointIndex >= totalPoints)
+        {
+            SendClientMessage(playerid, 0xFF0000FF, "Invalid point index. Valid range: 0-%d", totalPoints - 1);
+            return 1;
+        }
+
+        if (NPC_RemovePointFromPath(PlayerPatrolPath[playerid], pointIndex))
+        {
+            SendClientMessage(playerid, 0x00FF00FF, "Removed point %d from path %d (now has %d points)", pointIndex, PlayerPatrolPath[playerid], totalPoints - 1);
+        }
+        else
+        {
+            SendClientMessage(playerid, 0xFF0000FF, "Failed to remove point %d from path", pointIndex);
         }
         return 1;
     }
@@ -1116,6 +1727,20 @@ public OnPlayerCommandText(playerid, cmdtext[])
         NPC_GetSurfingOffsets(npcid, offsetX, offsetY, offsetZ);
 
         SendClientMessage(playerid, 0x00FF00FF, "NPC %d surfing offset: X=%.2f, Y=%.2f, Z=%.2f", npcid, offsetX, offsetY, offsetZ);
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/resetsurfing", true))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        NPC_ResetSurfingData(npcid);
+        SendClientMessage(playerid, 0x00FF00FF, "NPC %d surfing data has been reset.", npcid);
         return 1;
     }
 
@@ -1841,6 +2466,43 @@ public OnPlayerCommandText(playerid, cmdtext[])
         new bool:success = NPC_PausePlayingNode(npcid);
 
         SendClientMessage(playerid, 0x00FF00FF, "NPC %d pause node: %s", npcid, success ? "Success" : "Failed");
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/npcresumenode", true))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        new bool:success = NPC_ResumePlayingNode(npcid);
+
+        SendClientMessage(playerid, 0x00FF00FF, "NPC %d resume node: %s", npcid, success ? "Success" : "Failed");
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/npcsetnodepoint ", true, 17))
+    {
+        new nodeid = strval(cmdtext[17]);
+
+        if (nodeid < 0 || nodeid > 63)
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid node ID. Must be between 0 and 63.");
+
+        new idx = 17;
+        while (cmdtext[idx] != ' ' && cmdtext[idx] != '\0') idx++;
+        while (cmdtext[idx] == ' ') idx++;
+
+        if (cmdtext[idx] == '\0')
+            return SendClientMessage(playerid, 0xFF0000FF, "Usage: /npcsetnodepoint [nodeid] [pointid]");
+
+        new pointid = strval(cmdtext[idx]);
+
+        new bool:success = NPC_SetNodePoint(nodeid, pointid);
+
+        SendClientMessage(playerid, 0x00FF00FF, "Set node %d to point %d: %s", nodeid, pointid, success ? "Success" : "Failed");
         return 1;
     }
 
