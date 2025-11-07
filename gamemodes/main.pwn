@@ -3334,3 +3334,338 @@ public CheckNPCEnteringVehicle(playerid)
 
     return 1;
 }
+
+// ============================================================
+// NPC CALLBACKS
+// ============================================================
+
+public OnNPCFinishMove(npcid)
+{
+    // Find all players tracking this NPC
+    for (new playerid = 0; playerid < MAX_PLAYERS; playerid++)
+    {
+        if (!IsPlayerConnected(playerid))
+            continue;
+
+        if (PlayerNPC[playerid] == npcid)
+        {
+            new Float:x, Float:y, Float:z;
+            NPC_GetPos(npcid, x, y, z);
+            SendClientMessage(playerid, 0x00FF00FF, "NPC %d finished moving to position (%.2f, %.2f, %.2f)", npcid, x, y, z);
+        }
+    }
+    return 1;
+}
+
+public OnNPCFinishMovePath(npcid, pathid)
+{
+    // Find all players tracking this NPC
+    for (new playerid = 0; playerid < MAX_PLAYERS; playerid++)
+    {
+        if (!IsPlayerConnected(playerid))
+            continue;
+
+        if (PlayerNPC[playerid] == npcid)
+        {
+            SendClientMessage(playerid, 0x00FF00FF, "NPC %d finished moving along path %d", npcid, pathid);
+        }
+    }
+    return 1;
+}
+
+public OnNPCFinishMovePathPoint(npcid, pathid, pointid)
+{
+    // Find all players tracking this NPC
+    for (new playerid = 0; playerid < MAX_PLAYERS; playerid++)
+    {
+        if (!IsPlayerConnected(playerid))
+            continue;
+
+        if (PlayerNPC[playerid] == npcid)
+        {
+            SendClientMessage(playerid, 0xFFFF00FF, "NPC %d reached point %d on path %d", npcid, pointid, pathid);
+        }
+    }
+    return 1;
+}
+
+public OnNPCCreate(npcid)
+{
+    printf("[NPC] NPC %d has been created", npcid);
+
+    // Notify all connected players
+    for (new playerid = 0; playerid < MAX_PLAYERS; playerid++)
+    {
+        if (!IsPlayerConnected(playerid))
+            continue;
+
+        SendClientMessage(playerid, 0x00FF00FF, "NPC %d has been created", npcid);
+    }
+    return 1;
+}
+
+public OnNPCDestroy(npcid)
+{
+    printf("[NPC] NPC %d has been destroyed", npcid);
+
+    // Clear any player tracking this NPC and notify
+    for (new playerid = 0; playerid < MAX_PLAYERS; playerid++)
+    {
+        if (!IsPlayerConnected(playerid))
+            continue;
+
+        if (PlayerNPC[playerid] == npcid)
+        {
+            PlayerNPC[playerid] = INVALID_NPC_ID;
+            SendClientMessage(playerid, 0xFF0000FF, "Your tracked NPC %d has been destroyed", npcid);
+        }
+        else
+        {
+            SendClientMessage(playerid, 0xFFFF00FF, "NPC %d has been destroyed", npcid);
+        }
+    }
+    return 1;
+}
+
+public OnNPCSpawn(npcid)
+{
+    printf("[NPC] NPC %d has spawned", npcid);
+
+    // Notify players tracking this NPC
+    for (new playerid = 0; playerid < MAX_PLAYERS; playerid++)
+    {
+        if (!IsPlayerConnected(playerid))
+            continue;
+
+        if (PlayerNPC[playerid] == npcid)
+        {
+            new Float:x, Float:y, Float:z;
+            NPC_GetPos(npcid, x, y, z);
+            SendClientMessage(playerid, 0x00FF00FF, "Your tracked NPC %d spawned at (%.2f, %.2f, %.2f)", npcid, x, y, z);
+        }
+    }
+    return 1;
+}
+
+public OnNPCRespawn(npcid)
+{
+    printf("[NPC] NPC %d has respawned", npcid);
+
+    // Notify players tracking this NPC
+    for (new playerid = 0; playerid < MAX_PLAYERS; playerid++)
+    {
+        if (!IsPlayerConnected(playerid))
+            continue;
+
+        if (PlayerNPC[playerid] == npcid)
+        {
+            SendClientMessage(playerid, 0x00FF00FF, "Your tracked NPC %d has respawned", npcid);
+        }
+    }
+    return 1;
+}
+
+public OnNPCDeath(npcid, killerid, WEAPON:reason)
+{
+    printf("[NPC] NPC %d died (killer: %d, weapon: %d)", npcid, killerid, _:reason);
+
+    // Notify players tracking this NPC
+    for (new playerid = 0; playerid < MAX_PLAYERS; playerid++)
+    {
+        if (!IsPlayerConnected(playerid))
+            continue;
+
+        if (PlayerNPC[playerid] == npcid)
+        {
+            if (killerid == INVALID_PLAYER_ID)
+            {
+                SendClientMessage(playerid, 0xFF0000FF, "Your tracked NPC %d died (weapon: %d)", npcid, _:reason);
+            }
+            else
+            {
+                SendClientMessage(playerid, 0xFF0000FF, "Your tracked NPC %d was killed by player %d (weapon: %d)", npcid, killerid, _:reason);
+            }
+        }
+    }
+    return 1;
+}
+
+public OnNPCWeaponShot(npcid, WEAPON:weaponid, BULLET_HIT_TYPE:hittype, hitid, Float:fX, Float:fY, Float:fZ)
+{
+    // Only notify players tracking this NPC
+    for (new playerid = 0; playerid < MAX_PLAYERS; playerid++)
+    {
+        if (!IsPlayerConnected(playerid))
+            continue;
+
+        if (PlayerNPC[playerid] == npcid)
+        {
+            static hitTypeNames[5][32] = {
+                "None",
+                "Player",
+                "Vehicle",
+                "Object",
+                "Player Object"
+            };
+
+            SendClientMessage(playerid, 0xFFFF00FF, "NPC %d fired weapon %d at %s %d (%.2f, %.2f, %.2f)",
+                npcid, _:weaponid, hitTypeNames[_:hittype], hitid, fX, fY, fZ);
+        }
+    }
+    return 1;
+}
+
+public OnNPCTakeDamage(npcid, issuerid, Float:amount, WEAPON:weaponid, bodypart)
+{
+    // Only notify players tracking this NPC
+    for (new playerid = 0; playerid < MAX_PLAYERS; playerid++)
+    {
+        if (!IsPlayerConnected(playerid))
+            continue;
+
+        if (PlayerNPC[playerid] == npcid)
+        {
+            if (issuerid == INVALID_PLAYER_ID)
+            {
+                SendClientMessage(playerid, 0xFF8800FF, "NPC %d took %.1f damage (weapon: %d, bodypart: %d)",
+                    npcid, amount, _:weaponid, bodypart);
+            }
+            else
+            {
+                SendClientMessage(playerid, 0xFF8800FF, "NPC %d took %.1f damage from player %d (weapon: %d, bodypart: %d)",
+                    npcid, amount, issuerid, _:weaponid, bodypart);
+            }
+        }
+    }
+    return 1;
+}
+
+public OnNPCGiveDamage(npcid, damagedid, Float:amount, WEAPON:weaponid, bodypart)
+{
+    // Only notify players tracking this NPC
+    for (new playerid = 0; playerid < MAX_PLAYERS; playerid++)
+    {
+        if (!IsPlayerConnected(playerid))
+            continue;
+
+        if (PlayerNPC[playerid] == npcid)
+        {
+            SendClientMessage(playerid, 0xFF8800FF, "NPC %d dealt %.1f damage to player %d (weapon: %d, bodypart: %d)",
+                npcid, amount, damagedid, _:weaponid, bodypart);
+        }
+    }
+    return 1;
+}
+
+public OnNPCWeaponStateChange(npcid, newState, oldState)
+{
+    static weaponStates[5][64] = {
+        "Unknown",
+        "No ammo remaining",
+        "Single bullet left",
+        "More than one bullet left",
+        "Reloading"
+    };
+
+    // Only notify players tracking this NPC
+    for (new playerid = 0; playerid < MAX_PLAYERS; playerid++)
+    {
+        if (!IsPlayerConnected(playerid))
+            continue;
+
+        if (PlayerNPC[playerid] == npcid)
+        {
+            SendClientMessage(playerid, 0xFFFF00FF, "NPC %d weapon state: %s -> %s",
+                npcid, weaponStates[oldState], weaponStates[newState]);
+        }
+    }
+    return 1;
+}
+
+public OnNPCPlaybackStart(npcid, recordid)
+{
+    printf("[NPC] NPC %d started playback (record: %d)", npcid, recordid);
+
+    // Notify players tracking this NPC
+    for (new playerid = 0; playerid < MAX_PLAYERS; playerid++)
+    {
+        if (!IsPlayerConnected(playerid))
+            continue;
+
+        if (PlayerNPC[playerid] == npcid)
+        {
+            SendClientMessage(playerid, 0x00FF00FF, "NPC %d started playback (record ID: %d)", npcid, recordid);
+        }
+    }
+    return 1;
+}
+
+public OnNPCPlaybackEnd(npcid, recordid)
+{
+    printf("[NPC] NPC %d finished playback (record: %d)", npcid, recordid);
+
+    // Notify players tracking this NPC
+    for (new playerid = 0; playerid < MAX_PLAYERS; playerid++)
+    {
+        if (!IsPlayerConnected(playerid))
+            continue;
+
+        if (PlayerNPC[playerid] == npcid)
+        {
+            SendClientMessage(playerid, 0x00FF00FF, "NPC %d finished playback (record ID: %d)", npcid, recordid);
+        }
+    }
+    return 1;
+}
+
+public OnNPCFinishNodePoint(npcid, nodeid, pointid)
+{
+    // Notify players tracking this NPC
+    for (new playerid = 0; playerid < MAX_PLAYERS; playerid++)
+    {
+        if (!IsPlayerConnected(playerid))
+            continue;
+
+        if (PlayerNPC[playerid] == npcid)
+        {
+            SendClientMessage(playerid, 0xFFFF00FF, "NPC %d reached node %d point %d", npcid, nodeid, pointid);
+        }
+    }
+    return 1;
+}
+
+public OnNPCFinishNode(npcid, nodeid)
+{
+    printf("[NPC] NPC %d finished node %d", npcid, nodeid);
+
+    // Notify players tracking this NPC
+    for (new playerid = 0; playerid < MAX_PLAYERS; playerid++)
+    {
+        if (!IsPlayerConnected(playerid))
+            continue;
+
+        if (PlayerNPC[playerid] == npcid)
+        {
+            SendClientMessage(playerid, 0x00FF00FF, "NPC %d finished node %d", npcid, nodeid);
+        }
+    }
+    return 1;
+}
+
+public OnNPCChangeNode(npcid, newnodeid, oldnodeid)
+{
+    printf("[NPC] NPC %d changed from node %d to node %d", npcid, oldnodeid, newnodeid);
+
+    // Notify players tracking this NPC
+    for (new playerid = 0; playerid < MAX_PLAYERS; playerid++)
+    {
+        if (!IsPlayerConnected(playerid))
+            continue;
+
+        if (PlayerNPC[playerid] == npcid)
+        {
+            SendClientMessage(playerid, 0x00FF00FF, "NPC %d changed from node %d to node %d", npcid, oldnodeid, newnodeid);
+        }
+    }
+    return 1;
+}
