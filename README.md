@@ -23,6 +23,9 @@
 - `/hostile` - Make the NPC aggressively target you (tests `NPC_AimAtPlayer` with firing).
 - `/guard` - Have the NPC aim at you without firing (tests `NPC_AimAtPlayer` without firing).
 - `/friendly` - Stop the NPC from aiming (tests `NPC_StopAim`).
+- `/npcshoot [playerid]` - Make NPC shoot at specified player (tests `NPC_Shoot`).
+- `/npcstopmelee` - Stop NPC melee attack (tests `NPC_StopMeleeAttack`).
+- `/npcstopmove` - Stop NPC movement (tests `NPC_StopMove`).
 
 ## NPC ANIMATION
 - `/applydance` - Apply a dance animation for 25 seconds (tests `NPC_ApplyAnimation`, `NPC_ClearAnimations`).
@@ -50,6 +53,12 @@
 - `/setvelocity [x] [y] [z]` - Set NPC velocity (tests `NPC_SetVelocity`).
 - `/setinterior [id]` - Set NPC interior (tests `NPC_SetInterior`).
 - `/setvirtualworld [id]` - Set NPC virtual world (tests `NPC_SetVirtualWorld`).
+- `/setweaponaccuracy [accuracy]` - Set NPC weapon accuracy (tests `NPC_SetWeaponAccuracy`).
+- `/setweaponclipsize [size]` - Set NPC weapon clip size (tests `NPC_SetWeaponClipSize`).
+- `/setweaponreloadtime [ms]` - Set NPC weapon reload time (tests `NPC_SetWeaponReloadTime`).
+- `/setweaponskill [type] [level]` - Set NPC weapon skill level (tests `NPC_SetWeaponSkillLevel`).
+- `/setweaponshoottime [ms]` - Set NPC weapon shoot time (tests `NPC_SetWeaponShootTime`).
+- `/setweaponstate [state]` - Set NPC weapon state (tests `NPC_SetWeaponState`).
 
 ## PATH MANAGEMENT
 - `/createpatrol` - Create a new patrol path for your NPC (tests `NPC_CreatePath`).
@@ -64,6 +73,10 @@
 - `/npcpausenode` - Pause the current node playback (tests `NPC_PausePlayingNode`).
 - `/npcresumenode` - Resume a paused node playback (tests `NPC_ResumePlayingNode`).
 - `/npcsetnodepoint [nodeid] [pointid]` - Set node to a specific point (tests `NPC_SetNodePoint`).
+- `/npcstopnode` - Stop NPC node playback (tests `NPC_StopPlayingNode`).
+- `/npcclosenode [nodeid]` - Close a navigation node (tests `NPC_CloseNode`).
+- `/npcchangenode [nodeid] [linkid]` - Change NPC to different node via link (tests `NPC_ChangeNode`).
+- `/npcupdatenodepoint [nodeid] [pointid]` - Update node point position to player's position (tests `NPC_UpdateNodePoint`).
 
 ## VEHICLE COMMANDS
 - `/npcenterbike [seat]` - Order the NPC into your debug motorcycle (tests `NPC_EnterVehicle`).
@@ -72,10 +85,12 @@
 - `/npcenterhydra [seat]` - Order the NPC into your debug hydra (tests `NPC_EnterVehicle`).
 - `/npcexit` - Force the NPC to exit its current vehicle (tests `NPC_ExitVehicle`).
 - `/npcputinvehicle` - Place the NPC into your current vehicle at passenger seat 1 (tests `NPC_PutInVehicle`).
+- `/npcremovefromvehicle` - Remove NPC from vehicle (tests `NPC_RemoveFromVehicle`).
 - `/setvehiclegearstate [state]` - Set NPC vehicle gear state (tests `NPC_SetVehicleGearState`).
 - `/setvehiclehealth [health]` - Set NPC vehicle health (tests `NPC_SetVehicleHealth`).
 - `/sethydrathrusters [direction]` - Set hydra thrusters direction (tests `NPC_SetVehicleHydraThrusters`).
 - `/settrainspeed [speed]` - Set train speed (tests `NPC_SetVehicleTrainSpeed`).
+- `/npcusesiren [use]` - Use vehicle siren (tests `NPC_UseVehicleSiren`).
 
 ## SURFING COMMANDS
 - `/resetsurfing` - Clear any surfing data on the NPC (tests `NPC_ResetSurfingData`).
@@ -124,7 +139,7 @@
 
 ## CHECK COMMANDS - WEAPON
 - `/checkweapon` - Show the NPC's current weapon ID (`NPC_GetWeapon`).
-- `/checkweaponstate` - Show the NPC's weapon state (`NPC_GetWeaponState`).
+- `/checkweaponstate` - Show the NPC's weapon state with descriptive name (`NPC_GetWeaponState`).
 - `/checkweaponshoottime` - Show the shoot time for the current weapon (`NPC_GetWeaponShootTime`).
 - `/checkweaponaccuracy` - Show the weapon accuracy value (`NPC_GetWeaponAccuracy`).
 - `/checkweaponclipsize` - Show the scripted clip size (`NPC_GetWeaponClipSize`).
@@ -132,6 +147,8 @@
 - `/checkweaponreloadtime` - Show the scripted reload time (`NPC_GetWeaponReloadTime`).
 - `/checkweaponactualreloadtime` - Show the actual reload time (`NPC_GetWeaponActualReloadTime`).
 - `/checkweaponskill` - Show all weapon skill levels (`NPC_GetWeaponSkillLevel`).
+- `/checkwhonpcaiming` - Show which player the NPC is aiming at (`NPC_GetPlayerAimingAt`).
+- `/checkwhonpcmoving` - Show which player the NPC is moving to (`NPC_GetPlayerMovingTo`).
 
 ## CHECK COMMANDS - VEHICLE
 - `/checkvehicle` - Show the vehicle the NPC is in (`NPC_GetVehicle`).
@@ -158,12 +175,23 @@
 - `/checkplayingnode` - Report if a node playback is active (`NPC_IsPlayingNode`).
 - `/checknodepaused` - Report if node playback is paused (`NPC_IsNodePlaybackPaused`).
 - `/checknodeopen` - Report if a navigation node is open (`NPC_IsNodeOpen`).
+- `/checknodetype [nodeid]` - Get node type (foot/vehicle/boat) (`NPC_GetNodeType`).
+- `/checknodepointpos [nodeid] [pointid]` - Get specific node point position (`NPC_GetNodePointPosition`).
+- `/checknodepointcount [nodeid]` - Get node point count (`NPC_GetNodePointCount`).
+- `/checknodeinfo [nodeid]` - Get comprehensive node info including type and point count (`NPC_GetNodeInfo`).
 
 ## MISC COMMANDS
 - `/checkenterveh` - Start chat updates about the vehicle your NPC is entering.
 - `/stopcheckenterveh` - Stop chat updates from `/checkenterveh`.
 - `/npcloadrecord [filepath]` - Load a playback record from disk (`NPC_LoadRecord`).
 - `/npcmeleeattack [duration]` - Trigger a melee attack for the given millisecond (`NPC_MeleeAttack`).
+- `/startplayback [name]` - Start playback by name (`NPC_StartPlayback`).
+- `/startplaybackex [recordid]` - Start playback by record ID (`NPC_StartPlaybackEx`).
+- `/stopplayback` - Stop current playback (`NPC_StopPlayback`).
+- `/pauseplayback` - Pause or resume current playback (`NPC_PausePlayback`).
+- `/checkrecordcount` - Get count of loaded records (`NPC_GetRecordCount`).
+- `/npcunloadrecord [recordid]` - Unload specific record (`NPC_UnloadRecord`).
+- `/npcunloadallrecords` - Unload all records (`NPC_UnloadAllRecords`).
 
 ---
 
