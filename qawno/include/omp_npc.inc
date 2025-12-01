@@ -385,6 +385,20 @@ native NPC_SetVelocity(npcid, Float:x, Float:y, Float:z);
  */
 native NPC_GetVelocity(npcid, &Float:x, &Float:y, &Float:z);
 
+/**
+ * <library>omp_npc</library>
+ * <summary>Gets the position that the NPC is currently moving toward.</summary>
+ * <param name="npcid">The ID of the NPC</param>
+ * <param name="x">Variable to store the X coordinate of the target position, passed by reference</param>
+ * <param name="y">Variable to store the Y coordinate of the target position, passed by reference</param>
+ * <param name="z">Variable to store the Z coordinate of the target position, passed by reference</param>
+ * <returns>Returns true on success, false on failure.</returns>
+ * <seealso name="NPC_Move" />
+ * <seealso name="NPC_IsMoving" />
+ * <seealso name="NPC_GetPos" />
+ */
+native NPC_GetPosMovingTo(npcid, &Float:x, &Float:y, &Float:z);
+
 /*
 native # Appearance();
 native          Appearance(
@@ -406,6 +420,16 @@ native NPC_SetSkin(npcid, skinid);
  * <seealso name="NPC_IsValid" />
  */
 native NPC_GetSkin(npcid);
+
+/**
+ * <library>omp_npc</library>
+ * <summary>Gets the custom skin ID of an NPC.</summary>
+ * <param name="npcid">The ID of the NPC</param>
+ * <returns>Returns the custom skin ID of the NPC, or -1 if the NPC has no custom skin or is invalid.</returns>
+ * <seealso name="NPC_SetSkin" />
+ * <seealso name="NPC_GetSkin" />
+ */
+native NPC_GetCustomSkin(npcid);
 
 /**
  * <library>omp_npc</library>
@@ -1043,7 +1067,7 @@ native bool:NPC_AddPointToPath(pathid, Float:x, Float:y, Float:z, Float:stopRang
 /**
  * <library>omp_npc</library>
  */
-native bool:NPC_RemovePointFromPath(pathid, point_index);
+native bool:NPC_RemovePointFromPath(pathid, pointIndex);
 
 /**
  * <library>omp_npc</library>
@@ -1058,7 +1082,7 @@ native NPC_GetPathPointCount(pathid);
 /**
  * <library>omp_npc</library>
  */
-native bool:NPC_GetPathPoint(pathid, point_index, &Float:x, &Float:y, &Float:z, &Float:stopRange);
+native bool:NPC_GetPathPoint(pathid, pointIndex, &Float:x, &Float:y, &Float:z, &Float:stopRange);
 
 /**
  * <library>omp_npc</library>
@@ -1130,7 +1154,7 @@ native bool:NPC_GetNodeInfo(nodeid, &vehnodes, &pednodes, &navinode);
 /**
  * <library>omp_npc</library>
  */
-native bool:NPC_PlayNode(npcid, nodeid, NPC_MOVE_TYPE:moveType = NPC_MOVE_TYPE_JOG, Float:speed = NPC_MOVE_SPEED_AUTO, Float:radius = 0.0, bool:setangle = true);
+native bool:NPC_PlayNode(npcid, nodeid, NPC_MOVE_TYPE:moveType = NPC_MOVE_TYPE_JOG, Float:speed = NPC_MOVE_SPEED_AUTO, Float:radius = 0.0, bool:setAngle = true);
 
 /**
  * <library>omp_npc</library>
@@ -1258,22 +1282,3 @@ forward OnNPCFinishMovePath(npcid, pathid);
  * <library>omp_npc</library>
  */
 forward OnNPCFinishMovePathPoint(npcid, pathid, pointid);
-
-/*
-native # Streamer Support();
-native          Streamer Support(
-native      ================================(
-native
-*/
-
-#if defined _streamer_included
-	stock NPC_SetSurfingDynamicObject(npcid, objectid)
-	{
-		return NPC_SetSurfingPlayerObject(npcid, Streamer_GetItemInternalID(npcid, STREAMER_TYPE_OBJECT, objectid));
-	}
-
-	stock NPC_GetSurfingDynamicObject(npcid)
-	{
-		return Streamer_GetItemStreamerID(npcid, STREAMER_TYPE_OBJECT, NPC_GetSurfingPlayerObject(npcid));
-	}
-#endif
