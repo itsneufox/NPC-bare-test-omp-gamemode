@@ -1,5 +1,4 @@
 #include <open.mp>
-#include <omp_npc>
 
 main(){}
 
@@ -91,6 +90,7 @@ static const HELP_DIALOG_TEXT_2[] =
 /checkweaponstate\tGet NPC weapon state.\n\
 /setweaponstate [state]\tSet NPC weapon state.\n\
 /checkskin\tGet NPC skin ID.\n\
+/checkcustomskin\tGet NPC custom skin ID.\n\
 /checkspecialaction\tGet NPC special action.\n\
 /checksurfingobject\tGet NPC surfing object.\n\
 /checksurfingplayerobject\tGet NPC surfing player object.\n\
@@ -112,6 +112,7 @@ static const HELP_DIALOG_TEXT_2[] =
 /checkpathpoint\tGet current path point coords.\n\
 /checkpathpointcount\tGet path point count.\n\
 /checkpos\tGet NPC position.\n\
+/checkposmovingto\tGet NPC target position.\n\
 /npcopennode [id]\tOpen a navigation node.\n\
 /npcplaynode [id]\tMake NPC follow a node path.\n\
 /npcpausenode\tPause NPC node playback.\n\
@@ -1672,6 +1673,28 @@ public OnPlayerCommandText(playerid, cmdtext[])
         new skinid = NPC_GetSkin(npcid);
 
         SendClientMessage(playerid, 0x00FF00FF, "NPC %d skin: %d", npcid, skinid);
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/checkcustomskin", true))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        new customskinid = NPC_GetCustomSkin(npcid);
+
+        if (customskinid == -1)
+        {
+            SendClientMessage(playerid, 0xFF0000FF, "NPC %d has no custom skin set", npcid);
+        }
+        else
+        {
+            SendClientMessage(playerid, 0x00FF00FF, "NPC %d custom skin: %d", npcid, customskinid);
+        }
         return 1;
     }
 
@@ -3257,6 +3280,25 @@ public OnPlayerCommandText(playerid, cmdtext[])
         NPC_GetPos(npcid, x, y, z);
 
         SendClientMessage(playerid, 0x00FF00FF, "NPC %d position: %.2f, %.2f, %.2f", npcid, x, y, z);
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/checkposmovingto", true))
+    {
+        new npcid = PlayerNPC[playerid];
+        if (npcid == INVALID_NPC_ID)
+            return SendClientMessage(playerid, 0xFF0000FF, "You are not debugging a NPC.");
+
+        if (!NPC_IsValid(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "Invalid NPC.");
+
+        if (!NPC_IsMoving(npcid))
+            return SendClientMessage(playerid, 0xFF0000FF, "NPC %d is not moving", npcid);
+
+        new Float:x, Float:y, Float:z;
+        NPC_GetPosMovingTo(npcid, x, y, z);
+
+        SendClientMessage(playerid, 0x00FF00FF, "NPC %d target position: %.2f, %.2f, %.2f", npcid, x, y, z);
         return 1;
     }
 

@@ -120,6 +120,7 @@
 - `/checkammo` - Show total ammo for the current weapon (`NPC_GetAmmo`).
 - `/checkclip` - Show clip ammo for the current weapon (`NPC_GetClipAmmo`).
 - `/checkpos` - Show the NPC's coordinates (`NPC_GetPos`).
+- `/checkposmovingto` - Show the NPC's target position when moving (`NPC_GetPosMovingTo`).
 - `/checkfacingangle` - Show the NPC's facing angle (`NPC_GetFacingAngle`).
 - `/checkrot` - Show the NPC's rotation (`NPC_GetRot`).
 - `/checkvelocity` - Show the NPC's velocity (`NPC_GetVelocity`).
@@ -127,6 +128,7 @@
 - `/checkinterior` - Show the NPC's interior ID (`NPC_GetInterior`).
 - `/checkkeys` - Show the NPC's key states (`NPC_GetKeys`).
 - `/checkskin` - Show the NPC's skin (`NPC_GetSkin`).
+- `/checkcustomskin` - Show the NPC's custom skin ID (`NPC_GetCustomSkin`).
 - `/checkfightingstyle` - Show the NPC's fighting style (`NPC_GetFightingStyle`).
 - `/checkspecialaction` - Show the NPC's special action (`NPC_GetSpecialAction`).
 - `/checkinfiniteammo` - Show if infinite ammo is enabled (`NPC_IsInfiniteAmmoEnabled`).
